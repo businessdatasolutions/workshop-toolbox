@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generative AI Applicability Assessment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function calculateApplicability() {
+            let score = 0;
+            let feedback = [];
+
+            // Potential Value
+            const financialImpact = parseInt(document.getElementById('financial-impact').value);
+            score += financialImpact;
+            if (financialImpact <= 1) feedback.push("Consider quantifying the potential financial benefits more clearly.");
+
+            const productivityImprovement = parseInt(document.getElementById('productivity-improvement').value);
+            score += productivityImprovement;
+            if (productivityImprovement <= 1) feedback.push("Think about how GenAI could tangibly improve productivity in this case.");
+
+            const innovationPotential = parseInt(document.getElementById('innovation-potential').value);
+            score += innovationPotential;
+            if (innovationPotential <= 1) feedback.push("Explore the potential for GenAI to drive new innovation or create new offerings.");
+
+            const customerExperience = parseInt(document.getElementById('customer-experience').value);
+            score += customerExperience;
+            if (customerExperience <= 1) feedback.push("Consider how GenAI could enhance the experience for your customers.");
+
+            // Ease of Implementation
+            const offTheShelfTools = parseInt(document.getElementById('off-the-shelf-tools').value);
+            score += offTheShelfTools;
+            if (offTheShelfTools <= 1) feedback.push("Assess the availability and suitability of existing GenAI tools for this use case.");
+
+            const dataAvailability = parseInt(document.getElementById('data-availability').value);
+            score += dataAvailability;
+            if (dataAvailability <= 1) feedback.push("Evaluate the availability and quality of data required to effectively use GenAI.");
+
+            const technicalFeasibility = parseInt(document.getElementById('technical-feasibility').value);
+            score += technicalFeasibility;
+            if (technicalFeasibility <= 1) feedback.push("Consider the technical complexity and resources needed for implementation.");
+
+            const stakeholderBuyIn = parseInt(document.getElementById('stakeholder-buy-in').value);
+            score += stakeholderBuyIn;
+            if (stakeholderBuyIn <= 1) feedback.push("Outline a strategy to engage stakeholders and secure their support for this GenAI initiative.");
+
+            // Risks and Considerations
+            const accuracyReliability = parseInt(document.getElementById('accuracy-reliability').value);
+            score += accuracyReliability * -1; // Negative impact
+            if (accuracyReliability >= 3) feedback.push("Plan for robust validation and human oversight to mitigate risks related to GenAI output accuracy.");
+
+            const ethicalConsiderations = parseInt(document.getElementById('ethical-considerations').value);
+            score += ethicalConsiderations * -1; // Negative impact
+            if (ethicalConsiderations >= 3) feedback.push("Thoroughly consider the ethical implications, including bias, privacy, and accountability.");
+
+            const talentAvailability = parseInt(document.getElementById('talent-availability').value);
+            score += talentAvailability;
+            if (talentAvailability <= 1) feedback.push("Assess the current availability of talent with the necessary GenAI skills.");
+
+            // Business Case Specifics
+            const taskDiscreteness = parseInt(document.getElementById('task-discreteness').value);
+            score += taskDiscreteness;
+            if (taskDiscreteness <= 1) feedback.push("Break down the business case into more discrete tasks to better identify GenAI opportunities.");
+
+            const genAICostEquation = parseInt(document.getElementById('gen-ai-cost-equation').value);
+            score += genAICostEquation;
+            if (genAICostEquation <= 1) feedback.push("Consider the costs associated with using the LLM, customisation, and output validation.");
+
+            const humanInTheLoop = parseInt(document.getElementById('human-in-the-loop').value);
+            score += humanInTheLoop;
+            if (humanInTheLoop <= 1) feedback.push("Determine the appropriate level of human oversight required for this GenAI application.");
+
+            const resultsDiv = document.getElementById('assessment-results');
+            resultsDiv.classList.remove('hidden');
+            document.getElementById('overall-score').textContent = score;
+            document.getElementById('feedback-list').innerHTML = '';
+            if (feedback.length > 0) {
+                feedback.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    document.getElementById('feedback-list').appendChild(li);
+                });
+                document.getElementById('feedback-section').classList.remove('hidden');
+            } else {
+                document.getElementById('feedback-section').classList.add('hidden');
+            }
+
+            let applicabilityLevel = "";
+            if (score >= 15) {
+                applicabilityLevel = "High - Generative AI appears to be a strong potential fit for this business case.";
+            } else if (score >= 8) {
+                applicabilityLevel = "Medium - Generative AI could be applicable, but further investigation and planning are needed.";
+            } else {
+                applicabilityLevel = "Low - Generative AI might not be the most suitable technology for this business case at this stage.";
+            }
+            document.getElementById('applicability-level').textContent = applicabilityLevel;
+        }
+
+        function resetForm() {
+            document.getElementById('gen-ai-assessment-form').reset();
+            document.getElementById('assessment-results').classList.add('hidden');
+            document.getElementById('feedback-section').classList.add('hidden');
+        }
+    </script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-md shadow-md p-6">
+        <h1 class="text-2xl font-bold mb-4">Generative AI Applicability Assessment</h1>
+        <p class="mb-4">Use this form to assess the potential applicability of Generative AI for your business case. For each question, select the option that best reflects your current understanding.</p>
+
+        <form id="gen-ai-assessment-form" class="space-y-4">
+            <div>
+                <label for="financial-impact" class="block text-gray-700 text-sm font-bold mb-2">Potential Financial Impact (1: Low, 5: High)</label>
+                <input type="number" id="financial-impact" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" max="5" value="3">
+            </div>
+
+            <div>
+                <label for="productivity-improvement" class="block text-gray-700 text-sm font-bold mb-2">Potential for Productivity Improvement (1: Low, 5: High)</label>
+                <input type="number" id="productivity-improvement" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" max="5" value="3">
+            </div>
+
+            <div>
+                <label for="innovation-potential" class="block text-gray-700 text-sm font-bold mb-2">Potential for Innovation (1: Low, 5: High)</label>
+                <input type="number" id="innovation-potential" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" max="5" value="3">
+            </div>
+
+            <div>
+                <label for="customer-experience" class="block text-gray-700 text-sm font-bold mb-2">Potential to Enhance Customer Experience (1: Low, 5: High)</label>
+                <input type="number" id="customer-experience" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" max="5" value="3">
+            </div>
+
+            <div>
+                <label for="off-the-shelf-tools" class="block text-gray-700 text-sm font-bold mb-2">Availability of Suitable Off-the-Shelf GenAI Tools (1: Low, 5: High)</label>
+                <input type="number" id="off-the-shelf-tools" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" max="5" value="3">
+            </div>
+
+            <div>
+                <label for="data-availability" class="block text-gray-700 text-sm font-bold mb-2">Availability and Quality of Required Data (1: Low, 5: High)</label>
+                <input type="number" id="data-availability" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" max="5" value="3">
+            </div>
+
+            <div>
+                <label for="technical-feasibility" class="block text-gray-700 text-sm font-bold mb-2">Technical Feasibility and Low Complexity (1: Low, 5: High)</label>
+                <input type="number" id="technical-feasibility" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" max="5" value="3">
+            </div>
+
+            <div>
+                <label for="stakeholder-buy-in" class="block text-gray-700 text-sm font-bold mb-2">Likelihood of Securing Stakeholder Buy-in (1: Low, 5: High)</label>
+                <input type="number" id="stakeholder-buy-in" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" max="5" value="3">
+            </div>
+
+            <div>
+                <label for="accuracy-reliability" class="block text-gray-700 text-sm font-bold mb-2">Potential Risks Related to Accuracy and Reliability of GenAI Output (1: Low Risk, 5: High Risk)</label>
+                <input type="number" id="accuracy-reliability" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" max="5" value="3">
+            </div>
+
+            <div>
+                <label for="ethical-considerations" class="block text-gray-700 text-sm font-bold mb-2">Significant Ethical Considerations (1: Not Significant, 5: Very Significant)</label>
+                <input type="number" id="ethical-considerations" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" max="5" value="3">
+            </div>
+
+            <div>
+                <label for="talent-availability" class="block text-gray-700 text-sm font-bold mb-2">Availability of Talent with Necessary GenAI Skills (1: Low, 5: High)</label>
+                <input type="number" id="talent-availability" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" max="5" value="3">
+            </div>
+
+            <div>
+                <label for="task-discreteness" class="block text-gray-700 text-sm font-bold mb-2">Business Case Can Be Broken Down into Discrete Tasks Suitable for GenAI (1: Low, 5: High)</label>
+                <input type="number" id="task-discreteness" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" max="5" value="3">
+            </div>
+
+            <div>
+                <label for="gen-ai-cost-equation" class="block text-gray-700 text-sm font-bold mb-2">Favourable Generative AI Cost Equation (LLM Cost, Customisation, Validation) (1: Unfavourable, 5: Favourable)</label>
+                <input type="number" id="gen-ai-cost-equation" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" max="5" value="3">
+            </div>
+
+            <div>
+                <label for="human-in-the-loop" class="block text-gray-700 text-sm font-bold mb-2">Appropriate Level of Human Oversight Can Be Defined (1: Difficult, 5: Easy)</label>
+                <input type="number" id="human-in-the-loop" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" max="5" value="3">
+            </div>
+
+            <div class="flex space-x-4">
+                <button type="button" onclick="calculateApplicability()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Assess Applicability</button>
+                <button type="button" onclick="resetForm()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Reset</button>
+            </div>
+        </form>
+
+        <div id="assessment-results" class="mt-8 p-4 bg-gray-200 rounded-md hidden">
+            <h2 class="text-xl font-bold mb-2">Assessment Results</h2>
+            <p class="mb-2"><span class="font-semibold">Overall Score:</span> <span id="overall-score"></span> / 55</p>
+            <p class="mb-2"><span class="font-semibold">Applicability Level:</span> <span id="applicability-level"></span></p>
+            <div id="feedback-section" class="mt-4 hidden">
+                <h3 class="text-lg font-bold mb-2">Considerations:</h3>
+                <ul id="feedback-list" class="list-disc list-inside">
+                    <!-- Feedback items will be added here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

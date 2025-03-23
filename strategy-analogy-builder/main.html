@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Strategie Analogie Bouwer</title>
+    <!-- Materialize CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <!-- Material Icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+      main {
+        flex: 1 0 auto;
+        padding: 20px 0;
+      }
+      .card-panel {
+        margin-bottom: 20px;
+      }
+      .tabs .tab a {
+        color: #26a69a;
+      }
+      .tabs .tab a:hover,
+      .tabs .tab a.active {
+        color: #00796b;
+      }
+      .tabs .indicator {
+        background-color: #00796b;
+      }
+      .step-navigation {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 0;
+      }
+      .premise-row {
+        display: flex;
+        margin-bottom: 10px;
+      }
+      .premise-row .input-field {
+        flex-grow: 1;
+        margin: 0 10px;
+      }
+      .premise-label {
+        display: flex;
+        align-items: center;
+        width: 100px;
+      }
+      .premise-relation {
+        width: 150px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hidden {
+        display: none;
+      }
+      .summary-table {
+        margin: 20px 0;
+      }
+      .summary-table th,
+      .summary-table td {
+        padding: 10px;
+      }
+      .feature-type {
+        width: 120px;
+      }
+      #help-modal {
+        max-width: 700px;
+      }
+      .help-content {
+        padding: 0 20px 20px 20px;
+      }
+      .help-content h5 {
+        margin-top: 30px;
+      }
+      .premise-container {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 15px;
+        margin-bottom: 15px;
+      }
+      .premise-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .export-options {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+        gap: 20px;
+      }
+      .brand-logo {
+        margin-left: 15px;
+      }
+      .section-title {
+        margin-bottom: 20px;
+      }
+      .chip {
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <nav class="teal darken-1">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Strategie Analogie Bouwer</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>
+            <a href="#" data-target="help-modal" class="modal-trigger"
+              ><i class="material-icons left">help_outline</i>Hulp</a
+            >
+          </li>
+          <li>
+            <a href="#" id="reset-btn"
+              ><i class="material-icons left">refresh</i>Reset</a
+            >
+          </li>
+          <li>
+            <a href="#" id="export-btn"
+              ><i class="material-icons left">file_download</i>Exporteren</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+      <div class="container">
+        <!-- Progress Steps -->
+        <div class="row">
+          <div class="col s12">
+            <ul class="tabs">
+              <li class="tab col s3">
+                <a href="#step1" class="active">1. Definieer Uw Doel</a>
+              </li>
+              <li class="tab col s3"><a href="#step2">2. Kies Uw Bron</a></li>
+              <li class="tab col s3">
+                <a href="#step3">3. Bouw Uw Analogie</a>
+              </li>
+              <li class="tab col s3"><a href="#step4">4. Evalueer</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Stap 1: Definieer Uw Doel -->
+        <div id="step1" class="col s12">
+          <div class="card-panel">
+            <h5 class="section-title">Stap 1: Definieer Uw Doel</h5>
+            <p>
+              Begin met het definiëren van uw doelbedrijf of startup (de
+              organisatie waarvoor u de strategie ontwikkelt).
+            </p>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="target-name" type="text" class="validate" />
+                <label for="target-name">Naam van Doelbedrijf/Startup</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea
+                  id="target-description"
+                  class="materialize-textarea"
+                ></textarea>
+                <label for="target-description"
+                  >Korte Beschrijving (producten, markt, klanten)</label
+                >
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  id="target-desired-outcome"
+                  type="text"
+                  class="validate"
+                />
+                <label for="target-desired-outcome"
+                  >Gewenst Strategisch Resultaat (bijv. marktsucces, groei,
+                  kostenleiderschap)</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="step-navigation">
+            <div></div>
+            <a class="waves-effect waves-light btn next-step" data-next="step2"
+              ><i class="material-icons right">arrow_forward</i>Volgende</a
+            >
+          </div>
+        </div>
+
+        <!-- Stap 2: Kies Uw Bron -->
+        <div id="step2" class="col s12">
+          <div class="card-panel">
+            <h5 class="section-title">Stap 2: Kies Uw Bron</h5>
+            <p>
+              Kies een bronbedrijf of onderneming dat het gewenste resultaat
+              weergeeft. De bron moet een succesvol voorbeeld zijn dat de
+              gewenste conclusie ondersteunt.
+            </p>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="source-name" type="text" class="validate" />
+                <label for="source-name">Naam van Bronbedrijf</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea
+                  id="source-description"
+                  class="materialize-textarea"
+                ></textarea>
+                <label for="source-description"
+                  >Waarom heeft u dit bedrijf gekozen? Wat maakt het
+                  succesvol?</label
+                >
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="source-outcome" type="text" class="validate" />
+                <label for="source-outcome"
+                  >Strategisch Resultaat van de Bron (bijv. marktsucces,
+                  kostenleiderschap)</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="step-navigation">
+            <a class="waves-effect waves-light btn prev-step" data-prev="step1"
+              ><i class="material-icons left">arrow_back</i>Vorige</a
+            >
+            <a class="waves-effect waves-light btn next-step" data-next="step3"
+              ><i class="material-icons right">arrow_forward</i>Volgende</a
+            >
+          </div>
+        </div>
+
+        <!-- Stap 3: Bouw Uw Analogie -->
+        <div id="step3" class="col s12">
+          <div class="card-panel">
+            <h5 class="section-title">Stap 3: Bouw Uw Analogie</h5>
+            <p>
+              Identificeer de belangrijkste overeenkomsten en verschillen tussen
+              uw bron en doel. Deze vormen de premissen van uw analogie.
+            </p>
+
+            <div id="premise-container">
+              <div class="premise-container">
+                <div class="premise-header">
+                  <h6>Premisse A</h6>
+                  <div>
+                    <select class="feature-type browser-default">
+                      <option value="positive" selected>
+                        Positief (Overeenkomstig)
+                      </option>
+                      <option value="negative">Negatief (Verschillend)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="premise-row">
+                  <div class="premise-label">Bron</div>
+                  <div class="input-field">
+                    <input type="text" class="source-feature validate" />
+                  </div>
+                </div>
+                <div class="premise-row">
+                  <div class="premise-relation">
+                    <span class="relation-text">is vergelijkbaar met</span>
+                  </div>
+                </div>
+                <div class="premise-row">
+                  <div class="premise-label">Doel</div>
+                  <div class="input-field">
+                    <input type="text" class="target-feature validate" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="text" class="causal-relevance validate" />
+                    <label
+                      >Causale Relevantie (Hoe draagt deze eigenschap bij aan
+                      succes?)</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="center-align">
+              <a class="waves-effect waves-light btn" id="add-premise"
+                ><i class="material-icons left">add</i>Voeg nog een Premisse
+                toe</a
+              >
+            </div>
+          </div>
+
+          <div class="card-panel">
+            <h5>Conclusie</h5>
+            <div class="premise-row">
+              <div class="premise-label">Bron</div>
+              <div class="input-field">
+                <input
+                  type="text"
+                  id="conclusion-source"
+                  class="validate"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="premise-row">
+              <div class="premise-relation">
+                <span>is plausibel vergelijkbaar met</span>
+              </div>
+            </div>
+            <div class="premise-row">
+              <div class="premise-label">Doel</div>
+              <div class="input-field">
+                <input
+                  type="text"
+                  id="conclusion-target"
+                  class="validate"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="step-navigation">
+            <a class="waves-effect waves-light btn prev-step" data-prev="step2"
+              ><i class="material-icons left">arrow_back</i>Vorige</a
+            >
+            <a class="waves-effect waves-light btn next-step" data-next="step4"
+              ><i class="material-icons right">arrow_forward</i>Volgende</a
+            >
+          </div>
+        </div>
+
+        <!-- Stap 4: Evalueer Uw Analogie -->
+        <div id="step4" class="col s12">
+          <div class="card-panel">
+            <h5 class="section-title">Stap 4: Evalueer Uw Analogie</h5>
+
+            <!-- Bedrijfskoptekst met gecentreerde tekst -->
+            <div class="row">
+              <div class="col s12 center-align">
+                <div
+                  class="chip teal white-text"
+                  style="
+                    font-size: 16px;
+                    padding: 0;
+                    margin: 5px 10px;
+                    height: 40px;
+                    line-height: 40px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-width: 120px;
+                  "
+                >
+                  <span
+                    id="header-source-name"
+                    style="font-weight: bold; text-align: center; width: 100%"
+                    >[Bron]</span
+                  >
+                </div>
+                <i
+                  class="material-icons"
+                  style="vertical-align: middle; margin: 0 10px"
+                  >compare_arrows</i
+                >
+                <div
+                  class="chip teal darken-1 white-text"
+                  style="
+                    font-size: 16px;
+                    padding: 0;
+                    margin: 5px 10px;
+                    height: 40px;
+                    line-height: 40px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-width: 120px;
+                  "
+                >
+                  <span
+                    id="header-target-name"
+                    style="font-weight: bold; text-align: center; width: 100%"
+                    >[Doel]</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <p>
+              Bekijk uw analogie om de sterkte ervan te beoordelen. Richt u op
+              de causale relaties (verticale relaties) en de relevantie van elke
+              premisse.
+            </p>
+
+            <div class="row">
+              <div class="col s12">
+                <h6>Samenvatting van de Analogie</h6>
+                <table class="summary-table bordered">
+                  <thead>
+                    <tr>
+                      <th width="10%">#</th>
+                      <th width="35%">Bronkenmerk</th>
+                      <th width="20%">Relatie</th>
+                      <th width="35%">Doelkenmerk</th>
+                    </tr>
+                  </thead>
+                  <tbody id="summary-table-body">
+                    <!-- Wordt dynamisch gevuld -->
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td>Conclusie</td>
+                      <td id="summary-source-outcome"></td>
+                      <td>is plausibel vergelijkbaar met</td>
+                      <td id="summary-target-outcome"></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col s12">
+                <h6>Evaluatievragen</h6>
+                <ul class="collection">
+                  <li class="collection-item">
+                    <p>
+                      1. Wegen de positieve overeenkomsten tussen
+                      <span id="eval-source-name1"></span> en
+                      <span id="eval-target-name1"></span> op tegen de negatieve
+                      verschillen?
+                    </p>
+                    <div class="input-field">
+                      <textarea
+                        id="evaluation-1"
+                        class="materialize-textarea"
+                      ></textarea>
+                    </div>
+                  </li>
+                  <li class="collection-item">
+                    <p>
+                      2. Zijn de verticale (causale) relaties in
+                      <span id="eval-source-name2"></span> sterk? Leiden ze
+                      daadwerkelijk tot het gewenste resultaat?
+                    </p>
+                    <div class="input-field">
+                      <textarea
+                        id="evaluation-2"
+                        class="materialize-textarea"
+                      ></textarea>
+                    </div>
+                  </li>
+                  <li class="collection-item">
+                    <p>
+                      3. Kunnen dezelfde causale relaties plausibel ook op
+                      <span id="eval-target-name3"></span> van toepassing zijn?
+                    </p>
+                    <div class="input-field">
+                      <textarea
+                        id="evaluation-3"
+                        class="materialize-textarea"
+                      ></textarea>
+                    </div>
+                  </li>
+                  <li class="collection-item">
+                    <p>
+                      4. Zijn er cruciale ontbrekende premissen die toegevoegd
+                      moeten worden om
+                      <span id="eval-target-name4"></span> succesvol te maken?
+                    </p>
+                    <div class="input-field">
+                      <textarea
+                        id="evaluation-4"
+                        class="materialize-textarea"
+                      ></textarea>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col s12">
+                <h6>Algemene Beoordeling</h6>
+                <div class="input-field">
+                  <textarea
+                    id="overall-assessment"
+                    class="materialize-textarea"
+                  ></textarea>
+                  <label for="overall-assessment"
+                    >Wat is uw algemene beoordeling van deze strategische
+                    analogie tussen <span id="eval-source-name5"></span> en
+                    <span id="eval-target-name5"></span>?</label
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="export-options">
+            <a
+              class="waves-effect waves-light btn"
+              id="export-pdf"
+              onclick="exportAsPDF()"
+              ><i class="material-icons left">picture_as_pdf</i>Exporteer als
+              PDF</a
+            >
+            <a
+              class="waves-effect waves-light btn"
+              id="export-txt"
+              onclick="exportAsText()"
+              ><i class="material-icons left">description</i>Exporteer als
+              Tekst</a
+            >
+          </div>
+
+          <div class="step-navigation">
+            <a class="waves-effect waves-light btn prev-step" data-prev="step3"
+              ><i class="material-icons left">arrow_back</i>Vorige</a
+            >
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="page-footer teal darken-1">
+      <div class="container">
+        <div class="row">
+          <div class="col s12">
+            <h5 class="white-text">Strategie Analogie Bouwer</h5>
+            <p class="grey-text text-lighten-4">
+              Gebaseerd op het artikel "Strategy Theory Using Analogy:
+              Rationale, Tools and Examples" door Glenn R. Carroll en Jesper B.
+              Sørensen (2024).
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">© 2025 Strategie Analogie Bouwer</div>
+      </div>
+    </footer>
+
+    <!-- Help Modal -->
+    <div id="help-modal" class="modal">
+      <div class="modal-content">
+        <h4>Handleiding voor de Strategie Analogie Bouwer</h4>
+        <div class="help-content">
+          <p>
+            Deze tool helpt u een strategische analogie te ontwikkelen volgens
+            de methodologie beschreven door Carroll en Sørensen (2024). Hier
+            leest u hoe u het gebruikt:
+          </p>
+
+          <h5>Stap 1: Definieer Uw Doel</h5>
+          <p>
+            Begin met het definiëren van uw doelbedrijf – de organisatie
+            waarvoor u een strategie ontwikkelt. Geef duidelijk het gewenste
+            strategische resultaat aan (bijv. marktsucces, kostenleiderschap,
+            enz.).
+          </p>
+
+          <h5>Stap 2: Kies Uw Bron</h5>
+          <p>
+            Kies een bronbedrijf dat het gewenste resultaat laat zien. De bron
+            moet een succesvol voorbeeld zijn dat de gewenste conclusie
+            ondersteunt.
+          </p>
+
+          <h5>Stap 3: Bouw Uw Analogie</h5>
+          <p>
+            Identificeer de belangrijkste overeenkomsten (positieve premissen)
+            en verschillen (negatieve premissen) tussen uw bron en doel. Voor
+            elke premisse:
+          </p>
+          <ul>
+            <li>Beschrijf de eigenschap in zowel de bron als het doel</li>
+            <li>Geef aan of het een overeenkomst of een verschil betreft</li>
+            <li>Leg uit hoe het bijdraagt aan het resultaat</li>
+          </ul>
+          <p>
+            Onthoud dat de belangrijkste premissen degene zijn met sterke
+            causale relaties tot het resultaat.
+          </p>
+
+          <h5>Stap 4: Evalueer Uw Analogie</h5>
+          <p>Beoordeel de sterkte van uw analogie door te onderzoeken:</p>
+          <ul>
+            <li>
+              Of de positieve overeenkomsten opwegen tegen de negatieve
+              verschillen qua relevantie
+            </li>
+            <li>De sterkte van de verticale (causale) relaties in de bron</li>
+            <li>
+              Of deze causale relaties plausibel ook op het doel van toepassing
+              zijn
+            </li>
+            <li>Eventuele ontbrekende premissen die nodig zijn voor succes</li>
+          </ul>
+
+          <h5>Belangrijke Concepten</h5>
+          <p>
+            <strong>Horizontale Relaties</strong>: De een-op-een koppelingen van
+            eigenschappen tussen bron en doel.
+          </p>
+          <p>
+            <strong>Verticale Relaties</strong>: De causale relaties tussen
+            eigenschappen binnen de bron en het doel.
+          </p>
+          <p>
+            <strong>Positieve Analogie</strong>: Eigenschappen die overeenkomen
+            tussen bron en doel.
+          </p>
+          <p>
+            <strong>Negatieve Analogie</strong>: Eigenschappen die verschillen
+            tussen bron en doel.
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat"
+          >Sluiten</a
+        >
+      </div>
+    </div>
+
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize Materialize components
+        var tabs = document.querySelectorAll(".tabs");
+        M.Tabs.init(tabs);
+
+        var modals = document.querySelectorAll(".modal");
+        M.Modal.init(modals);
+
+        var textareas = document.querySelectorAll("textarea");
+        textareas.forEach(function (textarea) {
+          M.textareaAutoResize(textarea);
+        });
+
+        // Step navigation
+        document.querySelectorAll(".next-step").forEach(function (button) {
+          button.addEventListener("click", function () {
+            var nextTab = this.getAttribute("data-next");
+            var instance = M.Tabs.getInstance(document.querySelector(".tabs"));
+            instance.select(nextTab);
+            updateState();
+          });
+        });
+
+        document.querySelectorAll(".prev-step").forEach(function (button) {
+          button.addEventListener("click", function () {
+            var prevTab = this.getAttribute("data-prev");
+            var instance = M.Tabs.getInstance(document.querySelector(".tabs"));
+            instance.select(prevTab);
+          });
+        });
+
+        // Add premise button
+        let premiseCount = 1;
+        document
+          .getElementById("add-premise")
+          .addEventListener("click", function () {
+            premiseCount++;
+            const nextLetter = String.fromCharCode(
+              "A".charCodeAt(0) + premiseCount - 1
+            );
+            const newPremise = document.createElement("div");
+            newPremise.className = "premise-container";
+            newPremise.innerHTML = `
+                    <div class="premise-header">
+                        <h6>Premisse ${nextLetter}</h6>
+                        <div>
+                            <select class="feature-type browser-default">
+                                <option value="positive" selected>Positief (Overeenkomstig)</option>
+                                <option value="negative">Negatief (Verschillend)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="premise-row">
+                        <div class="premise-label">Bron</div>
+                        <div class="input-field">
+                            <input type="text" class="source-feature validate">
+                        </div>
+                    </div>
+                    <div class="premise-row">
+                        <div class="premise-relation">
+                            <span class="relation-text">is vergelijkbaar met</span>
+                        </div>
+                    </div>
+                    <div class="premise-row">
+                        <div class="premise-label">Doel</div>
+                        <div class="input-field">
+                            <input type="text" class="target-feature validate">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input type="text" class="causal-relevance validate">
+                            <label>Causale Relevantie (Hoe draagt deze eigenschap bij aan succes?)</label>
+                        </div>
+                    </div>
+                `;
+            document
+              .getElementById("premise-container")
+              .appendChild(newPremise);
+            const newInputs = newPremise.querySelectorAll("input");
+            newInputs.forEach((input) => {
+              M.updateTextFields();
+            });
+            const newSelect = newPremise.querySelector(".feature-type");
+            newSelect.addEventListener("change", updateRelationText);
+          });
+
+        // Update relation text based on feature type selection
+        function updateRelationText(event) {
+          const select = event.target;
+          const premiseContainer = select.closest(".premise-container");
+          const relationText = premiseContainer.querySelector(".relation-text");
+          relationText.textContent =
+            select.value === "positive"
+              ? "is vergelijkbaar met"
+              : "is niet vergelijkbaar met";
+        }
+
+        document.querySelectorAll(".feature-type").forEach(function (select) {
+          select.addEventListener("change", updateRelationText);
+        });
+
+        // Update conclusion fields when sources/outcomes change
+        document
+          .getElementById("source-outcome")
+          .addEventListener("input", updateConclusion);
+        document
+          .getElementById("target-desired-outcome")
+          .addEventListener("input", updateConclusion);
+
+        function updateConclusion() {
+          const sourceOutcome = document.getElementById("source-outcome").value;
+          const targetOutcome = document.getElementById(
+            "target-desired-outcome"
+          ).value;
+          document.getElementById("conclusion-source").value = sourceOutcome;
+          document.getElementById("conclusion-target").value = targetOutcome;
+          document.getElementById("summary-source-outcome").textContent =
+            sourceOutcome;
+          document.getElementById("summary-target-outcome").textContent =
+            targetOutcome;
+          M.updateTextFields();
+        }
+
+        // Update company names in evaluation questions and header
+        function updateEvaluationCompanyNames() {
+          const sourceName =
+            document.getElementById("source-name").value || "[Bronbedrijf]";
+          const targetName =
+            document.getElementById("target-name").value || "[Doelbedrijf]";
+          document.getElementById("header-source-name").textContent =
+            sourceName;
+          document.getElementById("header-target-name").textContent =
+            targetName;
+          document.getElementById("eval-source-name1").textContent = sourceName;
+          document.getElementById("eval-target-name1").textContent = targetName;
+          document.getElementById("eval-source-name2").textContent = sourceName;
+          document.getElementById("eval-target-name3").textContent = targetName;
+          document.getElementById("eval-target-name4").textContent = targetName;
+          const overallLabel = document.querySelector(
+            'label[for="overall-assessment"]'
+          );
+          if (overallLabel) {
+            document.getElementById("eval-source-name5").textContent =
+              sourceName;
+            document.getElementById("eval-target-name5").textContent =
+              targetName;
+          }
+          M.updateTextFields();
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+          setTimeout(function () {
+            const activeTab = M.Tabs.getInstance(
+              document.querySelector(".tabs")
+            ).index;
+            if (activeTab === 3) {
+              updateSummaryTable();
+              updateEvaluationCompanyNames();
+            }
+          }, 100);
+        });
+
+        // Update summary table in Step 4
+        function updateSummaryTable() {
+          const tableBody = document.getElementById("summary-table-body");
+          tableBody.innerHTML = "";
+          const premises = document.querySelectorAll(".premise-container");
+          premises.forEach((premise, index) => {
+            const letter = String.fromCharCode("A".charCodeAt(0) + index);
+            const sourceFeature =
+              premise.querySelector(".source-feature").value;
+            const targetFeature =
+              premise.querySelector(".target-feature").value;
+            const featureType = premise.querySelector(".feature-type").value;
+            const relation =
+              featureType === "positive"
+                ? "is vergelijkbaar met"
+                : "is niet vergelijkbaar met";
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                        <td>${letter}</td>
+                        <td>${sourceFeature}</td>
+                        <td>${relation}</td>
+                        <td>${targetFeature}</td>
+                    `;
+            tableBody.appendChild(row);
+          });
+        }
+
+        // Update state when moving between tabs
+        function updateState() {
+          updateConclusion();
+          const activeTab = M.Tabs.getInstance(
+            document.querySelector(".tabs")
+          ).index;
+          if (activeTab === 3) {
+            updateSummaryTable();
+            updateEvaluationCompanyNames();
+          }
+        }
+
+        document
+          .getElementById("source-name")
+          .addEventListener("input", function () {
+            if (
+              M.Tabs.getInstance(document.querySelector(".tabs")).index === 3
+            ) {
+              updateEvaluationCompanyNames();
+            }
+          });
+
+        document
+          .getElementById("target-name")
+          .addEventListener("input", function () {
+            if (
+              M.Tabs.getInstance(document.querySelector(".tabs")).index === 3
+            ) {
+              updateEvaluationCompanyNames();
+            }
+          });
+
+        // Reset button
+        document
+          .getElementById("reset-btn")
+          .addEventListener("click", function () {
+            if (
+              confirm(
+                "Dit zal al uw gegevens wissen. Weet u zeker dat u wilt resetten?"
+              )
+            ) {
+              document
+                .querySelectorAll("input, textarea")
+                .forEach(function (input) {
+                  input.value = "";
+                  M.updateTextFields();
+                });
+              const premiseContainer =
+                document.getElementById("premise-container");
+              premiseContainer.innerHTML = "";
+              const newPremise = document.createElement("div");
+              newPremise.className = "premise-container";
+              newPremise.innerHTML = `
+                        <div class="premise-header">
+                            <h6>Premisse A</h6>
+                            <div>
+                                <select class="feature-type browser-default">
+                                    <option value="positive" selected>Positief (Overeenkomstig)</option>
+                                    <option value="negative">Negatief (Verschillend)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="premise-row">
+                            <div class="premise-label">Bron</div>
+                            <div class="input-field">
+                                <input type="text" class="source-feature validate">
+                            </div>
+                        </div>
+                        <div class="premise-row">
+                            <div class="premise-relation">
+                                <span class="relation-text">is vergelijkbaar met</span>
+                            </div>
+                        </div>
+                        <div class="premise-row">
+                            <div class="premise-label">Doel</div>
+                            <div class="input-field">
+                                <input type="text" class="target-feature validate">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input type="text" class="causal-relevance validate">
+                                <label>Causale Relevantie (Hoe draagt deze eigenschap bij aan succes?)</label>
+                            </div>
+                        </div>
+                    `;
+              premiseContainer.appendChild(newPremise);
+              const instance = M.Tabs.getInstance(
+                document.querySelector(".tabs")
+              );
+              instance.select("step1");
+              premiseCount = 1;
+              const select = newPremise.querySelector(".feature-type");
+              select.addEventListener("change", updateRelationText);
+              M.updateTextFields();
+            }
+          });
+
+        // Exporteer als Tekst functie
+        function exportAsText() {
+          const targetName = document.getElementById("target-name").value;
+          const targetDesc =
+            document.getElementById("target-description").value;
+          const targetOutcome = document.getElementById(
+            "target-desired-outcome"
+          ).value;
+          const sourceName = document.getElementById("source-name").value;
+          const sourceDesc =
+            document.getElementById("source-description").value;
+          const sourceOutcome = document.getElementById("source-outcome").value;
+          let text = "STRATEGIE ANALOGIE ANALYSE\n";
+          text += "========================\n\n";
+          text += "DOELBEDRIJF:\n";
+          text += `Naam: ${targetName}\n`;
+          text += `Beschrijving: ${targetDesc}\n`;
+          text += `Gewenst Resultaat: ${targetOutcome}\n\n`;
+          text += "BRONBEDRIJF:\n";
+          text += `Naam: ${sourceName}\n`;
+          text += `Beschrijving: ${sourceDesc}\n`;
+          text += `Resultaat: ${sourceOutcome}\n\n`;
+          text += "ANALOGIE PREMISSEN:\n";
+          const premises = document.querySelectorAll(".premise-container");
+          premises.forEach((premise, index) => {
+            const letter = String.fromCharCode("A".charCodeAt(0) + index);
+            const sourceFeature =
+              premise.querySelector(".source-feature").value;
+            const targetFeature =
+              premise.querySelector(".target-feature").value;
+            const featureType = premise.querySelector(".feature-type").value;
+            const causalRelevance =
+              premise.querySelector(".causal-relevance").value;
+            const relation =
+              featureType === "positive"
+                ? "is vergelijkbaar met"
+                : "is niet vergelijkbaar met";
+            text += `Premisse ${letter}:\n`;
+            text += `- Bron: ${sourceFeature}\n`;
+            text += `- Relatie: ${relation}\n`;
+            text += `- Doel: ${targetFeature}\n`;
+            text += `- Causale Relevantie: ${causalRelevance}\n\n`;
+          });
+          text += "CONCLUSIE:\n";
+          text += `${sourceOutcome} is plausibel vergelijkbaar met ${targetOutcome}\n\n`;
+          text += "EVALUATIE:\n";
+          text += `1. Wegen de positieve overeenkomsten tussen ${sourceName} en ${targetName} op tegen de negatieve verschillen? ${
+            document.getElementById("evaluation-1").value
+          }\n\n`;
+          text += `2. Zijn de verticale relaties in ${sourceName} sterk? ${
+            document.getElementById("evaluation-2").value
+          }\n\n`;
+          text += `3. Kunnen dezelfde causale relaties plausibel ook op ${targetName} van toepassing zijn? ${
+            document.getElementById("evaluation-3").value
+          }\n\n`;
+          text += `4. Zijn er cruciale ontbrekende premissen om ${targetName} succesvol te maken? ${
+            document.getElementById("evaluation-4").value
+          }\n\n`;
+          text += "ALGEMENE BEOORDELING:\n";
+          text += document.getElementById("overall-assessment").value;
+          const blob = new Blob([text], { type: "text/plain" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = `${targetName}-Strategie-Analogie.txt`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        }
+
+        // Exporteer als PDF functie met jsPDF
+        function exportAsPDF() {
+          if (typeof window.jspdf === "undefined") {
+            alert(
+              "PDF-bibliotheek niet geladen. Probeer het opnieuw of controleer uw internetverbinding."
+            );
+            return;
+          }
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF();
+          const targetName =
+            document.getElementById("target-name").value || "(Naamloos Doel)";
+          const targetDesc =
+            document.getElementById("target-description").value || "";
+          const targetOutcome =
+            document.getElementById("target-desired-outcome").value || "";
+          const sourceName =
+            document.getElementById("source-name").value || "(Naamloos Bron)";
+          const sourceDesc =
+            document.getElementById("source-description").value || "";
+          const sourceOutcome =
+            document.getElementById("source-outcome").value || "";
+          const premises = [];
+          document
+            .querySelectorAll(".premise-container")
+            .forEach((premise, index) => {
+              const letter = String.fromCharCode("A".charCodeAt(0) + index);
+              const sourceFeature =
+                premise.querySelector(".source-feature").value || "";
+              const targetFeature =
+                premise.querySelector(".target-feature").value || "";
+              const featureType = premise.querySelector(".feature-type").value;
+              const causalRelevance =
+                premise.querySelector(".causal-relevance").value || "";
+              const relation =
+                featureType === "positive"
+                  ? "is vergelijkbaar met"
+                  : "is niet vergelijkbaar met";
+              premises.push({
+                letter,
+                sourceFeature,
+                relation,
+                targetFeature,
+                causalRelevance,
+                featureType,
+              });
+            });
+          const evaluations = {
+            q1: document.getElementById("evaluation-1").value || "",
+            q2: document.getElementById("evaluation-2").value || "",
+            q3: document.getElementById("evaluation-3").value || "",
+            q4: document.getElementById("evaluation-4").value || "",
+            overall: document.getElementById("overall-assessment").value || "",
+          };
+          const margin = 20;
+          let y = margin;
+          function addWrappedText(text, x, y, maxWidth, lineHeight) {
+            const lines = doc.splitTextToSize(text, maxWidth);
+            doc.text(lines, x, y);
+            return y + lines.length * lineHeight;
+          }
+          doc.setFontSize(18);
+          doc.setFont(undefined, "bold");
+          doc.text(
+            "STRATEGIE ANALOGIE ANALYSE",
+            doc.internal.pageSize.width / 2,
+            y,
+            { align: "center" }
+          );
+          y += 10;
+          doc.setFontSize(14);
+          doc.text(
+            `${sourceName} naar ${targetName}`,
+            doc.internal.pageSize.width / 2,
+            y,
+            { align: "center" }
+          );
+          y += 15;
+          doc.setFontSize(14);
+          doc.setFont(undefined, "bold");
+          doc.text("DOELBEDRIJF", margin, y);
+          y += 7;
+          doc.setFontSize(10);
+          doc.setFont(undefined, "bold");
+          doc.text("Naam:", margin, y);
+          doc.setFont(undefined, "normal");
+          doc.text(targetName, margin + 30, y);
+          y += 6;
+          doc.setFont(undefined, "bold");
+          doc.text("Beschrijving:", margin, y);
+          doc.setFont(undefined, "normal");
+          y = addWrappedText(
+            targetDesc,
+            margin + 30,
+            y,
+            doc.internal.pageSize.width - margin * 2 - 30,
+            5
+          );
+          y += 6;
+          doc.setFont(undefined, "bold");
+          doc.text("Gewenst Resultaat:", margin, y);
+          doc.setFont(undefined, "normal");
+          y = addWrappedText(
+            targetOutcome,
+            margin + 30,
+            y,
+            doc.internal.pageSize.width - margin * 2 - 30,
+            5
+          );
+          y += 10;
+          doc.setFontSize(14);
+          doc.setFont(undefined, "bold");
+          doc.text("BRONBEDRIJF", margin, y);
+          y += 7;
+          doc.setFontSize(10);
+          doc.setFont(undefined, "bold");
+          doc.text("Naam:", margin, y);
+          doc.setFont(undefined, "normal");
+          doc.text(sourceName, margin + 30, y);
+          y += 6;
+          doc.setFont(undefined, "bold");
+          doc.text("Beschrijving:", margin, y);
+          doc.setFont(undefined, "normal");
+          y = addWrappedText(
+            sourceDesc,
+            margin + 30,
+            y,
+            doc.internal.pageSize.width - margin * 2 - 30,
+            5
+          );
+          y += 6;
+          doc.setFont(undefined, "bold");
+          doc.text("Resultaat:", margin, y);
+          doc.setFont(undefined, "normal");
+          y = addWrappedText(
+            sourceOutcome,
+            margin + 30,
+            y,
+            doc.internal.pageSize.width - margin * 2 - 30,
+            5
+          );
+          y += 10;
+          doc.setFontSize(14);
+          doc.setFont(undefined, "bold");
+          doc.text("ANALOGIE PREMISSEN", margin, y);
+          y += 10;
+          premises.forEach((premise) => {
+            if (y > doc.internal.pageSize.height - 30) {
+              doc.addPage();
+              y = margin;
+            }
+            doc.setFontSize(12);
+            doc.setFont(undefined, "bold");
+            doc.text(
+              `Premisse ${premise.letter}: ${
+                premise.featureType === "positive" ? "(Positief)" : "(Negatief)"
+              }`,
+              margin,
+              y
+            );
+            y += 6;
+            doc.setFontSize(10);
+            doc.setFont(undefined, "bold");
+            doc.text("Bron:", margin, y);
+            doc.setFont(undefined, "normal");
+            y = addWrappedText(
+              premise.sourceFeature,
+              margin + 30,
+              y,
+              doc.internal.pageSize.width - margin * 2 - 30,
+              5
+            );
+            y += 4;
+            doc.setFont(undefined, "bold");
+            doc.text("Relatie:", margin, y);
+            doc.setFont(undefined, "normal");
+            doc.text(premise.relation, margin + 30, y);
+            y += 4;
+            doc.setFont(undefined, "bold");
+            doc.text("Doel:", margin, y);
+            doc.setFont(undefined, "normal");
+            y = addWrappedText(
+              premise.targetFeature,
+              margin + 30,
+              y,
+              doc.internal.pageSize.width - margin * 2 - 30,
+              5
+            );
+            y += 4;
+            doc.setFont(undefined, "bold");
+            doc.text("Causale Relevantie:", margin, y);
+            doc.setFont(undefined, "normal");
+            y = addWrappedText(
+              premise.causalRelevance,
+              margin + 30,
+              y,
+              doc.internal.pageSize.width - margin * 2 - 30,
+              5
+            );
+            y += 8;
+          });
+          if (y > doc.internal.pageSize.height - 50) {
+            doc.addPage();
+            y = margin;
+          }
+          doc.setFontSize(14);
+          doc.setFont(undefined, "bold");
+          doc.text("CONCLUSIE", margin, y);
+          y += 7;
+          doc.setFontSize(10);
+          doc.setFont(undefined, "normal");
+          doc.text(
+            `${sourceOutcome} is plausibel vergelijkbaar met ${targetOutcome}`,
+            margin,
+            y
+          );
+          y += 10;
+          if (y > doc.internal.pageSize.height - 100) {
+            doc.addPage();
+            y = margin;
+          }
+          doc.setFontSize(14);
+          doc.setFont(undefined, "bold");
+          doc.text("EVALUATIE", margin, y);
+          y += 10;
+          doc.setFontSize(10);
+          doc.setFont(undefined, "bold");
+          doc.text(
+            `1. Wegen de positieve overeenkomsten tussen ${sourceName} en ${targetName} op tegen de negatieve verschillen?`,
+            margin,
+            y
+          );
+          y += 6;
+          doc.setFont(undefined, "normal");
+          y = addWrappedText(
+            evaluations.q1,
+            margin,
+            y,
+            doc.internal.pageSize.width - margin * 2,
+            5
+          );
+          y += 8;
+          if (y > doc.internal.pageSize.height - 50) {
+            doc.addPage();
+            y = margin;
+          }
+          doc.setFont(undefined, "bold");
+          doc.text(
+            `2. Zijn de verticale (causale) relaties in ${sourceName} sterk?`,
+            margin,
+            y
+          );
+          y += 6;
+          doc.setFont(undefined, "normal");
+          y = addWrappedText(
+            evaluations.q2,
+            margin,
+            y,
+            doc.internal.pageSize.width - margin * 2,
+            5
+          );
+          y += 8;
+          if (y > doc.internal.pageSize.height - 50) {
+            doc.addPage();
+            y = margin;
+          }
+          doc.setFont(undefined, "bold");
+          doc.text(
+            `3. Kunnen dezelfde causale relaties plausibel ook op ${targetName} van toepassing zijn?`,
+            margin,
+            y
+          );
+          y += 6;
+          doc.setFont(undefined, "normal");
+          y = addWrappedText(
+            evaluations.q3,
+            margin,
+            y,
+            doc.internal.pageSize.width - margin * 2,
+            5
+          );
+          y += 8;
+          if (y > doc.internal.pageSize.height - 50) {
+            doc.addPage();
+            y = margin;
+          }
+          doc.setFont(undefined, "bold");
+          doc.text(
+            `4. Zijn er cruciale ontbrekende premissen om ${targetName} succesvol te maken?`,
+            margin,
+            y
+          );
+          y += 6;
+          doc.setFont(undefined, "normal");
+          y = addWrappedText(
+            evaluations.q4,
+            margin,
+            y,
+            doc.internal.pageSize.width - margin * 2,
+            5
+          );
+          y += 10;
+          if (y > doc.internal.pageSize.height - 60) {
+            doc.addPage();
+            y = margin;
+          }
+          doc.setFontSize(14);
+          doc.setFont(undefined, "bold");
+          doc.text("ALGEMENE BEOORDELING", margin, y);
+          y += 7;
+          doc.setFontSize(10);
+          doc.setFont(undefined, "normal");
+          y = addWrappedText(
+            evaluations.overall,
+            margin,
+            y,
+            doc.internal.pageSize.width - margin * 2,
+            5
+          );
+          const pageCount = doc.internal.getNumberOfPages();
+          for (let i = 1; i <= pageCount; i++) {
+            doc.setPage(i);
+            doc.setFontSize(8);
+            doc.text(
+              `Strategie Analogie Analyse - Pagina ${i} van ${pageCount}`,
+              doc.internal.pageSize.width / 2,
+              doc.internal.pageSize.height - 10,
+              { align: "center" }
+            );
+          }
+          doc.save(`${targetName}-Strategie-Analogie.pdf`);
+        }
+
+        // Save to local storage
+        function saveToLocalStorage() {
+          const data = {
+            target: {
+              name: document.getElementById("target-name").value,
+              description: document.getElementById("target-description").value,
+              outcome: document.getElementById("target-desired-outcome").value,
+            },
+            source: {
+              name: document.getElementById("source-name").value,
+              description: document.getElementById("source-description").value,
+              outcome: document.getElementById("source-outcome").value,
+            },
+            premises: Array.from(
+              document.querySelectorAll(".premise-container")
+            ).map((premise) => {
+              return {
+                sourceFeature: premise.querySelector(".source-feature").value,
+                targetFeature: premise.querySelector(".target-feature").value,
+                featureType: premise.querySelector(".feature-type").value,
+                causalRelevance:
+                  premise.querySelector(".causal-relevance").value,
+              };
+            }),
+            evaluation: {
+              q1: document.getElementById("evaluation-1").value,
+              q2: document.getElementById("evaluation-2").value,
+              q3: document.getElementById("evaluation-3").value,
+              q4: document.getElementById("evaluation-4").value,
+              overall: document.getElementById("overall-assessment").value,
+            },
+          };
+          localStorage.setItem("strategyAnalogy", JSON.stringify(data));
+        }
+
+        // Load from local storage
+        function loadFromLocalStorage() {
+          const savedData = localStorage.getItem("strategyAnalogy");
+          if (savedData) {
+            try {
+              const data = JSON.parse(savedData);
+              document.getElementById("target-name").value =
+                data.target.name || "";
+              document.getElementById("target-description").value =
+                data.target.description || "";
+              document.getElementById("target-desired-outcome").value =
+                data.target.outcome || "";
+              document.getElementById("source-name").value =
+                data.source.name || "";
+              document.getElementById("source-description").value =
+                data.source.description || "";
+              document.getElementById("source-outcome").value =
+                data.source.outcome || "";
+              if (data.premises && data.premises.length > 0) {
+                const premiseContainer =
+                  document.getElementById("premise-container");
+                premiseContainer.innerHTML = "";
+                data.premises.forEach((premiseData, index) => {
+                  const letter = String.fromCharCode("A".charCodeAt(0) + index);
+                  premiseCount = index + 1;
+                  const premiseElement = document.createElement("div");
+                  premiseElement.className = "premise-container";
+                  premiseElement.innerHTML = `
+                                    <div class="premise-header">
+                                        <h6>Premisse ${letter}</h6>
+                                        <div>
+                                            <select class="feature-type browser-default">
+                                                <option value="positive" ${
+                                                  premiseData.featureType ===
+                                                  "positive"
+                                                    ? "selected"
+                                                    : ""
+                                                }>Positief (Overeenkomstig)</option>
+                                                <option value="negative" ${
+                                                  premiseData.featureType ===
+                                                  "negative"
+                                                    ? "selected"
+                                                    : ""
+                                                }>Negatief (Verschillend)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="premise-row">
+                                        <div class="premise-label">Bron</div>
+                                        <div class="input-field">
+                                            <input type="text" class="source-feature validate" value="${
+                                              premiseData.sourceFeature || ""
+                                            }">
+                                        </div>
+                                    </div>
+                                    <div class="premise-row">
+                                        <div class="premise-relation">
+                                            <span class="relation-text">${
+                                              premiseData.featureType ===
+                                              "positive"
+                                                ? "is vergelijkbaar met"
+                                                : "is niet vergelijkbaar met"
+                                            }</span>
+                                        </div>
+                                    </div>
+                                    <div class="premise-row">
+                                        <div class="premise-label">Doel</div>
+                                        <div class="input-field">
+                                            <input type="text" class="target-feature validate" value="${
+                                              premiseData.targetFeature || ""
+                                            }">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input type="text" class="causal-relevance validate" value="${
+                                              premiseData.causalRelevance || ""
+                                            }">
+                                            <label ${
+                                              premiseData.causalRelevance
+                                                ? 'class="active"'
+                                                : ""
+                                            }>Causale Relevantie (Hoe draagt deze eigenschap bij aan succes?)</label>
+                                        </div>
+                                    </div>
+                                `;
+                  premiseContainer.appendChild(premiseElement);
+                  const select = premiseElement.querySelector(".feature-type");
+                  select.addEventListener("change", updateRelationText);
+                });
+              }
+              if (data.evaluation) {
+                document.getElementById("evaluation-1").value =
+                  data.evaluation.q1 || "";
+                document.getElementById("evaluation-2").value =
+                  data.evaluation.q2 || "";
+                document.getElementById("evaluation-3").value =
+                  data.evaluation.q3 || "";
+                document.getElementById("evaluation-4").value =
+                  data.evaluation.q4 || "";
+                document.getElementById("overall-assessment").value =
+                  data.evaluation.overall || "";
+              }
+              M.updateTextFields();
+              updateConclusion();
+              return true;
+            } catch (e) {
+              console.error("Fout bij het laden van opgeslagen data:", e);
+              return false;
+            }
+          }
+          return false;
+        }
+
+        setInterval(saveToLocalStorage, 60000);
+        document.querySelectorAll("input, textarea, select").forEach((el) => {
+          el.addEventListener("change", saveToLocalStorage);
+          el.addEventListener("keyup", debounce(saveToLocalStorage, 2000));
+        });
+
+        function debounce(func, wait) {
+          let timeout;
+          return function (...args) {
+            const context = this;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(context, args), wait);
+          };
+        }
+
+        // Voorbeeldgegevens laden functie
+        function loadExampleData() {
+          document.getElementById("target-name").value = "Instacart";
+          document.getElementById("target-description").value =
+            "Bezorgplatform voor boodschappen dat klanten verbindt met persoonlijke shoppers die boodschappen selecteren en leveren vanuit lokale winkels.";
+          document.getElementById("target-desired-outcome").value =
+            "Marktgroei en winstgevendheid";
+          document.getElementById("source-name").value = "DoorDash";
+          document.getElementById("source-description").value =
+            "Voedselbezorgplatform dat klanten verbindt met restaurants en bezorgers. Heeft met succes uitgebreid naar andere bezorgcategorieën.";
+          document.getElementById("source-outcome").value =
+            "Marktgroei en winstgevendheid";
+          const premiseContainer = document.getElementById("premise-container");
+          premiseContainer.innerHTML = "";
+          const premises = [
+            {
+              letter: "A",
+              sourceFeature:
+                "On-demand platform dat drie zijden van de markt verbindt (restaurants, chauffeurs, klanten)",
+              targetFeature:
+                "On-demand platform dat drie zijden van de markt verbindt (winkels, inkopers, klanten)",
+              featureType: "positive",
+              causalRelevance:
+                "Een platform met meerdere kanten creëert netwerkeffecten en hoge toetredingsdrempels",
+            },
+            {
+              letter: "B",
+              sourceFeature:
+                "Zelfstandige contractarbeiders met flexibele werktijden",
+              targetFeature:
+                "Zelfstandige contractarbeiders met flexibele werktijden",
+              featureType: "positive",
+              causalRelevance:
+                "Maakt opschaling mogelijk zonder vaste arbeidskosten en kan vraag en aanbod afstemmen",
+            },
+            {
+              letter: "C",
+              sourceFeature:
+                "Laaggeschoolde bezorgtaak die minimale training vereist",
+              targetFeature:
+                "Complexere inkooptaken die productselectie en beoordelingsvaardigheden vereisen",
+              featureType: "negative",
+              causalRelevance:
+                "Servicekwaliteit is moeilijker te waarborgen en er is meer training nodig",
+            },
+            {
+              letter: "D",
+              sourceFeature:
+                "Bestaande voorraadbeheersystemen voor restaurants",
+              targetFeature: "Beperkte voorraadbeheersystemen voor winkels",
+              featureType: "negative",
+              causalRelevance:
+                "Leidt tot uitdagingen bij een nauwkeurige productbeschikbaarheid",
+            },
+          ];
+          premises.forEach((premise, index) => {
+            premiseCount = index + 1;
+            const premiseElement = document.createElement("div");
+            premiseElement.className = "premise-container";
+            premiseElement.innerHTML = `
+                        <div class="premise-header">
+                            <h6>Premisse ${premise.letter}</h6>
+                            <div>
+                                <select class="feature-type browser-default">
+                                    <option value="positive" ${
+                                      premise.featureType === "positive"
+                                        ? "selected"
+                                        : ""
+                                    }>Positief (Overeenkomstig)</option>
+                                    <option value="negative" ${
+                                      premise.featureType === "negative"
+                                        ? "selected"
+                                        : ""
+                                    }>Negatief (Verschillend)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="premise-row">
+                            <div class="premise-label">Bron</div>
+                            <div class="input-field">
+                                <input type="text" class="source-feature validate" value="${
+                                  premise.sourceFeature
+                                }">
+                            </div>
+                        </div>
+                        <div class="premise-row">
+                            <div class="premise-relation">
+                                <span class="relation-text">${
+                                  premise.featureType === "positive"
+                                    ? "is vergelijkbaar met"
+                                    : "is niet vergelijkbaar met"
+                                }</span>
+                            </div>
+                        </div>
+                        <div class="premise-row">
+                            <div class="premise-label">Doel</div>
+                            <div class="input-field">
+                                <input type="text" class="target-feature validate" value="${
+                                  premise.targetFeature
+                                }">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input type="text" class="causal-relevance validate" value="${
+                                  premise.causalRelevance
+                                }">
+                                <label class="active">Causale Relevantie (Hoe draagt deze eigenschap bij aan succes?)</label>
+                            </div>
+                        </div>
+                    `;
+            premiseContainer.appendChild(premiseElement);
+            const select = premiseElement.querySelector(".feature-type");
+            select.addEventListener("change", updateRelationText);
+          });
+          document.getElementById("evaluation-1").value =
+            "De positieve overeenkomsten met betrekking tot het platformmodel en de flexibele arbeidskrachten zijn zeer relevant voor het succes van het businessmodel. De negatieve verschillen in vereiste winkelvaardigheden en voorraadsystemen zijn significant, maar kunnen mogelijk met technologie worden aangepakt.";
+          document.getElementById("evaluation-2").value =
+            "Het succes van DoorDash is sterk verbonden met de netwerkeffecten van het platform en de mogelijkheid om op te schalen met een flexibele arbeidskracht. Deze causale mechanismen lijken robuust.";
+          document.getElementById("evaluation-3").value =
+            "Dezelfde dynamiek van netwerkeffecten zou ook op Instacart van toepassing kunnen zijn, hoewel de hogere complexiteit van boodschappen doen de efficiëntie kan verminderen.";
+          document.getElementById("evaluation-4").value =
+            "Instacart moet mogelijk een sterker trainings- en kwaliteitscontrolesysteem voor shoppers toevoegen, gezien de hogere vaardigheidseisen. Daarnaast zou een betere integratie van voorraadsystemen met partners nodig zijn.";
+          document.getElementById("overall-assessment").value =
+            "De analogie tussen DoorDash en Instacart is sterk op basis van de fundamenten van het platformbusinessmodel, maar vereist aanvullende premissen om de unieke uitdagingen van boodschappen doen aan te pakken. Met de juiste aandacht voor de negatieve verschillen kan Instacart waarschijnlijk een vergelijkbaar marktsucces bereiken.";
+          M.updateTextFields();
+          updateConclusion();
+          saveToLocalStorage();
+        }
+
+        const loadExampleBtn = document.createElement("a");
+        loadExampleBtn.className = "waves-effect waves-light btn";
+        loadExampleBtn.innerHTML =
+          '<i class="material-icons left">play_arrow</i>Laad Voorbeeldgegevens';
+        loadExampleBtn.addEventListener("click", function () {
+          loadExampleData();
+          M.Modal.getInstance(document.getElementById("help-modal")).close();
+        });
+        document.querySelector(".modal-footer").prepend(loadExampleBtn);
+
+        if (!loadFromLocalStorage()) {
+          const modalInstance = M.Modal.getInstance(
+            document.getElementById("help-modal")
+          );
+          modalInstance.open();
+        }
+
+        // Expose the export functions to the global scope for inline onclick calls
+        window.exportAsPDF = exportAsPDF;
+        window.exportAsText = exportAsText;
+      });
+    </script>
+  </body>
+</html>

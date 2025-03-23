@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Willingness to Change - DINAMO Framework</title>
+    <!-- Materialize CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <!-- Material Icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <style>
+      .container {
+        margin-top: 20px;
+      }
+      .card-panel {
+        padding: 20px;
+      }
+      .question {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="teal">
+      <div class="nav-wrapper container">
+        <a href="#" class="brand-logo center">Willingness to Change</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+      <!-- Tabs -->
+      <ul id="tabs-swipe-demo" class="tabs">
+        <li class="tab col s6">
+          <a class="active" href="#theory">Theoretical Review</a>
+        </li>
+        <li class="tab col s6"><a href="#questionnaire">Questionnaire</a></li>
+      </ul>
+
+      <!-- Wrap tab content in a row for grid consistency -->
+      <div class="row">
+        <!-- Theoretical Background Section -->
+        <div id="theory" class="col s12">
+          <h5>Theoretical Underpinnings of the DINAMO Framework</h5>
+          <p>
+            The DINAMO framework is a validated instrument designed to assess an
+            individual’s willingness to change – a key factor in successful
+            organizational change. It is rooted in Ajzen’s Theory of Planned
+            Behavior, which proposes that behavior is driven by behavioral
+            intentions that are, in turn, influenced by:
+          </p>
+          <ul>
+            <li>
+              <strong>Attitudes:</strong> How one cognitively and affectively
+              evaluates the change.
+            </li>
+            <li>
+              <strong>Subjective Norms:</strong> Perceived social pressures
+              regarding the change.
+            </li>
+            <li>
+              <strong>Perceived Behavioral Control:</strong> One’s confidence in
+              the ability to implement the change.
+            </li>
+          </ul>
+          <p>
+            The DINAMO inventory operationalizes these components using
+            validated questionnaire items (see Metselaar, 1997 and subsequent
+            studies). By measuring each element, the tool provides a
+            comprehensive picture of one’s overall willingness to invest time
+            and effort in supporting change.
+          </p>
+        </div>
+
+        <!-- Questionnaire Section -->
+        <div id="questionnaire" class="col s12">
+          <h5>DINAMO Questionnaire</h5>
+          <p>
+            Please indicate your level of agreement with each statement (1 =
+            Strongly Disagree, 5 = Strongly Agree):
+          </p>
+          <form id="dynamoForm">
+            <!-- Question 1: Attitude -->
+            <div class="input-field question">
+              <p>
+                1. I believe that the proposed change will improve my work
+                performance.
+              </p>
+              <p>
+                <label>
+                  <input
+                    name="q1"
+                    type="radio"
+                    class="with-gap"
+                    value="1"
+                    required
+                  />
+                  <span>1</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input name="q1" type="radio" class="with-gap" value="2" />
+                  <span>2</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input name="q1" type="radio" class="with-gap" value="3" />
+                  <span>3</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input name="q1" type="radio" class="with-gap" value="4" />
+                  <span>4</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input name="q1" type="radio" class="with-gap" value="5" />
+                  <span>5</span>
+                </label>
+              </p>
+            </div>
+            <!-- Question 2: Subjective Norm -->
+            <div class="input-field question">
+              <p>2. My colleagues support the change initiative.</p>
+              <p>
+                <label>
+                  <input
+                    name="q2"
+                    type="radio"
+                    class="with-gap"
+                    value="1"
+                    required
+                  />
+                  <span>1</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input name="q2" type="radio" class="with-gap" value="2" />
+                  <span>2</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input name="q2" type="radio" class="with-gap" value="3" />
+                  <span>3</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input name="q2" type="radio" class="with-gap" value="4" />
+                  <span>4</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input name="q2" type="radio" class="with-gap" value="5" />
+                  <span>5</span>
+                </label>
+              </p>
+            </div>
+            <!-- Question 3: Perceived Behavioral Control -->
+            <div class="input-field question">
+              <p>
+                3. I feel confident in my ability to implement the necessary
+                changes.
+              </p>
+              <p>
+                <label>
+                  <input
+                    name="q3"
+                    type="radio"
+                    class="with-gap"
+                    value="1"
+                    required
+                  />
+                  <span>1</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input name="q3" type="radio" class="with-gap" value="2" />
+                  <span>2</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input name="q3" type="radio" class="with-gap" value="3" />
+                  <span>3</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input name="q3" type="radio" class="with-gap" value="4" />
+                  <span>4</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input name="q3" type="radio" class="with-gap" value="5" />
+                  <span>5</span>
+                </label>
+              </p>
+            </div>
+            <!-- Question 4: Willingness to Change -->
+            <div class="input-field question">
+              <p>
+                4. I am willing to invest the necessary time and effort to
+                support the change.
+              </p>
+              <p>
+                <label>
+                  <input
+                    name="q4"
+                    type="radio"
+                    class="with-gap"
+                    value="1"
+                    required
+                  />
+                  <span>1</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input name="q4" type="radio" class="with-gap" value="2" />
+                  <span>2</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input name="q4" type="radio" class="with-gap" value="3" />
+                  <span>3</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input name="q4" type="radio" class="with-gap" value="4" />
+                  <span>4</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input name="q4" type="radio" class="with-gap" value="5" />
+                  <span>5</span>
+                </label>
+              </p>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit">
+              Submit <i class="material-icons right">send</i>
+            </button>
+          </form>
+          <div
+            id="result"
+            class="card-panel teal lighten-4"
+            style="display: none; margin-top: 20px"
+          >
+            <h6>Your Total Score: <span id="score"></span></h6>
+            <p id="interpretation"></p>
+          </div>
+        </div>
+      </div>
+      <!-- End row -->
+    </div>
+    <!-- End container -->
+
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      // Initialize Materialize tabs on DOM load
+      document.addEventListener("DOMContentLoaded", function () {
+        var elems = document.querySelectorAll(".tabs");
+        M.Tabs.init(elems);
+      });
+
+      // Handle form submission and scoring
+      document
+        .getElementById("dynamoForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Retrieve selected values
+          var q1 = parseInt(
+            document.querySelector('input[name="q1"]:checked').value
+          );
+          var q2 = parseInt(
+            document.querySelector('input[name="q2"]:checked').value
+          );
+          var q3 = parseInt(
+            document.querySelector('input[name="q3"]:checked').value
+          );
+          var q4 = parseInt(
+            document.querySelector('input[name="q4"]:checked').value
+          );
+
+          // Calculate total score
+          var totalScore = q1 + q2 + q3 + q4;
+          document.getElementById("score").innerText = totalScore;
+
+          // Interpret score (midpoint is 12 for a 4-item questionnaire with scores 1-5)
+          var interpretation = "";
+          var maxScore = 20,
+            minScore = 4;
+          var midScore = (maxScore + minScore) / 2; // 12
+
+          if (totalScore <= midScore) {
+            interpretation =
+              "Your willingness to change appears to be on the lower side. Consider reflecting on any barriers you might be experiencing.";
+          } else {
+            interpretation =
+              "You exhibit a high willingness to change. You appear open and ready to invest effort in the change process.";
+          }
+
+          document.getElementById("interpretation").innerText = interpretation;
+          document.getElementById("result").style.display = "block";
+        });
+    </script>
+  </body>
+</html>

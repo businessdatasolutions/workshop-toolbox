@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GenAI Cost Equation Calculator</title>
+    <!-- Materialize CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <!-- Material Icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        background-color: #f5f5f5;
+      }
+      main {
+        flex: 1 0 auto;
+      }
+      .container {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      .card {
+        border-radius: 8px;
+      }
+      .result-card {
+        padding: 20px;
+        margin-top: 20px;
+      }
+      .correctness-slider {
+        margin-top: 40px;
+        margin-bottom: 40px;
+      }
+      .slider-labels {
+        display: flex;
+        justify-content: space-between;
+        margin-top: -15px;
+      }
+      .question-mark {
+        cursor: help;
+        vertical-align: middle;
+        color: #26a69a;
+      }
+      .section {
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+      .result-explanation {
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 15px;
+      }
+      .result-summary {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="teal darken-1">
+        <div class="nav-wrapper container">
+          <a href="#" class="brand-logo">GenAI Cost Calculator</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">About the GenAI Cost Equation</span>
+                <p>
+                  This tool helps evaluate whether using generative AI for a
+                  specific task makes economic sense. Based on the framework
+                  developed by Rama Ramakrishnan of MIT Sloan School of
+                  Management, it considers:
+                </p>
+
+                <ul class="browser-default">
+                  <li>The cost of doing the task without GenAI</li>
+                  <li>
+                    The cost of adapting GenAI for the required correctness
+                    level
+                  </li>
+                  <li>The cost of using GenAI</li>
+                  <li>
+                    The cost of detecting and fixing errors in GenAI's output
+                  </li>
+                  <li>
+                    The acceptable "cost of a miss" (when GenAI makes errors)
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Task Analysis</span>
+                <div class="input-field">
+                  <input
+                    id="taskName"
+                    type="text"
+                    value="Product description writing"
+                  />
+                  <label for="taskName" class="active">Task Name</label>
+                </div>
+
+                <div class="section">
+                  <p><b>Correctness Requirements</b></p>
+                  <p>
+                    Tasks range from "relaxed" (creative content) to "strict"
+                    (factual answers)
+                  </p>
+                  <div class="correctness-slider">
+                    <p class="range-field">
+                      <input
+                        type="range"
+                        id="correctnessSlider"
+                        min="1"
+                        max="10"
+                        value="5"
+                      />
+                    </p>
+                    <div class="slider-labels">
+                      <div class="slider-label">
+                        <span style="color: green">Relaxed</span>
+                      </div>
+                      <div class="slider-label">
+                        <span style="color: red">Strict</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="correctnessDescription" class="card-panel">
+                    <p>
+                      <b>Current selection:</b>
+                      <span id="correctnessText"
+                        >Moderate correctness requirements</span
+                      >
+                    </p>
+                  </div>
+                </div>
+
+                <div class="section">
+                  <p><b>Cost Analysis</b></p>
+                  <div class="row">
+                    <div class="col s12 m6">
+                      <div class="card-panel">
+                        <h6>Traditional Method Costs</h6>
+                        <div class="input-field">
+                          <input
+                            id="traditionalTimeCost"
+                            type="number"
+                            value="10"
+                            class="validate"
+                          />
+                          <label for="traditionalTimeCost" class="active"
+                            >Time cost (hours)</label
+                          >
+                        </div>
+                        <div class="input-field">
+                          <input
+                            id="hourlyRate"
+                            type="number"
+                            value="50"
+                            class="validate"
+                          />
+                          <label for="hourlyRate" class="active"
+                            >Hourly rate ($)</label
+                          >
+                        </div>
+                        <div class="input-field">
+                          <input
+                            id="otherTraditionalCosts"
+                            type="number"
+                            value="100"
+                            class="validate"
+                          />
+                          <label for="otherTraditionalCosts" class="active"
+                            >Other costs ($)</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col s12 m6">
+                      <div class="card-panel">
+                        <h6>GenAI Method Costs</h6>
+                        <div class="input-field">
+                          <input
+                            id="adaptationCost"
+                            type="number"
+                            value="200"
+                            class="validate"
+                          />
+                          <label for="adaptationCost" class="active"
+                            >Adaptation cost ($)</label
+                          >
+                        </div>
+                        <div class="input-field">
+                          <input
+                            id="usageCost"
+                            type="number"
+                            value="50"
+                            class="validate"
+                          />
+                          <label for="usageCost" class="active"
+                            >Usage cost ($)</label
+                          >
+                        </div>
+                        <div class="input-field">
+                          <input
+                            id="errorDetectionCost"
+                            type="number"
+                            value="100"
+                            class="validate"
+                          />
+                          <label for="errorDetectionCost" class="active"
+                            >Error detection/fixing cost ($)</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="section">
+                  <p><b>Risk Assessment</b></p>
+                  <div class="card-panel">
+                    <div class="input-field">
+                      <input
+                        id="errorImpactCost"
+                        type="number"
+                        value="500"
+                        class="validate"
+                      />
+                      <label for="errorImpactCost" class="active"
+                        >Estimated cost of an error ($)</label
+                      >
+                    </div>
+                    <div class="input-field">
+                      <input
+                        id="errorProbability"
+                        type="number"
+                        value="5"
+                        class="validate"
+                        min="0"
+                        max="100"
+                      />
+                      <label for="errorProbability" class="active"
+                        >Estimated error probability (%)</label
+                      >
+                    </div>
+
+                    <p>Risk factors:</p>
+                    <p>
+                      <label>
+                        <input type="checkbox" id="criticalDecision" />
+                        <span>Task involves critical business decisions</span>
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input type="checkbox" id="regulatoryCompliance" />
+                        <span>Task has regulatory/compliance implications</span>
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input type="checkbox" id="humanReview" checked />
+                        <span>Human review before output use</span>
+                      </label>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="center-align">
+                  <button
+                    onclick="analyzeGenAI()"
+                    class="btn-large waves-effect waves-light teal"
+                  >
+                    Analyze GenAI Suitability
+                    <i class="material-icons right">calculate</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="resultCard" class="card result-card" style="display: none">
+          <div class="card-content">
+            <span class="card-title">Analysis Results</span>
+            <div id="resultSummary" class="result-summary"></div>
+
+            <div class="row">
+              <div class="col s12 m6">
+                <div class="card-panel">
+                  <h6>Cost Comparison</h6>
+                  <p>
+                    <b>Traditional method:</b> $<span id="traditionalCostResult"
+                      >0</span
+                    >
+                  </p>
+                  <p>
+                    <b>GenAI method:</b> $<span id="genaiCostResult">0</span>
+                  </p>
+                  <p>
+                    <b>Cost difference:</b> $<span id="costDifference">0</span>
+                  </p>
+                </div>
+              </div>
+              <div class="col s12 m6">
+                <div class="card-panel">
+                  <h6>Risk Assessment</h6>
+                  <p>
+                    <b>Expected cost of errors:</b> $<span
+                      id="expectedErrorCost"
+                      >0</span
+                    >
+                  </p>
+                  <p><b>Risk level:</b> <span id="riskLevel">Medium</span></p>
+                  <p>
+                    <b>Error mitigation:</b>
+                    <span id="errorMitigation">Some measures in place</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              id="resultExplanation"
+              class="result-explanation card-panel"
+            ></div>
+
+            <div class="recommendation-section">
+              <h5>Recommendation</h5>
+              <p id="recommendation"></p>
+              <div id="nextSteps" class="card-panel teal lighten-5">
+                <h6>Suggested Next Steps</h6>
+                <ul class="browser-default" id="nextStepsList"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer teal darken-1">
+      <div class="container">
+        <div class="row">
+          <div class="col s12">
+            <p class="grey-text text-lighten-4">
+              Based on the GenAI Cost Equation framework by Rama Ramakrishnan,
+              MIT Sloan School of Management.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">© 2025 GenAI Cost Equation Calculator</div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      // Initialize Materialize components
+      document.addEventListener("DOMContentLoaded", function () {
+        // Update correctness description based on slider value
+        updateCorrectnessText();
+
+        // Add event listener for slider
+        document
+          .getElementById("correctnessSlider")
+          .addEventListener("input", updateCorrectnessText);
+      });
+
+      // Update correctness description text based on slider value
+      function updateCorrectnessText() {
+        const value = parseInt(
+          document.getElementById("correctnessSlider").value
+        );
+        const descriptionElement = document.getElementById("correctnessText");
+
+        if (value <= 3) {
+          descriptionElement.textContent =
+            "Relaxed correctness requirements (creative content, multiple valid answers)";
+        } else if (value <= 6) {
+          descriptionElement.textContent =
+            "Moderate correctness requirements (balance of creativity and accuracy)";
+        } else {
+          descriptionElement.textContent =
+            "Strict correctness requirements (factual responses, single correct answer)";
+        }
+      }
+
+      // Main analysis function
+      function analyzeGenAI() {
+        // Get all input values
+        const taskName =
+          document.getElementById("taskName").value || "Unnamed Task";
+        const correctnessLevel = parseInt(
+          document.getElementById("correctnessSlider").value
+        );
+
+        // Traditional costs
+        const traditionalTime =
+          parseFloat(document.getElementById("traditionalTimeCost").value) || 0;
+        const hourlyRate =
+          parseFloat(document.getElementById("hourlyRate").value) || 0;
+        const otherTraditionalCosts =
+          parseFloat(document.getElementById("otherTraditionalCosts").value) ||
+          0;
+        const traditionalCost =
+          traditionalTime * hourlyRate + otherTraditionalCosts;
+
+        // GenAI costs
+        const adaptationCost =
+          parseFloat(document.getElementById("adaptationCost").value) || 0;
+        const usageCost =
+          parseFloat(document.getElementById("usageCost").value) || 0;
+        const errorDetectionCost =
+          parseFloat(document.getElementById("errorDetectionCost").value) || 0;
+        const genaiCost = adaptationCost + usageCost + errorDetectionCost;
+
+        // Risk assessment
+        const errorImpact =
+          parseFloat(document.getElementById("errorImpactCost").value) || 0;
+        const errorProbability =
+          parseFloat(document.getElementById("errorProbability").value) || 0;
+        const expectedErrorCost = (errorImpact * errorProbability) / 100;
+
+        // Risk factors
+        const criticalDecision =
+          document.getElementById("criticalDecision").checked;
+        const regulatoryCompliance = document.getElementById(
+          "regulatoryCompliance"
+        ).checked;
+        const humanReview = document.getElementById("humanReview").checked;
+
+        // Calculate cost difference
+        const costDifference = traditionalCost - genaiCost;
+        const costRatio = traditionalCost / (genaiCost > 0 ? genaiCost : 1);
+
+        // Calculate risk level
+        let riskLevel = "Low";
+        if (criticalDecision || regulatoryCompliance) {
+          riskLevel = "High";
+        } else if (errorImpact > 1000) {
+          riskLevel = "Medium";
+        }
+
+        // Determine error mitigation level
+        let errorMitigation = "Inadequate";
+        if (humanReview) {
+          errorMitigation = "Strong (human review)";
+        } else if (errorDetectionCost > 0) {
+          errorMitigation = "Moderate";
+        }
+
+        // Determine overall recommendation
+        let recommendation = "";
+        let nextSteps = [];
+
+        if (
+          costRatio > 2 &&
+          (riskLevel === "Low" || (riskLevel !== "Low" && humanReview))
+        ) {
+          recommendation =
+            "Strong recommendation to proceed with GenAI solution. The cost savings are significant, and the risk profile is acceptable.";
+          nextSteps = [
+            "Initiate a pilot project to validate assumptions",
+            "Document success metrics and measure results",
+            "Develop a robust testing process",
+            "Create a plan for scaling the solution if the pilot is successful",
+          ];
+        } else if (costRatio > 1.5 && riskLevel !== "High") {
+          recommendation =
+            "Consider proceeding with GenAI solution with appropriate safeguards. The cost savings are moderate, and the risk appears manageable.";
+          nextSteps = [
+            "Start with a limited-scope pilot",
+            "Implement thorough testing procedures",
+            "Create a robust error detection process",
+            "Have a contingency plan if GenAI performance doesn't meet expectations",
+          ];
+        } else if (costRatio > 1) {
+          recommendation =
+            "Proceed with caution. The cost savings are modest, so be sure the quality and risk considerations are fully addressed.";
+          nextSteps = [
+            "Consider a more limited deployment scope",
+            "Strengthen error detection and human review processes",
+            "Carefully monitor costs during the pilot phase",
+            "Explore ways to reduce adaptation or error-handling costs",
+          ];
+        } else {
+          recommendation =
+            "Not recommended at this time. Traditional methods are more cost-effective or the risk profile is too high.";
+          nextSteps = [
+            "Consider waiting for more mature GenAI solutions",
+            "Explore ways to reduce adaptation or error-handling costs",
+            "Re-evaluate as GenAI capabilities and costs evolve",
+            "Consider using GenAI for specific sub-tasks rather than the entire process",
+          ];
+        }
+
+        // If high correctness with high risk but good cost savings
+        if (correctnessLevel > 7 && riskLevel === "High" && costRatio > 2) {
+          recommendation =
+            "Potential for significant savings, but high correctness requirements and risk level demand careful implementation.";
+          nextSteps.unshift(
+            "Implement robust human-in-the-loop validation systems"
+          );
+          nextSteps.unshift(
+            "Consider instruction fine-tuning for your specific domain needs"
+          );
+        }
+
+        // Update results
+        document.getElementById("traditionalCostResult").textContent =
+          traditionalCost.toFixed(2);
+        document.getElementById("genaiCostResult").textContent =
+          genaiCost.toFixed(2);
+        document.getElementById("costDifference").textContent =
+          costDifference.toFixed(2);
+        document.getElementById("expectedErrorCost").textContent =
+          expectedErrorCost.toFixed(2);
+        document.getElementById("riskLevel").textContent = riskLevel;
+        document.getElementById("errorMitigation").textContent =
+          errorMitigation;
+
+        // Set recommendation
+        document.getElementById("recommendation").textContent = recommendation;
+
+        // Generate explanation
+        let explanation = `For the task "${taskName}": `;
+
+        if (costRatio > 1) {
+          explanation += `GenAI offers a ${costRatio.toFixed(
+            1
+          )}x cost advantage over traditional methods. `;
+        } else {
+          explanation += `Traditional methods are currently more cost-effective than GenAI. `;
+        }
+
+        if (correctnessLevel > 7) {
+          explanation += `This task requires a high degree of correctness, which typically increases adaptation and error-checking costs. `;
+
+          if (!humanReview) {
+            explanation += `Consider implementing human review for this high-correctness task. `;
+          }
+        }
+
+        if (riskLevel === "High") {
+          explanation += `The risk profile is high, primarily due to ${
+            criticalDecision ? "critical business decision implications" : ""
+          }${criticalDecision && regulatoryCompliance ? " and " : ""}${
+            regulatoryCompliance ? "regulatory/compliance requirements" : ""
+          }. `;
+        }
+
+        document.getElementById("resultExplanation").textContent = explanation;
+
+        // Populate next steps
+        const nextStepsList = document.getElementById("nextStepsList");
+        nextStepsList.innerHTML = "";
+        nextSteps.forEach((step) => {
+          const li = document.createElement("li");
+          li.textContent = step;
+          nextStepsList.appendChild(li);
+        });
+
+        // Show result card
+        document.getElementById("resultCard").style.display = "block";
+
+        // Set summary text
+        const resultSummary = document.getElementById("resultSummary");
+        if (costRatio > 2 && (riskLevel === "Low" || humanReview)) {
+          resultSummary.textContent =
+            "✅ Recommended: GenAI solution shows strong potential";
+          resultSummary.style.color = "#2e7d32"; // green
+        } else if (costRatio > 1.5 && riskLevel !== "High") {
+          resultSummary.textContent =
+            "✓ Cautiously Recommended: Proceed with appropriate safeguards";
+          resultSummary.style.color = "#2e7d32"; // green
+        } else if (costRatio > 1) {
+          resultSummary.textContent =
+            "⚠️ Potential: Modest benefits with careful implementation";
+          resultSummary.style.color = "#ff9800"; // orange
+        } else {
+          resultSummary.textContent =
+            "❌ Not Recommended: Traditional methods more cost-effective";
+          resultSummary.style.color = "#d32f2f"; // red
+        }
+
+        // Scroll to results
+        document
+          .getElementById("resultCard")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+    </script>
+  </body>
+</html>
