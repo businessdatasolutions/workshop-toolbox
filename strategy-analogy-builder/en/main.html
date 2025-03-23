@@ -14,8 +14,10 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <!-- jsPDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
+      /* Base Layout */
       body {
         display: flex;
         min-height: 100vh;
@@ -25,9 +27,11 @@
         flex: 1 0 auto;
         padding: 20px 0;
       }
+      /* Card Panels and General Spacing */
       .card-panel {
         margin-bottom: 20px;
       }
+      /* Tabs Styling */
       .tabs .tab a {
         color: #26a69a;
       }
@@ -38,11 +42,13 @@
       .tabs .indicator {
         background-color: #00796b;
       }
+      /* Navigation and Export Options */
       .step-navigation {
         display: flex;
         justify-content: space-between;
         margin: 20px 0;
       }
+      /* Premise Layout */
       .premise-row {
         display: flex;
         margin-bottom: 10px;
@@ -63,9 +69,11 @@
         align-items: center;
         justify-content: center;
       }
+      /* Hidden Element */
       .hidden {
         display: none;
       }
+      /* Summary Table */
       .summary-table {
         margin: 20px 0;
       }
@@ -73,9 +81,11 @@
       .summary-table td {
         padding: 10px;
       }
+      /* Feature Type Select */
       .feature-type {
         width: 120px;
       }
+      /* Help Modal */
       #help-modal {
         max-width: 700px;
       }
@@ -85,6 +95,7 @@
       .help-content h5 {
         margin-top: 30px;
       }
+      /* Premise Container */
       .premise-container {
         border: 1px solid #ddd;
         border-radius: 4px;
@@ -97,18 +108,22 @@
         align-items: center;
         margin-bottom: 10px;
       }
+      /* Export Options */
       .export-options {
         display: flex;
         justify-content: center;
         margin: 20px 0;
         gap: 20px;
       }
+      /* Brand Logo */
       .brand-logo {
         margin-left: 15px;
       }
+      /* Section Title */
       .section-title {
         margin-bottom: 20px;
       }
+      /* Chip */
       .chip {
         margin: 5px;
       }
@@ -164,14 +179,12 @@
               Start by defining your target company or startup (the one you're
               working on the strategy for).
             </p>
-
             <div class="row">
               <div class="input-field col s12">
                 <input id="target-name" type="text" class="validate" />
                 <label for="target-name">Target Company/Startup Name</label>
               </div>
             </div>
-
             <div class="row">
               <div class="input-field col s12">
                 <textarea
@@ -183,7 +196,6 @@
                 >
               </div>
             </div>
-
             <div class="row">
               <div class="input-field col s12">
                 <input
@@ -198,12 +210,11 @@
               </div>
             </div>
           </div>
-
           <div class="step-navigation">
             <div></div>
-            <a class="waves-effect waves-light btn next-step" data-next="step2"
-              ><i class="material-icons right">arrow_forward</i>Next</a
-            >
+            <a class="waves-effect waves-light btn next-step" data-next="step2">
+              <i class="material-icons right">arrow_forward</i>Next
+            </a>
           </div>
         </div>
 
@@ -216,14 +227,12 @@
               want for your target. The source should be successful in
               demonstrating the conclusion you want to achieve.
             </p>
-
             <div class="row">
               <div class="input-field col s12">
                 <input id="source-name" type="text" class="validate" />
                 <label for="source-name">Source Company Name</label>
               </div>
             </div>
-
             <div class="row">
               <div class="input-field col s12">
                 <textarea
@@ -236,7 +245,6 @@
                 >
               </div>
             </div>
-
             <div class="row">
               <div class="input-field col s12">
                 <input id="source-outcome" type="text" class="validate" />
@@ -247,14 +255,13 @@
               </div>
             </div>
           </div>
-
           <div class="step-navigation">
-            <a class="waves-effect waves-light btn prev-step" data-prev="step1"
-              ><i class="material-icons left">arrow_back</i>Previous</a
-            >
-            <a class="waves-effect waves-light btn next-step" data-next="step3"
-              ><i class="material-icons right">arrow_forward</i>Next</a
-            >
+            <a class="waves-effect waves-light btn prev-step" data-prev="step1">
+              <i class="material-icons left">arrow_back</i>Previous
+            </a>
+            <a class="waves-effect waves-light btn next-step" data-next="step3">
+              <i class="material-icons right">arrow_forward</i>Next
+            </a>
           </div>
         </div>
 
@@ -266,8 +273,8 @@
               Now, identify key similarities and differences between your source
               and target. These will form the premises of your analogy.
             </p>
-
             <div id="premise-container">
+              <!-- Initial Premise -->
               <div class="premise-container">
                 <div class="premise-header">
                   <h6>Premise A</h6>
@@ -308,11 +315,10 @@
                 </div>
               </div>
             </div>
-
             <div class="center-align">
-              <a class="waves-effect waves-light btn" id="add-premise"
-                ><i class="material-icons left">add</i>Add Another Premise</a
-              >
+              <a class="waves-effect waves-light btn" id="add-premise">
+                <i class="material-icons left">add</i>Add Another Premise
+              </a>
             </div>
           </div>
 
@@ -348,21 +354,20 @@
           </div>
 
           <div class="step-navigation">
-            <a class="waves-effect waves-light btn prev-step" data-prev="step2"
-              ><i class="material-icons left">arrow_back</i>Previous</a
-            >
-            <a class="waves-effect waves-light btn next-step" data-next="step4"
-              ><i class="material-icons right">arrow_forward</i>Next</a
-            >
+            <a class="waves-effect waves-light btn prev-step" data-prev="step2">
+              <i class="material-icons left">arrow_back</i>Previous
+            </a>
+            <a class="waves-effect waves-light btn next-step" data-next="step4">
+              <i class="material-icons right">arrow_forward</i>Next
+            </a>
           </div>
         </div>
 
-        <!-- Step 4: Evaluate with Company Header -->
+        <!-- Step 4: Evaluate -->
         <div id="step4" class="col s12">
           <div class="card-panel">
             <h5 class="section-title">Step 4: Evaluate Your Analogy</h5>
-
-            <!-- Company Header with Properly Centered Text -->
+            <!-- Company Header -->
             <div class="row">
               <div class="col s12 center-align">
                 <div
@@ -412,12 +417,10 @@
                 </div>
               </div>
             </div>
-
             <p>
               Review your analogy to assess its strength. Focus on the causal
               relationships (vertical relations) and relevance of each premise.
             </p>
-
             <div class="row">
               <div class="col s12">
                 <h6>Analogy Summary</h6>
@@ -431,7 +434,7 @@
                     </tr>
                   </thead>
                   <tbody id="summary-table-body">
-                    <!-- Will be populated dynamically -->
+                    <!-- Populated dynamically -->
                   </tbody>
                   <tfoot>
                     <tr>
@@ -444,7 +447,6 @@
                 </table>
               </div>
             </div>
-
             <div class="row">
               <div class="col s12">
                 <h6>Evaluation Questions</h6>
@@ -504,7 +506,6 @@
                 </ul>
               </div>
             </div>
-
             <div class="row">
               <div class="col s12">
                 <h6>Overall Assessment</h6>
@@ -522,26 +523,26 @@
               </div>
             </div>
           </div>
-
           <div class="export-options">
             <a
               class="waves-effect waves-light btn"
               id="export-pdf"
               onclick="exportAsPDF()"
-              ><i class="material-icons left">picture_as_pdf</i>Export as PDF</a
             >
+              <i class="material-icons left">picture_as_pdf</i>Export as PDF
+            </a>
             <a
               class="waves-effect waves-light btn"
               id="export-txt"
               onclick="exportAsText()"
-              ><i class="material-icons left">description</i>Export as Text</a
             >
+              <i class="material-icons left">description</i>Export as Text
+            </a>
           </div>
-
           <div class="step-navigation">
-            <a class="waves-effect waves-light btn prev-step" data-prev="step3"
-              ><i class="material-icons left">arrow_back</i>Previous</a
-            >
+            <a class="waves-effect waves-light btn prev-step" data-prev="step3">
+              <i class="material-icons left">arrow_back</i>Previous
+            </a>
             <div></div>
           </div>
         </div>
@@ -577,21 +578,18 @@
             methodology described by Carroll and Sørensen (2024). Here's how to
             use it:
           </p>
-
           <h5>Step 1: Define Your Target</h5>
           <p>
             Start by defining your target company - the organization you're
             developing a strategy for. Clearly state the desired strategic
             outcome (market success, cost leadership, etc.).
           </p>
-
           <h5>Step 2: Select Your Source</h5>
           <p>
             Choose a source company that displays the outcome you want to
             achieve. The source should be a successful example that demonstrates
             the conclusion you're aiming for.
           </p>
-
           <h5>Step 3: Build Your Analogy</h5>
           <p>
             Identify key similarities (positive premises) and differences
@@ -607,7 +605,6 @@
             Remember that the most important premises are those with strong
             causal relationships to the outcome.
           </p>
-
           <h5>Step 4: Evaluate Your Analogy</h5>
           <p>Assess the strength of your analogy by examining:</p>
           <ul>
@@ -621,7 +618,6 @@
             </li>
             <li>Any missing premises needed for success</li>
           </ul>
-
           <h5>Key Concepts</h5>
           <p>
             <strong>Horizontal Relations</strong>: The one-to-one mappings of
@@ -651,408 +647,256 @@
     <!-- Materialize JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
+    <!-- Refactored JavaScript with Full PDF Export -->
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Initialize Materialize components
-        var tabs = document.querySelectorAll(".tabs");
-        M.Tabs.init(tabs);
+      (function () {
+        "use strict";
 
-        var modals = document.querySelectorAll(".modal");
-        M.Modal.init(modals);
-
-        var textareas = document.querySelectorAll("textarea");
-        textareas.forEach(function (textarea) {
-          M.textareaAutoResize(textarea);
-        });
-
-        // Step navigation
-        document.querySelectorAll(".next-step").forEach(function (button) {
-          button.addEventListener("click", function () {
-            var nextTab = this.getAttribute("data-next");
-            var instance = M.Tabs.getInstance(document.querySelector(".tabs"));
-            instance.select(nextTab);
-            updateState();
-          });
-        });
-
-        document.querySelectorAll(".prev-step").forEach(function (button) {
-          button.addEventListener("click", function () {
-            var prevTab = this.getAttribute("data-prev");
-            var instance = M.Tabs.getInstance(document.querySelector(".tabs"));
-            instance.select(prevTab);
-          });
-        });
-
-        // Add premise button
         let premiseCount = 1;
-        document
-          .getElementById("add-premise")
-          .addEventListener("click", function () {
-            premiseCount++;
-            const nextLetter = String.fromCharCode(
-              "A".charCodeAt(0) + premiseCount - 1
-            );
 
-            const newPremise = document.createElement("div");
-            newPremise.className = "premise-container";
-            newPremise.innerHTML = `
-                    <div class="premise-header">
-                        <h6>Premise ${nextLetter}</h6>
-                        <div>
-                            <select class="feature-type browser-default">
-                                <option value="positive" selected>Positive (Similar)</option>
-                                <option value="negative">Negative (Different)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="premise-row">
-                        <div class="premise-label">Source</div>
-                        <div class="input-field">
-                            <input type="text" class="source-feature validate">
-                        </div>
-                    </div>
-                    <div class="premise-row">
-                        <div class="premise-relation">
-                            <span class="relation-text">is similar to</span>
-                        </div>
-                    </div>
-                    <div class="premise-row">
-                        <div class="premise-label">Target</div>
-                        <div class="input-field">
-                            <input type="text" class="target-feature validate">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input type="text" class="causal-relevance validate">
-                            <label>Causal Relevance (How does this feature contribute to success?)</label>
-                        </div>
-                    </div>
-                `;
+        // Helper: Refresh Materialize text fields
+        const refreshTextFields = () => M.updateTextFields();
 
-            document
-              .getElementById("premise-container")
-              .appendChild(newPremise);
-
-            // Initialize the labels for the new premise
-            const newInputs = newPremise.querySelectorAll("input");
-            newInputs.forEach((input) => {
-              M.updateTextFields();
-            });
-
-            // Add event listener to the new feature type select
-            const newSelect = newPremise.querySelector(".feature-type");
-            newSelect.addEventListener("change", updateRelationText);
-          });
+        // Debounce helper
+        function debounce(func, wait) {
+          let timeout;
+          return function (...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+          };
+        }
 
         // Update relation text based on feature type selection
         function updateRelationText(event) {
           const select = event.target;
-          const premiseContainer = select.closest(".premise-container");
-          const relationText = premiseContainer.querySelector(".relation-text");
-
-          if (select.value === "positive") {
-            relationText.textContent = "is similar to";
-          } else {
-            relationText.textContent = "is not similar to";
-          }
+          const container = select.closest(".premise-container");
+          const relationSpan = container.querySelector(".relation-text");
+          relationSpan.textContent =
+            select.value === "positive" ? "is similar to" : "is not similar to";
         }
 
-        // Add event listeners to feature type selects
-        document.querySelectorAll(".feature-type").forEach(function (select) {
-          select.addEventListener("change", updateRelationText);
-        });
+        // Bind change event to feature type selects
+        function bindFeatureTypeListeners() {
+          document.querySelectorAll(".feature-type").forEach((select) => {
+            select.removeEventListener("change", updateRelationText);
+            select.addEventListener("change", updateRelationText);
+          });
+        }
 
-        // Update conclusion fields when sources/outcomes change
-        document
-          .getElementById("source-outcome")
-          .addEventListener("input", updateConclusion);
-        document
-          .getElementById("target-desired-outcome")
-          .addEventListener("input", updateConclusion);
-
+        // Update Conclusion and Summary fields
         function updateConclusion() {
           const sourceOutcome = document.getElementById("source-outcome").value;
           const targetOutcome = document.getElementById(
             "target-desired-outcome"
           ).value;
-
           document.getElementById("conclusion-source").value = sourceOutcome;
           document.getElementById("conclusion-target").value = targetOutcome;
-
-          // Update summary table as well
           document.getElementById("summary-source-outcome").textContent =
             sourceOutcome;
           document.getElementById("summary-target-outcome").textContent =
             targetOutcome;
-
-          M.updateTextFields();
+          refreshTextFields();
         }
 
-        // Update company names in evaluation questions and header
+        // Update evaluation header company names
         function updateEvaluationCompanyNames() {
           const sourceName =
             document.getElementById("source-name").value || "[Source Company]";
           const targetName =
             document.getElementById("target-name").value || "[Target Company]";
-
-          // Update header with company names
           document.getElementById("header-source-name").textContent =
             sourceName;
           document.getElementById("header-target-name").textContent =
             targetName;
-
-          // Update all spans with company names in questions
-          document.getElementById("eval-source-name1").textContent = sourceName;
-          document.getElementById("eval-target-name1").textContent = targetName;
-          document.getElementById("eval-source-name2").textContent = sourceName;
-          document.getElementById("eval-target-name3").textContent = targetName;
-          document.getElementById("eval-target-name4").textContent = targetName;
-
-          // Update label for overall assessment
-          const overallLabel = document.querySelector(
-            'label[for="overall-assessment"]'
-          );
-          if (overallLabel) {
-            document.getElementById("eval-source-name5").textContent =
-              sourceName;
-            document.getElementById("eval-target-name5").textContent =
-              targetName;
-          }
-
-          M.updateTextFields();
+          [
+            "eval-source-name1",
+            "eval-source-name2",
+            "eval-source-name5",
+          ].forEach((id) => {
+            document.getElementById(id).textContent = sourceName;
+          });
+          [
+            "eval-target-name1",
+            "eval-target-name3",
+            "eval-target-name4",
+            "eval-target-name5",
+          ].forEach((id) => {
+            document.getElementById(id).textContent = targetName;
+          });
+          refreshTextFields();
         }
 
-        // Make sure to call this function when the page loads and
-        // when a tab is already selected:
-        document.addEventListener("DOMContentLoaded", function () {
-          // Check if we're starting on the evaluation tab (e.g., from a refresh)
-          setTimeout(function () {
-            const activeTab = M.Tabs.getInstance(
-              document.querySelector(".tabs")
-            ).index;
-            if (activeTab === 3) {
-              // Step 4
-              updateSummaryTable();
-              updateEvaluationCompanyNames();
-            }
-          }, 100);
-        });
-
-        // Update summary table in Step 4
+        // Update Summary Table (Step 4)
         function updateSummaryTable() {
           const tableBody = document.getElementById("summary-table-body");
           tableBody.innerHTML = "";
-
-          const premises = document.querySelectorAll(".premise-container");
-          premises.forEach((premise, index) => {
-            const letter = String.fromCharCode("A".charCodeAt(0) + index);
-            const sourceFeature =
-              premise.querySelector(".source-feature").value;
-            const targetFeature =
-              premise.querySelector(".target-feature").value;
-            const featureType = premise.querySelector(".feature-type").value;
-
-            const relation =
-              featureType === "positive"
-                ? "is similar to"
-                : "is not similar to";
-
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                        <td>${letter}</td>
-                        <td>${sourceFeature}</td>
-                        <td>${relation}</td>
-                        <td>${targetFeature}</td>
-                    `;
-
-            tableBody.appendChild(row);
-          });
+          document
+            .querySelectorAll(".premise-container")
+            .forEach((premise, index) => {
+              const letter = String.fromCharCode(65 + index);
+              const sourceFeature =
+                premise.querySelector(".source-feature").value;
+              const targetFeature =
+                premise.querySelector(".target-feature").value;
+              const featureType = premise.querySelector(".feature-type").value;
+              const relation =
+                featureType === "positive"
+                  ? "is similar to"
+                  : "is not similar to";
+              const row = document.createElement("tr");
+              row.innerHTML = `<td>${letter}</td><td>${sourceFeature}</td><td>${relation}</td><td>${targetFeature}</td>`;
+              tableBody.appendChild(row);
+            });
         }
 
-        // Update state when moving between tabs
+        // Update state when navigating tabs
         function updateState() {
-          // Update conclusion
           updateConclusion();
-
-          // Update summary table when moving to Step 4
-          const activeTab = M.Tabs.getInstance(
-            document.querySelector(".tabs")
-          ).index;
-          if (activeTab === 3) {
-            // Step 4
+          if (M.Tabs.getInstance(document.querySelector(".tabs")).index === 3) {
             updateSummaryTable();
-            updateEvaluationCompanyNames(); // Add this line
+            updateEvaluationCompanyNames();
           }
         }
 
-        // Add event listeners for company name changes
-        document
-          .getElementById("source-name")
-          .addEventListener("input", function () {
-            if (
-              M.Tabs.getInstance(document.querySelector(".tabs")).index === 3
-            ) {
-              updateEvaluationCompanyNames();
-            }
-          });
-
-        document
-          .getElementById("target-name")
-          .addEventListener("input", function () {
-            if (
-              M.Tabs.getInstance(document.querySelector(".tabs")).index === 3
-            ) {
-              updateEvaluationCompanyNames();
-            }
-          });
-
-        // Reset button
-        document
-          .getElementById("reset-btn")
-          .addEventListener("click", function () {
-            if (
-              confirm(
-                "This will clear all your data. Are you sure you want to reset?"
-              )
-            ) {
-              // Clear all inputs
-              document
-                .querySelectorAll("input, textarea")
-                .forEach(function (input) {
-                  input.value = "";
-                  M.updateTextFields();
-                });
-
-              // Reset premise container to just one premise
-              const premiseContainer =
-                document.getElementById("premise-container");
-              premiseContainer.innerHTML = "";
-
-              const newPremise = document.createElement("div");
-              newPremise.className = "premise-container";
-              newPremise.innerHTML = `
-                        <div class="premise-header">
-                            <h6>Premise A</h6>
-                            <div>
-                                <select class="feature-type browser-default">
-                                    <option value="positive" selected>Positive (Similar)</option>
-                                    <option value="negative">Negative (Different)</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="premise-row">
-                            <div class="premise-label">Source</div>
-                            <div class="input-field">
-                                <input type="text" class="source-feature validate">
-                            </div>
-                        </div>
-                        <div class="premise-row">
-                            <div class="premise-relation">
-                                <span class="relation-text">is similar to</span>
-                            </div>
-                        </div>
-                        <div class="premise-row">
-                            <div class="premise-label">Target</div>
-                            <div class="input-field">
-                                <input type="text" class="target-feature validate">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input type="text" class="causal-relevance validate">
-                                <label>Causal Relevance (How does this feature contribute to success?)</label>
-                            </div>
-                        </div>
-                    `;
-
-              premiseContainer.appendChild(newPremise);
-
-              // Reset to first tab
-              const instance = M.Tabs.getInstance(
-                document.querySelector(".tabs")
-              );
-              instance.select("step1");
-
-              // Reset premise count
-              premiseCount = 1;
-
-              // Add event listener to the feature type select
-              const select = newPremise.querySelector(".feature-type");
-              select.addEventListener("change", updateRelationText);
-
-              M.updateTextFields();
-            }
-          });
-
-        // Export functions
-        document
-          .getElementById("export-txt")
-          .addEventListener("click", exportAsText);
-        const pdfButton = document.getElementById("export-pdf");
-        if (pdfButton) {
-          // Remove previous event listeners and ensure it uses the new function
-          pdfButton.addEventListener("click", exportAsPDF);
+        // Add a new premise
+        function addNewPremise() {
+          premiseCount++;
+          const nextLetter = String.fromCharCode(65 + premiseCount - 1);
+          const newPremise = document.createElement("div");
+          newPremise.className = "premise-container";
+          newPremise.innerHTML = `
+            <div class="premise-header">
+              <h6>Premise ${nextLetter}</h6>
+              <div>
+                <select class="feature-type browser-default">
+                  <option value="positive" selected>Positive (Similar)</option>
+                  <option value="negative">Negative (Different)</option>
+                </select>
+              </div>
+            </div>
+            <div class="premise-row">
+              <div class="premise-label">Source</div>
+              <div class="input-field">
+                <input type="text" class="source-feature validate">
+              </div>
+            </div>
+            <div class="premise-row">
+              <div class="premise-relation">
+                <span class="relation-text">is similar to</span>
+              </div>
+            </div>
+            <div class="premise-row">
+              <div class="premise-label">Target</div>
+              <div class="input-field">
+                <input type="text" class="target-feature validate">
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input type="text" class="causal-relevance validate">
+                <label>Causal Relevance (How does this feature contribute to success?)</label>
+              </div>
+            </div>
+          `;
+          document.getElementById("premise-container").appendChild(newPremise);
+          refreshTextFields();
+          bindFeatureTypeListeners();
         }
 
-        document
-          .getElementById("export-btn")
-          .addEventListener("click", exportAsText);
+        // Reset data and UI
+        function resetData() {
+          if (
+            !confirm(
+              "This will clear all your data. Are you sure you want to reset?"
+            )
+          )
+            return;
+          document
+            .querySelectorAll("input, textarea")
+            .forEach((input) => (input.value = ""));
+          refreshTextFields();
+          // Reset premise container to one initial premise
+          const container = document.getElementById("premise-container");
+          container.innerHTML = "";
+          premiseCount = 1;
+          const initialPremise = document.createElement("div");
+          initialPremise.className = "premise-container";
+          initialPremise.innerHTML = `
+            <div class="premise-header">
+              <h6>Premise A</h6>
+              <div>
+                <select class="feature-type browser-default">
+                  <option value="positive" selected>Positive (Similar)</option>
+                  <option value="negative">Negative (Different)</option>
+                </select>
+              </div>
+            </div>
+            <div class="premise-row">
+              <div class="premise-label">Source</div>
+              <div class="input-field">
+                <input type="text" class="source-feature validate">
+              </div>
+            </div>
+            <div class="premise-row">
+              <div class="premise-relation">
+                <span class="relation-text">is similar to</span>
+              </div>
+            </div>
+            <div class="premise-row">
+              <div class="premise-label">Target</div>
+              <div class="input-field">
+                <input type="text" class="target-feature validate">
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input type="text" class="causal-relevance validate">
+                <label>Causal Relevance (How does this feature contribute to success?)</label>
+              </div>
+            </div>
+          `;
+          container.appendChild(initialPremise);
+          M.Tabs.getInstance(document.querySelector(".tabs")).select("step1");
+          refreshTextFields();
+        }
 
+        // Export as Text
         function exportAsText() {
-          // Gather all data
           const targetName = document.getElementById("target-name").value;
           const targetDesc =
             document.getElementById("target-description").value;
           const targetOutcome = document.getElementById(
             "target-desired-outcome"
           ).value;
-
           const sourceName = document.getElementById("source-name").value;
           const sourceDesc =
             document.getElementById("source-description").value;
           const sourceOutcome = document.getElementById("source-outcome").value;
-
-          let text = "STRATEGY ANALOGY ANALYSIS\n";
-          text += "========================\n\n";
-
+          let text = "STRATEGY ANALOGY ANALYSIS\n========================\n\n";
           text += "TARGET COMPANY:\n";
-          text += `Name: ${targetName}\n`;
-          text += `Description: ${targetDesc}\n`;
-          text += `Desired Outcome: ${targetOutcome}\n\n`;
-
+          text += `Name: ${targetName}\nDescription: ${targetDesc}\nDesired Outcome: ${targetOutcome}\n\n`;
           text += "SOURCE COMPANY:\n";
-          text += `Name: ${sourceName}\n`;
-          text += `Description: ${sourceDesc}\n`;
-          text += `Outcome: ${sourceOutcome}\n\n`;
-
+          text += `Name: ${sourceName}\nDescription: ${sourceDesc}\nOutcome: ${sourceOutcome}\n\n`;
           text += "ANALOGY PREMISES:\n";
-          const premises = document.querySelectorAll(".premise-container");
-          premises.forEach((premise, index) => {
-            const letter = String.fromCharCode("A".charCodeAt(0) + index);
-            const sourceFeature =
-              premise.querySelector(".source-feature").value;
-            const targetFeature =
-              premise.querySelector(".target-feature").value;
-            const featureType = premise.querySelector(".feature-type").value;
-            const causalRelevance =
-              premise.querySelector(".causal-relevance").value;
-
-            const relation =
-              featureType === "positive"
-                ? "is similar to"
-                : "is not similar to";
-
-            text += `Premise ${letter}:\n`;
-            text += `- Source: ${sourceFeature}\n`;
-            text += `- Relation: ${relation}\n`;
-            text += `- Target: ${targetFeature}\n`;
-            text += `- Causal Relevance: ${causalRelevance}\n\n`;
-          });
-
+          document
+            .querySelectorAll(".premise-container")
+            .forEach((premise, index) => {
+              const letter = String.fromCharCode(65 + index);
+              const sourceFeature =
+                premise.querySelector(".source-feature").value;
+              const targetFeature =
+                premise.querySelector(".target-feature").value;
+              const featureType = premise.querySelector(".feature-type").value;
+              const causalRelevance =
+                premise.querySelector(".causal-relevance").value;
+              const relation =
+                featureType === "positive"
+                  ? "is similar to"
+                  : "is not similar to";
+              text += `Premise ${letter}:\n- Source: ${sourceFeature}\n- Relation: ${relation}\n- Target: ${targetFeature}\n- Causal Relevance: ${causalRelevance}\n\n`;
+            });
           text += "CONCLUSION:\n";
           text += `${sourceOutcome} is plausibly similar to ${targetOutcome}\n\n`;
-
           text += "EVALUATION:\n";
           text += `1. Do positive similarities between ${sourceName} and ${targetName} outweigh negative differences? ${
             document.getElementById("evaluation-1").value
@@ -1066,11 +910,9 @@
           text += `4. Missing premises for ${targetName}? ${
             document.getElementById("evaluation-4").value
           }\n\n`;
-
-          text += "OVERALL ASSESSMENT:\n";
-          text += document.getElementById("overall-assessment").value;
-
-          // Create a blob and download
+          text +=
+            "OVERALL ASSESSMENT:\n" +
+            document.getElementById("overall-assessment").value;
           const blob = new Blob([text], { type: "text/plain" });
           const url = URL.createObjectURL(blob);
           const a = document.createElement("a");
@@ -1082,29 +924,24 @@
           URL.revokeObjectURL(url);
         }
 
-        // Export to PDF function using jsPDF
+        // Export as PDF using jsPDF
         function exportAsPDF() {
-          // Make sure jsPDF is available
           if (typeof window.jspdf === "undefined") {
             alert(
               "PDF library not loaded. Please try again or check your internet connection."
             );
             return;
           }
-
           const { jsPDF } = window.jspdf;
-
-          // Create new PDF document
           const doc = new jsPDF();
 
-          // Gather all data
+          // Gather Data
           const targetName =
             document.getElementById("target-name").value || "(Unnamed Target)";
           const targetDesc =
             document.getElementById("target-description").value || "";
           const targetOutcome =
             document.getElementById("target-desired-outcome").value || "";
-
           const sourceName =
             document.getElementById("source-name").value || "(Unnamed Source)";
           const sourceDesc =
@@ -1112,12 +949,11 @@
           const sourceOutcome =
             document.getElementById("source-outcome").value || "";
 
-          // Get all premises
           const premises = [];
           document
             .querySelectorAll(".premise-container")
             .forEach((premise, index) => {
-              const letter = String.fromCharCode("A".charCodeAt(0) + index);
+              const letter = String.fromCharCode(65 + index);
               const sourceFeature =
                 premise.querySelector(".source-feature").value || "";
               const targetFeature =
@@ -1125,23 +961,19 @@
               const featureType = premise.querySelector(".feature-type").value;
               const causalRelevance =
                 premise.querySelector(".causal-relevance").value || "";
-
               const relation =
                 featureType === "positive"
                   ? "is similar to"
                   : "is not similar to";
-
               premises.push({
                 letter,
                 sourceFeature,
                 relation,
                 targetFeature,
                 causalRelevance,
-                featureType,
               });
             });
 
-          // Get evaluation answers
           const evaluations = {
             q1: document.getElementById("evaluation-1").value || "",
             q2: document.getElementById("evaluation-2").value || "",
@@ -1150,34 +982,15 @@
             overall: document.getElementById("overall-assessment").value || "",
           };
 
-          // PDF Styling variables
+          // PDF Styling Variables
           const margin = 20;
           let y = margin;
 
-          // Helper function for text wrapping
+          // Helper: Add Wrapped Text
           function addWrappedText(text, x, y, maxWidth, lineHeight) {
             const lines = doc.splitTextToSize(text, maxWidth);
             doc.text(lines, x, y);
             return y + lines.length * lineHeight;
-          }
-
-          // Helper function to add section with title
-          function addSection(
-            title,
-            content,
-            x,
-            startY,
-            maxWidth,
-            titleSize = 12,
-            contentSize = 10
-          ) {
-            doc.setFontSize(titleSize);
-            doc.setFont(undefined, "bold");
-            doc.text(title, x, startY);
-
-            doc.setFontSize(contentSize);
-            doc.setFont(undefined, "normal");
-            return addWrappedText(content, x, startY + 6, maxWidth, 5);
           }
 
           // Title
@@ -1188,10 +1001,10 @@
             doc.internal.pageSize.width / 2,
             y,
             { align: "center" }
-          );å
+          );
           y += 10;
 
-          // Source and Target header
+          // Header: Source to Target
           doc.setFontSize(14);
           doc.text(
             `${sourceName} to ${targetName}`,
@@ -1206,14 +1019,12 @@
           doc.setFont(undefined, "bold");
           doc.text("TARGET COMPANY", margin, y);
           y += 7;
-
           doc.setFontSize(10);
           doc.setFont(undefined, "bold");
           doc.text("Name:", margin, y);
           doc.setFont(undefined, "normal");
           doc.text(targetName, margin + 30, y);
           y += 6;
-
           doc.setFont(undefined, "bold");
           doc.text("Description:", margin, y);
           doc.setFont(undefined, "normal");
@@ -1225,7 +1036,6 @@
             5
           );
           y += 6;
-
           doc.setFont(undefined, "bold");
           doc.text("Desired Outcome:", margin, y);
           doc.setFont(undefined, "normal");
@@ -1243,14 +1053,12 @@
           doc.setFont(undefined, "bold");
           doc.text("SOURCE COMPANY", margin, y);
           y += 7;
-
           doc.setFontSize(10);
           doc.setFont(undefined, "bold");
           doc.text("Name:", margin, y);
           doc.setFont(undefined, "normal");
           doc.text(sourceName, margin + 30, y);
           y += 6;
-
           doc.setFont(undefined, "bold");
           doc.text("Description:", margin, y);
           doc.setFont(undefined, "normal");
@@ -1262,7 +1070,6 @@
             5
           );
           y += 6;
-
           doc.setFont(undefined, "bold");
           doc.text("Outcome:", margin, y);
           doc.setFont(undefined, "normal");
@@ -1280,25 +1087,23 @@
           doc.setFont(undefined, "bold");
           doc.text("ANALOGY PREMISES", margin, y);
           y += 10;
-
-          // Add each premise
           premises.forEach((premise) => {
             if (y > doc.internal.pageSize.height - 30) {
               doc.addPage();
               y = margin;
             }
-
             doc.setFontSize(12);
             doc.setFont(undefined, "bold");
             doc.text(
               `Premise ${premise.letter}: ${
-                premise.featureType === "positive" ? "(Positive)" : "(Negative)"
+                premise.relation.includes("similar")
+                  ? "(Positive)"
+                  : "(Negative)"
               }`,
               margin,
               y
             );
             y += 6;
-
             doc.setFontSize(10);
             doc.setFont(undefined, "bold");
             doc.text("Source:", margin, y);
@@ -1311,13 +1116,11 @@
               5
             );
             y += 4;
-
             doc.setFont(undefined, "bold");
             doc.text("Relation:", margin, y);
             doc.setFont(undefined, "normal");
             doc.text(premise.relation, margin + 30, y);
             y += 4;
-
             doc.setFont(undefined, "bold");
             doc.text("Target:", margin, y);
             doc.setFont(undefined, "normal");
@@ -1329,7 +1132,6 @@
               5
             );
             y += 4;
-
             doc.setFont(undefined, "bold");
             doc.text("Causal Relevance:", margin, y);
             doc.setFont(undefined, "normal");
@@ -1348,12 +1150,10 @@
             doc.addPage();
             y = margin;
           }
-
           doc.setFontSize(14);
           doc.setFont(undefined, "bold");
           doc.text("CONCLUSION", margin, y);
           y += 7;
-
           doc.setFontSize(10);
           doc.setFont(undefined, "normal");
           doc.text(
@@ -1368,16 +1168,11 @@
             doc.addPage();
             y = margin;
           }
-
           doc.setFontSize(14);
           doc.setFont(undefined, "bold");
           doc.text("EVALUATION", margin, y);
           y += 10;
-
-          // Evaluation Questions
           doc.setFontSize(10);
-
-          // Q1
           doc.setFont(undefined, "bold");
           doc.text(
             `1. Do the positive similarities between ${sourceName} and ${targetName} outweigh the negative differences?`,
@@ -1394,14 +1189,10 @@
             5
           );
           y += 8;
-
-          // Check for page break
           if (y > doc.internal.pageSize.height - 50) {
             doc.addPage();
             y = margin;
           }
-
-          // Q2
           doc.setFont(undefined, "bold");
           doc.text(
             `2. Are the vertical (causal) relations in ${sourceName} strong?`,
@@ -1418,13 +1209,10 @@
             5
           );
           y += 8;
-
-          // Q3
           if (y > doc.internal.pageSize.height - 50) {
             doc.addPage();
             y = margin;
           }
-
           doc.setFont(undefined, "bold");
           doc.text(
             `3. Can these same causal relations plausibly apply to ${targetName} as well?`,
@@ -1441,13 +1229,10 @@
             5
           );
           y += 8;
-
-          // Q4
           if (y > doc.internal.pageSize.height - 50) {
             doc.addPage();
             y = margin;
           }
-
           doc.setFont(undefined, "bold");
           doc.text(
             `4. Are there any crucial missing premises that would need to be added to make ${targetName} successful?`,
@@ -1464,18 +1249,14 @@
             5
           );
           y += 10;
-
-          // Overall Assessment
           if (y > doc.internal.pageSize.height - 60) {
             doc.addPage();
             y = margin;
           }
-
           doc.setFontSize(14);
           doc.setFont(undefined, "bold");
           doc.text("OVERALL ASSESSMENT", margin, y);
           y += 7;
-
           doc.setFontSize(10);
           doc.setFont(undefined, "normal");
           y = addWrappedText(
@@ -1486,7 +1267,7 @@
             5
           );
 
-          // Footer
+          // Footer: Page Numbers
           const pageCount = doc.internal.getNumberOfPages();
           for (let i = 1; i <= pageCount; i++) {
             doc.setPage(i);
@@ -1498,12 +1279,10 @@
               { align: "center" }
             );
           }
-
-          // Save the PDF
           doc.save(`${targetName}-Strategy-Analogy.pdf`);
         }
 
-        // Save to local storage to prevent data loss
+        // Save to Local Storage
         function saveToLocalStorage() {
           const data = {
             target: {
@@ -1518,15 +1297,12 @@
             },
             premises: Array.from(
               document.querySelectorAll(".premise-container")
-            ).map((premise) => {
-              return {
-                sourceFeature: premise.querySelector(".source-feature").value,
-                targetFeature: premise.querySelector(".target-feature").value,
-                featureType: premise.querySelector(".feature-type").value,
-                causalRelevance:
-                  premise.querySelector(".causal-relevance").value,
-              };
-            }),
+            ).map((premise) => ({
+              sourceFeature: premise.querySelector(".source-feature").value,
+              targetFeature: premise.querySelector(".target-feature").value,
+              featureType: premise.querySelector(".feature-type").value,
+              causalRelevance: premise.querySelector(".causal-relevance").value,
+            })),
             evaluation: {
               q1: document.getElementById("evaluation-1").value,
               q2: document.getElementById("evaluation-2").value,
@@ -1535,114 +1311,88 @@
               overall: document.getElementById("overall-assessment").value,
             },
           };
-
           localStorage.setItem("strategyAnalogy", JSON.stringify(data));
         }
 
-        // Load from local storage
+        // Load from Local Storage
         function loadFromLocalStorage() {
           const savedData = localStorage.getItem("strategyAnalogy");
           if (savedData) {
             try {
               const data = JSON.parse(savedData);
-
-              // Populate target fields
               document.getElementById("target-name").value =
                 data.target.name || "";
               document.getElementById("target-description").value =
                 data.target.description || "";
               document.getElementById("target-desired-outcome").value =
                 data.target.outcome || "";
-
-              // Populate source fields
               document.getElementById("source-name").value =
                 data.source.name || "";
               document.getElementById("source-description").value =
                 data.source.description || "";
               document.getElementById("source-outcome").value =
                 data.source.outcome || "";
-
-              // Populate premises
               if (data.premises && data.premises.length > 0) {
-                const premiseContainer =
-                  document.getElementById("premise-container");
-                premiseContainer.innerHTML = "";
-
-                data.premises.forEach((premiseData, index) => {
-                  const letter = String.fromCharCode("A".charCodeAt(0) + index);
+                const container = document.getElementById("premise-container");
+                container.innerHTML = "";
+                data.premises.forEach((pData, index) => {
                   premiseCount = index + 1;
-
-                  const premiseElement = document.createElement("div");
-                  premiseElement.className = "premise-container";
-                  premiseElement.innerHTML = `
-                                    <div class="premise-header">
-                                        <h6>Premise ${letter}</h6>
-                                        <div>
-                                            <select class="feature-type browser-default">
-                                                <option value="positive" ${
-                                                  premiseData.featureType ===
-                                                  "positive"
-                                                    ? "selected"
-                                                    : ""
-                                                }>Positive (Similar)</option>
-                                                <option value="negative" ${
-                                                  premiseData.featureType ===
-                                                  "negative"
-                                                    ? "selected"
-                                                    : ""
-                                                }>Negative (Different)</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="premise-row">
-                                        <div class="premise-label">Source</div>
-                                        <div class="input-field">
-                                            <input type="text" class="source-feature validate" value="${
-                                              premiseData.sourceFeature || ""
-                                            }">
-                                        </div>
-                                    </div>
-                                    <div class="premise-row">
-                                        <div class="premise-relation">
-                                            <span class="relation-text">${
-                                              premiseData.featureType ===
-                                              "positive"
-                                                ? "is similar to"
-                                                : "is not similar to"
-                                            }</span>
-                                        </div>
-                                    </div>
-                                    <div class="premise-row">
-                                        <div class="premise-label">Target</div>
-                                        <div class="input-field">
-                                            <input type="text" class="target-feature validate" value="${
-                                              premiseData.targetFeature || ""
-                                            }">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <input type="text" class="causal-relevance validate" value="${
-                                              premiseData.causalRelevance || ""
-                                            }">
-                                            <label ${
-                                              premiseData.causalRelevance
-                                                ? 'class="active"'
-                                                : ""
-                                            }>Causal Relevance (How does this feature contribute to success?)</label>
-                                        </div>
-                                    </div>
-                                `;
-
-                  premiseContainer.appendChild(premiseElement);
-
-                  // Add event listener to the feature type select
-                  const select = premiseElement.querySelector(".feature-type");
-                  select.addEventListener("change", updateRelationText);
+                  const letter = String.fromCharCode(65 + index);
+                  const premiseDiv = document.createElement("div");
+                  premiseDiv.className = "premise-container";
+                  premiseDiv.innerHTML = `
+                    <div class="premise-header">
+                      <h6>Premise ${letter}</h6>
+                      <div>
+                        <select class="feature-type browser-default">
+                          <option value="positive" ${
+                            pData.featureType === "positive" ? "selected" : ""
+                          }>Positive (Similar)</option>
+                          <option value="negative" ${
+                            pData.featureType === "negative" ? "selected" : ""
+                          }>Negative (Different)</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="premise-row">
+                      <div class="premise-label">Source</div>
+                      <div class="input-field">
+                        <input type="text" class="source-feature validate" value="${
+                          pData.sourceFeature || ""
+                        }">
+                      </div>
+                    </div>
+                    <div class="premise-row">
+                      <div class="premise-relation">
+                        <span class="relation-text">${
+                          pData.featureType === "positive"
+                            ? "is similar to"
+                            : "is not similar to"
+                        }</span>
+                      </div>
+                    </div>
+                    <div class="premise-row">
+                      <div class="premise-label">Target</div>
+                      <div class="input-field">
+                        <input type="text" class="target-feature validate" value="${
+                          pData.targetFeature || ""
+                        }">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <input type="text" class="causal-relevance validate" value="${
+                          pData.causalRelevance || ""
+                        }">
+                        <label ${
+                          pData.causalRelevance ? 'class="active"' : ""
+                        }>Causal Relevance (How does this feature contribute to success?)</label>
+                      </div>
+                    </div>
+                  `;
+                  container.appendChild(premiseDiv);
                 });
               }
-
-              // Populate evaluation
               if (data.evaluation) {
                 document.getElementById("evaluation-1").value =
                   data.evaluation.q1 || "";
@@ -1655,12 +1405,8 @@
                 document.getElementById("overall-assessment").value =
                   data.evaluation.overall || "";
               }
-
-              // Update text fields to ensure labels move up
-              M.updateTextFields();
-              // Update the conclusion fields
+              refreshTextFields();
               updateConclusion();
-
               return true;
             } catch (e) {
               console.error("Error loading saved data:", e);
@@ -1670,43 +1416,20 @@
           return false;
         }
 
-        // Save every minute and on form input changes
-        setInterval(saveToLocalStorage, 60000);
-        document.querySelectorAll("input, textarea, select").forEach((el) => {
-          el.addEventListener("change", saveToLocalStorage);
-          el.addEventListener("keyup", debounce(saveToLocalStorage, 2000));
-        });
-
-        // Helper function to debounce events
-        function debounce(func, wait) {
-          let timeout;
-          return function (...args) {
-            const context = this;
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(context, args), wait);
-          };
-        }
-
-        // Add example data function for demonstration
+        // Load example data
         function loadExampleData() {
-          // Populate target fields
           document.getElementById("target-name").value = "Instacart";
           document.getElementById("target-description").value =
             "Grocery delivery platform connecting customers with personal shoppers who select and deliver groceries from local stores.";
           document.getElementById("target-desired-outcome").value =
             "Market growth and profitability";
-
-          // Populate source fields
           document.getElementById("source-name").value = "DoorDash";
           document.getElementById("source-description").value =
             "Food delivery platform that connects customers with restaurants and delivery drivers. Successfully expanded to other delivery categories.";
           document.getElementById("source-outcome").value =
             "Market growth and profitability";
-
-          // Create premises
-          const premiseContainer = document.getElementById("premise-container");
-          premiseContainer.innerHTML = "";
-
+          const container = document.getElementById("premise-container");
+          container.innerHTML = "";
           const premises = [
             {
               letter: "A",
@@ -1748,73 +1471,60 @@
                 "Creates challenges for accurate product availability",
             },
           ];
-
           premises.forEach((premise, index) => {
             premiseCount = index + 1;
-
-            const premiseElement = document.createElement("div");
-            premiseElement.className = "premise-container";
-            premiseElement.innerHTML = `
-                        <div class="premise-header">
-                            <h6>Premise ${premise.letter}</h6>
-                            <div>
-                                <select class="feature-type browser-default">
-                                    <option value="positive" ${
-                                      premise.featureType === "positive"
-                                        ? "selected"
-                                        : ""
-                                    }>Positive (Similar)</option>
-                                    <option value="negative" ${
-                                      premise.featureType === "negative"
-                                        ? "selected"
-                                        : ""
-                                    }>Negative (Different)</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="premise-row">
-                            <div class="premise-label">Source</div>
-                            <div class="input-field">
-                                <input type="text" class="source-feature validate" value="${
-                                  premise.sourceFeature
-                                }">
-                            </div>
-                        </div>
-                        <div class="premise-row">
-                            <div class="premise-relation">
-                                <span class="relation-text">${
-                                  premise.featureType === "positive"
-                                    ? "is similar to"
-                                    : "is not similar to"
-                                }</span>
-                            </div>
-                        </div>
-                        <div class="premise-row">
-                            <div class="premise-label">Target</div>
-                            <div class="input-field">
-                                <input type="text" class="target-feature validate" value="${
-                                  premise.targetFeature
-                                }">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input type="text" class="causal-relevance validate" value="${
-                                  premise.causalRelevance
-                                }">
-                                <label class="active">Causal Relevance (How does this feature contribute to success?)</label>
-                            </div>
-                        </div>
-                    `;
-
-            premiseContainer.appendChild(premiseElement);
-
-            // Add event listener to the feature type select
-            const select = premiseElement.querySelector(".feature-type");
-            select.addEventListener("change", updateRelationText);
+            const premiseDiv = document.createElement("div");
+            premiseDiv.className = "premise-container";
+            premiseDiv.innerHTML = `
+              <div class="premise-header">
+                <h6>Premise ${premise.letter}</h6>
+                <div>
+                  <select class="feature-type browser-default">
+                    <option value="positive" ${
+                      premise.featureType === "positive" ? "selected" : ""
+                    }>Positive (Similar)</option>
+                    <option value="negative" ${
+                      premise.featureType === "negative" ? "selected" : ""
+                    }>Negative (Different)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="premise-row">
+                <div class="premise-label">Source</div>
+                <div class="input-field">
+                  <input type="text" class="source-feature validate" value="${
+                    premise.sourceFeature
+                  }">
+                </div>
+              </div>
+              <div class="premise-row">
+                <div class="premise-relation">
+                  <span class="relation-text">${
+                    premise.featureType === "positive"
+                      ? "is similar to"
+                      : "is not similar to"
+                  }</span>
+                </div>
+              </div>
+              <div class="premise-row">
+                <div class="premise-label">Target</div>
+                <div class="input-field">
+                  <input type="text" class="target-feature validate" value="${
+                    premise.targetFeature
+                  }">
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" class="causal-relevance validate" value="${
+                    premise.causalRelevance
+                  }">
+                  <label class="active">Causal Relevance (How does this feature contribute to success?)</label>
+                </div>
+              </div>
+            `;
+            container.appendChild(premiseDiv);
           });
-
-          // Populate evaluation fields
           document.getElementById("evaluation-1").value =
             "The positive similarities related to the platform model and flexible workforce are highly relevant to the business model success. The negative differences in shopping skill requirements and inventory systems are significant but can potentially be addressed with technology.";
           document.getElementById("evaluation-2").value =
@@ -1825,16 +1535,105 @@
             "Instacart may need to add a stronger training and quality control system for shoppers given the higher skill requirements. Additionally, it should develop better inventory integration with grocery partners.";
           document.getElementById("overall-assessment").value =
             "The analogy between DoorDash and Instacart is strong in the platform business model fundamentals but requires additional premises to address the unique challenges of grocery shopping. With proper attention to the negative analogies, Instacart can likely achieve similar market success.";
-
-          // Update text fields to ensure labels move up
-          M.updateTextFields();
-          // Update the conclusion fields
+          refreshTextFields();
           updateConclusion();
-          // Save to local storage
           saveToLocalStorage();
         }
 
-        // Add "Load Example" button to help modal
+        // Bind Event Listeners on DOMContentLoaded
+        document.addEventListener("DOMContentLoaded", function () {
+          M.Tabs.init(document.querySelectorAll(".tabs"));
+          M.Modal.init(document.querySelectorAll(".modal"));
+          document
+            .querySelectorAll("textarea")
+            .forEach((textarea) => M.textareaAutoResize(textarea));
+
+          // Step Navigation
+          document.querySelectorAll(".next-step").forEach((button) => {
+            button.addEventListener("click", function () {
+              const nextTab = this.getAttribute("data-next");
+              M.Tabs.getInstance(document.querySelector(".tabs")).select(
+                nextTab
+              );
+              updateState();
+            });
+          });
+          document.querySelectorAll(".prev-step").forEach((button) => {
+            button.addEventListener("click", function () {
+              const prevTab = this.getAttribute("data-prev");
+              M.Tabs.getInstance(document.querySelector(".tabs")).select(
+                prevTab
+              );
+            });
+          });
+
+          // Add Premise Button
+          document
+            .getElementById("add-premise")
+            .addEventListener("click", addNewPremise);
+
+          // Update Conclusion on Outcome changes
+          document
+            .getElementById("source-outcome")
+            .addEventListener("input", updateConclusion);
+          document
+            .getElementById("target-desired-outcome")
+            .addEventListener("input", updateConclusion);
+
+          // Update Evaluation Company Names on Name changes
+          document
+            .getElementById("source-name")
+            .addEventListener("input", () => {
+              if (
+                M.Tabs.getInstance(document.querySelector(".tabs")).index === 3
+              )
+                updateEvaluationCompanyNames();
+            });
+          document
+            .getElementById("target-name")
+            .addEventListener("input", () => {
+              if (
+                M.Tabs.getInstance(document.querySelector(".tabs")).index === 3
+              )
+                updateEvaluationCompanyNames();
+            });
+
+          // Reset Button
+          document
+            .getElementById("reset-btn")
+            .addEventListener("click", resetData);
+
+          // Export Buttons
+          document
+            .getElementById("export-txt")
+            .addEventListener("click", exportAsText);
+          const pdfButton = document.getElementById("export-pdf");
+          if (pdfButton) {
+            pdfButton.addEventListener("click", exportAsPDF);
+          }
+          document
+            .getElementById("export-btn")
+            .addEventListener("click", exportAsText);
+
+          // Save on change/keyup events (debounced)
+          document.querySelectorAll("input, textarea, select").forEach((el) => {
+            el.addEventListener("change", saveToLocalStorage);
+            el.addEventListener("keyup", debounce(saveToLocalStorage, 2000));
+          });
+
+          // Bind initial feature type listeners
+          bindFeatureTypeListeners();
+
+          // Attempt to load saved data; if none, open the help modal
+          if (!loadFromLocalStorage()) {
+            const modalInstance = M.Modal.getInstance(
+              document.getElementById("help-modal")
+            );
+            modalInstance.open();
+          }
+        });
+
+        // Add "Load Example" button to Help Modal
         const loadExampleBtn = document.createElement("a");
         loadExampleBtn.className = "waves-effect waves-light btn";
         loadExampleBtn.innerHTML =
@@ -1843,18 +1642,8 @@
           loadExampleData();
           M.Modal.getInstance(document.getElementById("help-modal")).close();
         });
-
         document.querySelector(".modal-footer").prepend(loadExampleBtn);
-
-        // Try to load saved data on startup
-        if (!loadFromLocalStorage()) {
-          // If no saved data, show modal with option to load example
-          const modalInstance = M.Modal.getInstance(
-            document.getElementById("help-modal")
-          );
-          modalInstance.open();
-        }
-      });
+      })();
     </script>
   </body>
 </html>
