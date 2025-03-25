@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Journey Monitoring Tool</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .journey-stage {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 15px;
+        transition: all 0.3s ease;
+      }
+      .journey-stage:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      .emotional-curve-container {
+        height: 200px;
+        position: relative;
+        margin: 30px 0;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .curve-point {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: #0d6efd;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+        z-index: 10;
+      }
+      .curve-line {
+        position: absolute;
+        height: 2px;
+        background-color: #0d6efd;
+        z-index: 5;
+      }
+      .stage-label {
+        position: absolute;
+        bottom: -25px;
+        transform: translateX(-50%);
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+      }
+      .dashboard-card {
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+      .dashboard-card:hover {
+        transform: translateY(-5px);
+      }
+      .score-indicator {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+      }
+      .bg-success-light {
+        background-color: rgba(25, 135, 84, 0.2);
+      }
+      .bg-warning-light {
+        background-color: rgba(255, 193, 7, 0.2);
+      }
+      .bg-danger-light {
+        background-color: rgba(220, 53, 69, 0.2);
+      }
+      .bg-primary-light {
+        background-color: rgba(13, 110, 253, 0.2);
+      }
+      .needs-tag {
+        font-size: 12px;
+        border-radius: 20px;
+        padding: 5px 10px;
+        margin: 2px;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <i class="fas fa-route me-2"></i>
+            Employee Journey Monitor
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" href="#dashboard">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#journeyMap">Journey Map</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#surveyBuilder">Survey Builder</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#reports">Reports</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#settings">Settings</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                >
+                  <i class="fas fa-user-circle me-1"></i> Admin
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="#">Profile</a></li>
+                  <li><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Dashboard Section -->
+      <div id="dashboard" class="mb-5">
+        <div class="row mb-4">
+          <div class="col">
+            <h1 class="display-5 mb-4">
+              Employee Journey Monitoring Dashboard
+            </h1>
+            <p class="lead">
+              Track, analyze, and improve the quality of employee experiences
+              across all journey stages.
+            </p>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-md-3">
+            <div class="dashboard-card card bg-success-light mb-3">
+              <div
+                class="card-body d-flex justify-content-between align-items-center"
+              >
+                <div>
+                  <h6 class="card-subtitle mb-1 text-muted">Overall Score</h6>
+                  <h2 class="card-title mb-0">7.8/10</h2>
+                </div>
+                <div class="score-indicator bg-success">
+                  <i class="fas fa-arrow-up"></i>
+                </div>
+              </div>
+              <div class="card-footer bg-transparent">
+                <small class="text-success"
+                  ><i class="fas fa-arrow-up me-1"></i> 0.5 from last
+                  quarter</small
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="dashboard-card card bg-warning-light mb-3">
+              <div
+                class="card-body d-flex justify-content-between align-items-center"
+              >
+                <div>
+                  <h6 class="card-subtitle mb-1 text-muted">Responses</h6>
+                  <h2 class="card-title mb-0">1,247</h2>
+                </div>
+                <div class="score-indicator bg-warning">
+                  <i class="fas fa-users"></i>
+                </div>
+              </div>
+              <div class="card-footer bg-transparent">
+                <small class="text-warning"
+                  ><i class="fas fa-arrow-down me-1"></i> 7% participation
+                  rate</small
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="dashboard-card card bg-danger-light mb-3">
+              <div
+                class="card-body d-flex justify-content-between align-items-center"
+              >
+                <div>
+                  <h6 class="card-subtitle mb-1 text-muted">Pain Points</h6>
+                  <h2 class="card-title mb-0">14</h2>
+                </div>
+                <div class="score-indicator bg-danger">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </div>
+              </div>
+              <div class="card-footer bg-transparent">
+                <small class="text-danger"
+                  ><i class="fas fa-arrow-up me-1"></i> 3 new since last
+                  month</small
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="dashboard-card card bg-primary-light mb-3">
+              <div
+                class="card-body d-flex justify-content-between align-items-center"
+              >
+                <div>
+                  <h6 class="card-subtitle mb-1 text-muted">
+                    Improvement Actions
+                  </h6>
+                  <h2 class="card-title mb-0">27</h2>
+                </div>
+                <div class="score-indicator bg-primary">
+                  <i class="fas fa-tasks"></i>
+                </div>
+              </div>
+              <div class="card-footer bg-transparent">
+                <small class="text-primary"
+                  ><i class="fas fa-check me-1"></i> 8 completed this
+                  quarter</small
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card mb-4">
+              <div
+                class="card-header bg-light d-flex justify-content-between align-items-center"
+              >
+                <h5 class="mb-0">Emotional Journey Curve</h5>
+                <div>
+                  <select
+                    class="form-select form-select-sm"
+                    id="timeRangeSelector"
+                  >
+                    <option>Last Quarter</option>
+                    <option>Last 6 Months</option>
+                    <option selected>Last Year</option>
+                    <option>All Time</option>
+                  </select>
+                </div>
+              </div>
+              <div class="card-body">
+                <div
+                  class="emotional-curve-container"
+                  id="emotionalCurveVisual"
+                >
+                  <!-- A canvas and curve points will be rendered here via JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card mb-4">
+              <div class="card-header bg-light">
+                <h5 class="mb-0">Top Employee Needs</h5>
+              </div>
+              <div class="card-body">
+                <div class="d-flex flex-wrap mb-3">
+                  <span class="needs-tag bg-primary text-white"
+                    >Clear Communication</span
+                  >
+                  <span class="needs-tag bg-info text-white"
+                    >Work-Life Balance</span
+                  >
+                  <span class="needs-tag bg-success text-white"
+                    >Career Growth</span
+                  >
+                  <span class="needs-tag bg-warning text-dark"
+                    >Recognition</span
+                  >
+                  <span class="needs-tag bg-danger text-white"
+                    >Mental Health Support</span
+                  >
+                  <span class="needs-tag bg-secondary text-white"
+                    >Onboarding Guidance</span
+                  >
+                  <span class="needs-tag bg-dark text-white"
+                    >Peer Collaboration</span
+                  >
+                </div>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Need</th>
+                      <th>Mentions</th>
+                      <th>Stage</th>
+                      <th>Trend</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Clear Communication</td>
+                      <td>342</td>
+                      <td>Onboarding</td>
+                      <td>
+                        <span class="text-danger"
+                          ><i class="fas fa-arrow-up"></i> 12%</span
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Work-Life Balance</td>
+                      <td>287</td>
+                      <td>Work</td>
+                      <td>
+                        <span class="text-warning"
+                          ><i class="fas fa-arrows-alt-h"></i> 0%</span
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Career Growth</td>
+                      <td>254</td>
+                      <td>Mobility</td>
+                      <td>
+                        <span class="text-success"
+                          ><i class="fas fa-arrow-down"></i> 8%</span
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Recognition</td>
+                      <td>198</td>
+                      <td>Rewards</td>
+                      <td>
+                        <span class="text-danger"
+                          ><i class="fas fa-arrow-up"></i> 15%</span
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card mb-4">
+              <div class="card-header bg-light">
+                <h5 class="mb-0">Stage Performance</h5>
+              </div>
+              <div class="card-body">
+                <div class="mb-4">
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Discovery</span>
+                    <span>8.2/10</span>
+                  </div>
+                  <div class="progress">
+                    <div
+                      class="progress-bar bg-success"
+                      style="width: 82%"
+                    ></div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Onboarding</span>
+                    <span>6.8/10</span>
+                  </div>
+                  <div class="progress">
+                    <div
+                      class="progress-bar bg-warning"
+                      style="width: 68%"
+                    ></div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Training</span>
+                    <span>7.9/10</span>
+                  </div>
+                  <div class="progress">
+                    <div
+                      class="progress-bar bg-success"
+                      style="width: 79%"
+                    ></div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Work</span>
+                    <span>7.3/10</span>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar bg-info" style="width: 73%"></div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Rewards</span>
+                    <span>6.5/10</span>
+                  </div>
+                  <div class="progress">
+                    <div
+                      class="progress-bar bg-warning"
+                      style="width: 65%"
+                    ></div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Mobility</span>
+                    <span>5.7/10</span>
+                  </div>
+                  <div class="progress">
+                    <div
+                      class="progress-bar bg-danger"
+                      style="width: 57%"
+                    ></div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Breaks</span>
+                    <span>8.1/10</span>
+                  </div>
+                  <div class="progress">
+                    <div
+                      class="progress-bar bg-success"
+                      style="width: 81%"
+                    ></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="d-flex justify-content-between mb-1">
+                    <span>Exit</span>
+                    <span>7.0/10</span>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar bg-info" style="width: 70%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Journey Map Section -->
+      <div id="journeyMap" class="mb-5 d-none">
+        <div class="row mb-3">
+          <div class="col">
+            <h2>Employee Journey Map</h2>
+            <p class="text-muted">
+              Visualize and analyze the complete employee journey across all
+              touchpoints.
+            </p>
+          </div>
+          <div class="col-auto">
+            <button
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#addTouchpointModal"
+            >
+              <i class="fas fa-plus me-1"></i> Add Touchpoint
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="card mb-4">
+              <div class="card-header bg-light">
+                <ul class="nav nav-tabs card-header-tabs">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#touchpoints"
+                      >Touchpoints</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#emotionalCurve"
+                      >Emotional Curve</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#needs">Needs</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#insights">Insights</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#opportunities">Opportunities</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <div class="journey-map-container">
+                  <!-- Journey map stages -->
+                  <div class="row journey-stages">
+                    <div class="col">
+                      <div class="journey-stage" data-stage="discovery">
+                        <h5><i class="fas fa-search me-2"></i> Discovery</h5>
+                        <p class="small">
+                          The perception of the organization and the Hiring
+                          Process.
+                        </p>
+                        <div class="touchpoints">
+                          <div class="touchpoint p-2 border rounded mb-2">
+                            <div
+                              class="d-flex justify-content-between align-items-center"
+                            >
+                              <span>Job Application</span>
+                              <span class="badge bg-success">8.4</span>
+                            </div>
+                          </div>
+                          <div class="touchpoint p-2 border rounded mb-2">
+                            <div
+                              class="d-flex justify-content-between align-items-center"
+                            >
+                              <span>Interview Process</span>
+                              <span class="badge bg-info">7.8</span>
+                            </div>
+                          </div>
+                          <div class="touchpoint p-2 border rounded mb-2">
+                            <div
+                              class="d-flex justify-content-between align-items-center"
+                            >
+                              <span>Offer Acceptance</span>
+                              <span class="badge bg-success">8.7</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="journey-stage" data-stage="onboarding">
+                        <h5>
+                          <i class="fas fa-user-plus me-2"></i> Onboarding
+                        </h5>
+                        <p class="small">
+                          The integration into the organization.
+                        </p>
+                        <div class="touchpoints">
+                          <div class="touchpoint p-2 border rounded mb-2">
+                            <div
+                              class="d-flex justify-content-between align-items-center"
+                            >
+                              <span>First Day</span>
+                              <span class="badge bg-warning">6.5</span>
+                            </div>
+                          </div>
+                          <div class="touchpoint p-2 border rounded mb-2">
+                            <div
+                              class="d-flex justify-content-between align-items-center"
+                            >
+                              <span>IT Setup</span>
+                              <span class="badge bg-danger">5.2</span>
+                            </div>
+                          </div>
+                          <div class="touchpoint p-2 border rounded mb-2">
+                            <div
+                              class="d-flex justify-content-between align-items-center"
+                            >
+                              <span>Team Introduction</span>
+                              <span class="badge bg-info">7.2</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="journey-stage" data-stage="training">
+                        <h5>
+                          <i class="fas fa-graduation-cap me-2"></i> Training
+                        </h5>
+                        <p class="small">
+                          The acquisition of knowledge or skills.
+                        </p>
+                        <div class="touchpoints">
+                          <div class="touchpoint p-2 border rounded mb-2">
+                            <div
+                              class="d-flex justify-content-between align-items-center"
+                            >
+                              <span>Initial Training</span>
+                              <span class="badge bg-info">7.5</span>
+                            </div>
+                          </div>
+                          <div class="touchpoint p-2 border rounded mb-2">
+                            <div
+                              class="d-flex justify-content-between align-items-center"
+                            >
+                              <span>Mentorship Program</span>
+                              <span class="badge bg-success">8.3</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="journey-stage" data-stage="work">
+                        <h5><i class="fas fa-briefcase me-2"></i> Work</h5>
+                        <p class="small">
+                          The achievement of tasks and team connections.
+                        </p>
+                        <div class="touchpoints">
+                          <div class="touchpoint p-2 border rounded mb-2">
+                            <div
+                              class="d-flex justify-content-between align-items-center"
+                            >
+                              <span>First Project</span>
+                              <span class="badge bg-info">7.4</span>
+                            </div>
+                          </div>
+                          <div class="touchpoint p-2 border rounded mb-2">
+                            <div
+                              class="d-flex justify-content-between align-items-center"
+                            >
+                              <span>Performance Review</span>
+                              <span class="badge bg-warning">6.8</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="journey-stage" data-stage="rewards">
+                        <h5><i class="fas fa-gift me-2"></i> Rewards</h5>
+                        <p class="small">
+                          Everything related to compensation and benefits.
+                        </p>
+                        <div class="touchpoints">
+                          <div class="touchpoint p-2 border rounded mb-2">
+                            <div
+                              class="d-flex justify-content-between align-items-center"
+                            >
+                              <span>Salary Review</span>
+                              <span class="badge bg-warning">6.3</span>
+                            </div>
+                          </div>
+                          <div class="touchpoint p-2 border rounded mb-2">
+                            <div
+                              class="d-flex justify-content-between align-items-center"
+                            >
+                              <span>Recognition Program</span>
+                              <span class="badge bg-danger">5.9</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="journey-stage" data-stage="mobility">
+                        <h5><i class="fas fa-route me-2"></i> Mobility</h5>
+                        <p class="small">
+                          Professional changes relevant to the employee.
+                        </p>
+                        <div class="touchpoints">
+                          <div class="touchpoint p-2 border rounded mb-2">
+                            <div
+                              class="d-flex justify-content-between align-items-center"
+                            >
+                              <span>Internal Job Change</span>
+                              <span class="badge bg-danger">5.4</span>
+                            </div>
+                          </div>
+                          <div class="touchpoint p-2 border rounded mb-2">
+                            <div
+                              class="d-flex justify-content-between align-items-center"
+                            >
+                              <span>Promotion Process</span>
+                              <span class="badge bg-danger">5.1</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="journey-stage" data-stage="breaks">
+                        <h5><i class="fas fa-coffee me-2"></i> Breaks</h5>
+                        <p class="small">
+                          Moments when you aren’t working but maintain a
+                          relationship.
+                        </p>
+                        <div class="touchpoints">
+                          <div class="touchpoint p-2 border rounded mb-2">
+                            <div
+                              class="d-flex justify-content-between align-items-center"
+                            >
+                              <span>Parental Leave</span>
+                              <span class="badge bg-success">8.1</span>
+                            </div>
+                          </div>
+                          <div class="touchpoint p-2 border rounded mb-2">
+                            <div
+                              class="d-flex justify-content-between align-items-center"
+                            >
+                              <span>Sabbatical</span>
+                              <span class="badge bg-success">8.5</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="journey-stage" data-stage="exit">
+                        <h5><i class="fas fa-door-open me-2"></i> Exit</h5>
+                        <p class="small">
+                          The way a person disassociates from the organization.
+                        </p>
+                        <div class="touchpoints">
+                          <div class="touchpoint p-2 border rounded mb-2">
+                            <div
+                              class="d-flex justify-content-between align-items-center"
+                            >
+                              <span>Resignation Process</span>
+                              <span class="badge bg-info">7.3</span>
+                            </div>
+                          </div>
+                          <div class="touchpoint p-2 border rounded mb-2">
+                            <div
+                              class="d-flex justify-content-between align-items-center"
+                            >
+                              <span>Exit Interview</span>
+                              <span class="badge bg-info">7.1</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End of journey stages -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Survey Builder Section -->
+      <div id="surveyBuilder" class="mb-5 d-none">
+        <div class="row mb-3">
+          <div class="col">
+            <h2>Survey Builder</h2>
+            <p class="text-muted">
+              Create and manage surveys to collect employee feedback at
+              different journey stages.
+            </p>
+          </div>
+          <div class="col-auto">
+            <button class="btn btn-primary">
+              <i class="fas fa-plus me-1"></i> New Survey
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card mb-4">
+              <div class="card-body">
+                <h5 class="card-title mb-3">Survey Templates</h5>
+                <div class="list-group">
+                  <a
+                    href="#"
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                  >
+                    Onboarding Experience
+                    <span class="badge bg-primary rounded-pill">Active</span>
+                  </a>
+                  <a
+                    href="#"
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                  >
+                    Training Effectiveness
+                    <span class="badge bg-secondary rounded-pill">Draft</span>
+                  </a>
+                  <a
+                    href="#"
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                  >
+                    Quarterly Pulse
+                    <span class="badge bg-primary rounded-pill">Active</span>
+                  </a>
+                  <a
+                    href="#"
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                  >
+                    Exit Interview
+                    <span class="badge bg-primary rounded-pill">Active</span>
+                  </a>
+                  <a
+                    href="#"
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                  >
+                    Career Development
+                    <span class="badge bg-secondary rounded-pill">Draft</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card mb-4">
+              <div class="card-header bg-light">
+                <h5 class="mb-0">Onboarding Experience Survey</h5>
+              </div>
+              <div class="card-body">
+                <form>
+                  <div class="mb-3">
+                    <label for="surveyTitle" class="form-label"
+                      >Survey Title</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="surveyTitle"
+                      placeholder="Enter survey title"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="surveyDescription" class="form-label"
+                      >Description</label
+                    >
+                    <textarea
+                      class="form-control"
+                      id="surveyDescription"
+                      rows="3"
+                      placeholder="Enter survey description"
+                    ></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label for="surveyQuestions" class="form-label"
+                      >Questions</label
+                    >
+                    <textarea
+                      class="form-control"
+                      id="surveyQuestions"
+                      rows="5"
+                      placeholder="Enter survey questions"
+                    ></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">
+                    Save Survey
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reports Section -->
+      <div id="reports" class="mb-5 d-none">
+        <div class="row mb-3">
+          <div class="col">
+            <h2>Reports</h2>
+            <p class="text-muted">
+              Generate and view reports on employee experiences and feedback.
+            </p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <p>Reports functionality coming soon...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings Section -->
+      <div id="settings" class="mb-5 d-none">
+        <div class="row mb-3">
+          <div class="col">
+            <h2>Settings</h2>
+            <p class="text-muted">
+              Configure your monitoring tool preferences and integrations.
+            </p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <p>Settings functionality coming soon...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Touchpoint Modal -->
+    <div
+      class="modal fade"
+      id="addTouchpointModal"
+      tabindex="-1"
+      aria-labelledby="addTouchpointModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addTouchpointModalLabel">
+              Add Touchpoint
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="touchpointForm">
+              <div class="mb-3">
+                <label for="touchpointName" class="form-label"
+                  >Touchpoint Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="touchpointName"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="touchpointStage" class="form-label">Stage</label>
+                <select class="form-select" id="touchpointStage" required>
+                  <option value="discovery">Discovery</option>
+                  <option value="onboarding">Onboarding</option>
+                  <option value="training">Training</option>
+                  <option value="work">Work</option>
+                  <option value="rewards">Rewards</option>
+                  <option value="mobility">Mobility</option>
+                  <option value="breaks">Breaks</option>
+                  <option value="exit">Exit</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="touchpointScore" class="form-label">Score</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="touchpointScore"
+                  min="0"
+                  max="10"
+                  step="0.1"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Add Touchpoint
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Draw a sample emotional curve on a canvas
+      function drawEmotionalCurve() {
+        var container = document.getElementById("emotionalCurveVisual");
+        var width = container.offsetWidth;
+        var height = container.offsetHeight;
+        var canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        container.appendChild(canvas);
+        var ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.moveTo(0, height * 0.5);
+        ctx.bezierCurveTo(
+          width * 0.25,
+          height * 0.3,
+          width * 0.75,
+          height * 0.7,
+          width,
+          height * 0.5
+        );
+        ctx.strokeStyle = "#0d6efd";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Draw curve points
+        var points = [
+          { x: 0, y: height * 0.5 },
+          { x: width * 0.25, y: height * 0.3 },
+          { x: width * 0.75, y: height * 0.7 },
+          { x: width, y: height * 0.5 },
+        ];
+        points.forEach(function (point) {
+          var div = document.createElement("div");
+          div.classList.add("curve-point");
+          div.style.left = point.x + "px";
+          div.style.top = point.y + "px";
+          container.appendChild(div);
+        });
+      }
+      document.addEventListener("DOMContentLoaded", drawEmotionalCurve);
+
+      // Navigation: Show corresponding section based on nav link clicked
+      document.querySelectorAll(".navbar-nav a.nav-link").forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href").substring(1);
+          // List of all main section IDs
+          const sections = [
+            "dashboard",
+            "journeyMap",
+            "surveyBuilder",
+            "reports",
+            "settings",
+          ];
+          sections.forEach((id) => {
+            const el = document.getElementById(id);
+            if (el) {
+              if (id === targetId) {
+                el.classList.remove("d-none");
+              } else {
+                el.classList.add("d-none");
+              }
+            }
+          });
+          // Update active nav link
+          document
+            .querySelectorAll(".navbar-nav a.nav-link")
+            .forEach((nav) => nav.classList.remove("active"));
+          this.classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>
