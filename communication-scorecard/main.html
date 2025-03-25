@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scorecard voor Strategische Communicatie</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+        .scorecard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #0d6efd;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 15px;
+        }
+        .factor-card {
+            border-left: 5px solid #0d6efd;
+            margin-bottom: 25px;
+            transition: transform 0.2s;
+        }
+        .factor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #e7f1ff;
+            font-weight: bold;
+        }
+        .progress {
+            height: 25px;
+            margin-top: 10px;
+        }
+        .rating-label {
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        .comments {
+            min-height: 100px;
+            margin-top: 10px;
+        }
+        .factor-description {
+            font-style: italic;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+        .save-btn {
+            margin-top: 20px;
+        }
+        .overall-score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #0d6efd;
+            text-align: center;
+            border: 3px solid #0d6efd;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            line-height: 94px;
+            margin: 0 auto 20px;
+        }
+        .results-section {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .date-picker {
+            max-width: 200px;
+        }
+        .reference {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 30px;
+            border-top: 1px solid #e9ecef;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container scorecard-container">
+        <h1 class="text-center">Scorecard voor Communicatie bij Bedrijfsprocesverbetering</h1>
+        
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="evaluator" class="form-label">Naam Evaluator:</label>
+                    <input type="text" class="form-control" id="evaluator" placeholder="Voer uw naam in">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="project" class="form-label">Procesverbeteringsproject:</label>
+                    <input type="text" class="form-control" id="project" placeholder="Voer de projectnaam in">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="date" class="form-label">Datum Evaluatie:</label>
+                    <input type="date" class="form-control date-picker" id="date">
+                </div>
+            </div>
+        </div>
+
+        <!-- Succesfactor 1 -->
+        <div class="card factor-card">
+            <div class="card-header">
+                I. Duidelijkheid van Strategie en Logica
+            </div>
+            <div class="card-body">
+                <p class="factor-description">Hoe duidelijk de rationale achter het bedrijfsprocesverbeterplan wordt gecommuniceerd, inclusief waarom specifieke processen worden aangepakt, hoe de gewenste toekomstige staat eruitziet en hoe voorgestelde veranderingen tot de gewenste resultaten leiden.</p>
+                
+                <div class="row mb-2">
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf1-c1">
+                            <label class="form-check-label" for="sf1-c1">
+                                Duidelijke uitleg waarom processen verbetering behoeven
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf1-c2">
+                            <label class="form-check-label" for="sf1-c2">
+                                Gewenste toekomstige staat duidelijk geformuleerd
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf1-c3">
+                            <label class="form-check-label" for="sf1-c3">
+                                Logische samenhang tussen acties en resultaten
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf1-c4">
+                            <label class="form-check-label" for="sf1-c4">
+                                Onderscheid tussen waarom, wat en hoe
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <label class="rating-label">Beoordeling (1-10):</label>
+                <input type="range" class="form-range" min="1" max="10" id="sf1-rating" value="5">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" id="sf1-progress" style="width: 50%;" aria-valuenow="5" aria-valuemin="1" aria-valuemax="10">5/10</div>
+                </div>
+                
+                <label class="rating-label">Opmerkingen:</label>
+                <textarea class="form-control comments" id="sf1-comments" placeholder="Voer uw observaties en suggesties in"></textarea>
+            </div>
+        </div>
+
+        <!-- Succesfactor 2 -->
+        <div class="card factor-card">
+            <div class="card-header">
+                II. Strategie als Argument en het Bevorderen van Discussie
+            </div>
+            <div class="card-body">
+                <p class="factor-description">Hoe goed het plan wordt gepresenteerd als een logisch argument, inclusief duidelijkheid over aannames, uitnodiging tot constructieve discussie en het creëren van ruimte voor de perspectieven van werknemers.</p>
+                
+                <div class="row mb-2">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf2-c1">
+                            <label class="form-check-label" for="sf2-c1">
+                                Aannames duidelijk vermeld
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf2-c2">
+                            <label class="form-check-label" for="sf2-c2">
+                                Constructieve discussie aangemoedigd
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf2-c3">
+                            <label class="form-check-label" for="sf2-c3">
+                                Ruimte voor werknemersperspectieven geboden
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <label class="rating-label">Beoordeling (1-10):</label>
+                <input type="range" class="form-range" min="1" max="10" id="sf2-rating" value="5">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" id="sf2-progress" style="width: 50%;" aria-valuenow="5" aria-valuemin="1" aria-valuemax="10">5/10</div>
+                </div>
+                
+                <label class="rating-label">Opmerkingen:</label>
+                <textarea class="form-control comments" id="sf2-comments" placeholder="Voer uw observaties en suggesties in"></textarea>
+            </div>
+        </div>
+
+        <!-- Succesfactor 3 -->
+        <div class="card factor-card">
+            <div class="card-header">
+                III. Voortdurende en Consistente Communicatie
+            </div>
+            <div class="card-body">
+                <p class="factor-description">Hoe regelmatig en via welke kanalen het plan wordt gecommuniceerd, inclusief voortgangsupdates, herhaling van de redenen en tijdigheid van informatie.</p>
+                
+                <div class="row mb-2">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf3-c1">
+                            <label class="form-check-label" for="sf3-c1">
+                                Regelmatige voortgangsupdates gegeven
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf3-c2">
+                            <label class="form-check-label" for="sf3-c2">
+                                Herhaling van redenen en voordelen
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf3-c3">
+                            <label class="form-check-label" for="sf3-c3">
+                                Tijdige verspreiding van informatie
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <label class="rating-label">Beoordeling (1-10):</label>
+                <input type="range" class="form-range" min="1" max="10" id="sf3-rating" value="5">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" id="sf3-progress" style="width: 50%;" aria-valuenow="5" aria-valuemin="1" aria-valuemax="10">5/10</div>
+                </div>
+                
+                <label class="rating-label">Opmerkingen:</label>
+                <textarea class="form-control comments" id="sf3-comments" placeholder="Voer uw observaties en suggesties in"></textarea>
+            </div>
+        </div>
+
+        <!-- Succesfactor 4 -->
+        <div class="card factor-card">
+            <div class="card-header">
+                IV. Actief Luisteren en Feedback Integreren
+            </div>
+            <div class="card-body">
+                <p class="factor-description">Hoe goed feedback wordt gevraagd, geluisterd en geïntegreerd van degenen die direct betrokken zijn bij de verbeterde processen.</p>
+                
+                <div class="row mb-2">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf4-c1">
+                            <label class="form-check-label" for="sf4-c1">
+                                Feedbackmechanismen gecreëerd
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf4-c2">
+                            <label class="form-check-label" for="sf4-c2">
+                                Feedback serieus genomen
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf4-c3">
+                            <label class="form-check-label" for="sf4-c3">
+                                Bewijs dat feedback het plan beïnvloedt
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <label class="rating-label">Beoordeling (1-10):</label>
+                <input type="range" class="form-range" min="1" max="10" id="sf4-rating" value="5">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" id="sf4-progress" style="width: 50%;" aria-valuenow="5" aria-valuemin="1" aria-valuemax="10">5/10</div>
+                </div>
+                
+                <label class="rating-label">Opmerkingen:</label>
+                <textarea class="form-control comments" id="sf4-comments" placeholder="Voer uw observaties en suggesties in"></textarea>
+            </div>
+        </div>
+
+        <!-- Succesfactor 5 -->
+        <div class="card factor-card">
+            <div class="card-header">
+                V. Inzicht in het Publiek en Afstemming
+            </div>
+            <div class="card-body">
+                <p class="factor-description">Hoe goed de communicatie is afgestemd op verschillende groepen werknemers, rekening houdend met de impact, gebruikmakend van relevante taal en ingaan op mogelijke zorgen.</p>
+                
+                <div class="row mb-2">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf5-c1">
+                            <label class="form-check-label" for="sf5-c1">
+                                Impact op verschillende rollen in overweging genomen
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf5-c2">
+                            <label class="form-check-label" for="sf5-c2">
+                                Relevante taal en voorbeelden gebruikt
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf5-c3">
+                            <label class="form-check-label" for="sf5-c3">
+                                Mogelijke zorgen proactief aangepakt
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <label class="rating-label">Beoordeling (1-10):</label>
+                <input type="range" class="form-range" min="1" max="10" id="sf5-rating" value="5">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" id="sf5-progress" style="width: 50%;" aria-valuenow="5" aria-valuemin="1" aria-valuemax="10">5/10</div>
+                </div>
+                
+                <label class="rating-label">Opmerkingen:</label>
+                <textarea class="form-control comments" id="sf5-comments" placeholder="Voer uw observaties en suggesties in"></textarea>
+            </div>
+        </div>
+
+        <!-- Succesfactor 6 -->
+        <div class="card factor-card">
+            <div class="card-header">
+                VI. Aansprekende Presentatie
+            </div>
+            <div class="card-body">
+                <p class="factor-description">Hoe effectief het plan op een aansprekende manier wordt gepresenteerd, inclusief structuur, visuele elementen, verhalen en mogelijkheden voor interactie.</p>
+                
+                <div class="row mb-2">
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf6-c1">
+                            <label class="form-check-label" for="sf6-c1">
+                                Sterke opening en afsluiting
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf6-c2">
+                            <label class="form-check-label" for="sf6-c2">
+                                Effectieve visuele elementen gebruikt
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf6-c3">
+                            <label class="form-check-label" for="sf6-c3">
+                                Verhalen/voorbeelden om punten te illustreren
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf6-c4">
+                            <label class="form-check-label" for="sf6-c4">
+                                Mogelijkheden voor interactie
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <label class="rating-label">Beoordeling (1-10):</label>
+                <input type="range" class="form-range" min="1" max="10" id="sf6-rating" value="5">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" id="sf6-progress" style="width: 50%;" aria-valuenow="5" aria-valuemin="1" aria-valuemax="10">5/10</div>
+                </div>
+                
+                <label class="rating-label">Opmerkingen:</label>
+                <textarea class="form-control comments" id="sf6-comments" placeholder="Voer uw observaties en suggesties in"></textarea>
+            </div>
+        </div>
+
+        <button class="btn btn-primary btn-lg d-block mx-auto save-btn" id="calculate-btn">Bereken Totale Score</button>
+
+        <div class="results-section mt-4" id="results-section" style="display: none;">
+            <h3 class="text-center mb-4">Scorecard Resultaten</h3>
+            
+            <div class="overall-score" id="overall-score">0</div>
+            <p class="text-center mb-4" id="score-interpretation"></p>
+            
+            <h4>Sterke Punten</h4>
+            <ul id="strengths-list" class="mb-4">
+                <!-- Wordt ingevuld door JavaScript -->
+            </ul>
+            
+            <h4>Verbeterpunten</h4>
+            <ul id="improvements-list" class="mb-4">
+                <!-- Wordt ingevuld door JavaScript -->
+            </ul>
+            
+            <h4>Aanbevolen Volgende Stappen</h4>
+            <ul id="recommendations-list">
+                <!-- Wordt ingevuld door JavaScript -->
+            </ul>
+            
+            <div class="d-flex justify-content-center mt-4">
+                <button class="btn btn-success me-2" id="print-btn">Scorecard Afdrukken</button>
+                <button class="btn btn-secondary" id="save-pdf-btn">Opslaan als PDF</button>
+            </div>
+        </div>
+        
+        <!-- Theoretische Bronvermelding -->
+        <div class="reference">
+            Bron: Abrahams, M. (Host), &amp; Sorensen, J. (Guest). (z.j.). <em>71. Strategy Success: How to Communicate Your Gameplan</em> [Video podcast]. Stanford Graduate School of Business. YouTube. Verkregen van <a href="https://youtu.be/vn1oA5QNDWo?si=bt8QyzeNMHf8MJtv" target="_blank">https://youtu.be/vn1oA5QNDWo?si=bt8QyzeNMHf8MJtv</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle met Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Zet de huidige datum als standaard
+        document.getElementById('date').valueAsDate = new Date();
+        
+        // Update progress balken bij aanpassing van de slider
+        for (let i = 1; i <= 6; i++) {
+            const slider = document.getElementById(`sf${i}-rating`);
+            const progress = document.getElementById(`sf${i}-progress`);
+            
+            slider.addEventListener('input', function() {
+                const value = this.value;
+                const percentage = (value / 10) * 100;
+                
+                progress.style.width = percentage + '%';
+                progress.setAttribute('aria-valuenow', value);
+                progress.textContent = value + '/10';
+                
+                // Verander kleur op basis van de beoordeling
+                if (value <= 3) {
+                    progress.className = 'progress-bar bg-danger';
+                } else if (value <= 7) {
+                    progress.className = 'progress-bar bg-warning';
+                } else {
+                    progress.className = 'progress-bar bg-success';
+                }
+            });
+        }
+        
+        // Bereken de totale score
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            const scores = [];
+            for (let i = 1; i <= 6; i++) {
+                scores.push(parseInt(document.getElementById(`sf${i}-rating`).value));
+            }
+            
+            const overallScore = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+            document.getElementById('overall-score').textContent = overallScore;
+            
+            // Toon de resultaten sectie
+            document.getElementById('results-section').style.display = 'block';
+            
+            // Score interpretatie
+            const scoreInterpretation = document.getElementById('score-interpretation');
+            if (overallScore <= 3) {
+                scoreInterpretation.textContent = 'Communicatiestrategie heeft aanzienlijke verbetering nodig';
+            } else if (overallScore <= 5) {
+                scoreInterpretation.textContent = 'Communicatiestrategie is onder gemiddeld en vraagt om aandacht';
+            } else if (overallScore <= 7) {
+                scoreInterpretation.textContent = 'Communicatiestrategie is bevredigend, maar er is ruimte voor verbetering';
+            } else if (overallScore <= 9) {
+                scoreInterpretation.textContent = 'Communicatiestrategie is sterk met enkele kleine verbeterpunten';
+            } else {
+                scoreInterpretation.textContent = 'Uitstekende communicatiestrategie, behoud de huidige aanpak';
+            }
+            
+            // Bepaal sterke punten en verbeterpunten
+            const strengths = [];
+            const improvements = [];
+            const factorNames = [
+                'Duidelijkheid van Strategie en Logica',
+                'Strategie als Argument en het Bevorderen van Discussie',
+                'Voortdurende en Consistente Communicatie',
+                'Actief Luisteren en Feedback Integreren',
+                'Inzicht in het Publiek en Afstemming',
+                'Aansprekende Presentatie'
+            ];
+            
+            scores.forEach((score, index) => {
+                if (score >= 8) {
+                    strengths.push(`<li><strong>${factorNames[index]}</strong> (Beoordeling: ${score}/10)</li>`);
+                }
+                if (score <= 5) {
+                    improvements.push(`<li><strong>${factorNames[index]}</strong> (Beoordeling: ${score}/10)</li>`);
+                }
+            });
+            
+            document.getElementById('strengths-list').innerHTML = strengths.length > 0 ? strengths.join('') : '<li>Geen duidelijke sterke punten; alle gebieden kunnen verbetering gebruiken.</li>';
+            document.getElementById('improvements-list').innerHTML = improvements.length > 0 ? improvements.join('') : '<li>Geen grote verbeterpunten. Ga zo door!</li>';
+            
+            // Genereer aanbevelingen
+            const recommendations = [];
+            if (scores[0] <= 5) recommendations.push('<li>Verduidelijk het doel en de verwachte resultaten van het procesverbeterplan voor alle belanghebbenden.</li>');
+            if (scores[1] <= 5) recommendations.push('<li>Creëer meer mogelijkheden voor medewerkers om input te leveren en het plan te bespreken.</li>');
+            if (scores[2] <= 5) recommendations.push('<li>Implementeer een gestructureerder communicatieschema met regelmatige updates.</li>');
+            if (scores[3] <= 5) recommendations.push('<li>Ontwikkel betere mechanismen voor feedbackverzameling en toon hoe feedback wordt geïntegreerd.</li>');
+            if (scores[4] <= 5) recommendations.push('<li>Stem de communicatie beter af op de verschillende stakeholdergroepen en hun specifieke behoeften.</li>');
+            if (scores[5] <= 5) recommendations.push('<li>Maak gebruik van meer aansprekende visuele hulpmiddelen en verhalen in de presentaties.</li>');
+            
+            if (recommendations.length === 0) {
+                recommendations.push('<li>Hervat de huidige aanpak en zorg voor consistentie in alle communicatiegebieden.</li>');
+                recommendations.push('<li>Documenteer succesvolle communicatiepraktijken als voorbeeld voor toekomstige projecten.</li>');
+            }
+            
+            document.getElementById('recommendations-list').innerHTML = recommendations.join('');
+            
+            // Scroll naar de resultaten
+            document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Print de scorecard
+        document.getElementById('print-btn').addEventListener('click', function() {
+            window.print();
+        });
+        
+        // Opslaan als PDF (in een echte applicatie zou dit met extra libraries of server-side verwerking worden afgehandeld)
+        document.getElementById('save-pdf-btn').addEventListener('click', function() {
+            alert('PDF-export functionaliteit zou hier worden geïmplementeerd. In een echte applicatie zou dit de huidige scorecard als PDF opslaan.');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>AI Strategy Navigator</title>
+		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body class="bg-gray-100 min-h-screen">
+		<!-- Game Container -->
+		<div id="app" class="container mx-auto px-4 py-8">
+			<!-- Landing Page -->
+			<div id="landing-page" class="block">
+				<div class="bg-white rounded-lg shadow-lg p-8 max-w-4xl mx-auto">
+					<h1 class="text-3xl font-bold text-center text-indigo-800 mb-6">
+						AI Strategy Navigator
+					</h1>
+					<p class="text-lg mb-6">
+						Welcome to the AI Strategy workshop game! This interactive
+						experience will help you understand what strategy is, how it differs
+						from other business games, and why it's important to view AI from a
+						business strategy perspective.
+					</p>
+
+					<div class="mb-8 p-4 bg-blue-50 rounded-lg">
+						<h2 class="text-xl font-semibold text-blue-800 mb-2">
+							Game Objective
+						</h2>
+						<p>
+							To develop and justify a successful long-term strategy for a
+							hypothetical organisation by strategically integrating Artificial
+							Intelligence (AI) to achieve a sustainable competitive advantage
+							and secure necessary resources in a dynamic market.
+						</p>
+					</div>
+
+					<h2 class="text-xl font-semibold text-indigo-800 mb-4">Game Setup</h2>
+					<div class="mb-6">
+						<label class="block text-gray-700 mb-2" for="num-groups"
+							>Number of Groups (4-6 participants per group):</label
+						>
+						<input
+							type="number"
+							id="num-groups"
+							min="1"
+							max="10"
+							value="4"
+							class="w-full p-2 border border-gray-300 rounded"
+						/>
+					</div>
+
+					<div class="text-center">
+						<button
+							id="start-game-btn"
+							class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300"
+						>
+							Start Game
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Facilitator View -->
+			<div id="facilitator-view" class="hidden">
+				<div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+					<div class="flex justify-between items-center mb-4">
+						<h1 class="text-2xl font-bold text-indigo-800">
+							AI Strategy Navigator - Facilitator View
+						</h1>
+						<div>
+							<button
+								id="instructions-btn"
+								class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg mr-2"
+							>
+								<i class="fas fa-question-circle mr-1"></i> Instructions
+							</button>
+							<button
+								id="reset-game-btn"
+								class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg"
+							>
+								<i class="fas fa-redo-alt mr-1"></i> Reset Game
+							</button>
+						</div>
+					</div>
+
+					<div class="grid grid-cols-3 gap-4 mb-6">
+						<div class="col-span-1 bg-blue-50 p-4 rounded-lg">
+							<h2 class="text-lg font-semibold text-blue-800 mb-2">
+								Current Round
+							</h2>
+							<div id="current-round" class="text-2xl font-bold">1</div>
+							<p id="round-description" class="text-sm mt-2">
+								Strategic Analysis and Formulation
+							</p>
+						</div>
+						<div class="col-span-1 bg-green-50 p-4 rounded-lg">
+							<h2 class="text-lg font-semibold text-green-800 mb-2">Timer</h2>
+							<div id="timer" class="text-2xl font-bold">20:00</div>
+							<div class="flex mt-2">
+								<button
+									id="start-timer-btn"
+									class="bg-green-600 hover:bg-green-700 text-white text-sm py-1 px-3 rounded mr-2"
+								>
+									Start
+								</button>
+								<button
+									id="pause-timer-btn"
+									class="bg-yellow-600 hover:bg-yellow-700 text-white text-sm py-1 px-3 rounded mr-2"
+								>
+									Pause
+								</button>
+								<button
+									id="reset-timer-btn"
+									class="bg-red-600 hover:bg-red-700 text-white text-sm py-1 px-3 rounded"
+								>
+									Reset
+								</button>
+							</div>
+						</div>
+						<div class="col-span-1 bg-purple-50 p-4 rounded-lg">
+							<h2 class="text-lg font-semibold text-purple-800 mb-2">Groups</h2>
+							<div id="groups-count" class="text-2xl font-bold">4</div>
+							<button
+								id="assign-scenarios-btn"
+								class="bg-purple-600 hover:bg-purple-700 text-white text-sm py-1 px-3 rounded mt-2"
+							>
+								Assign Scenarios
+							</button>
+						</div>
+					</div>
+
+					<div class="mb-6">
+						<h2 class="text-lg font-semibold text-indigo-800 mb-2">
+							Game Controls
+						</h2>
+						<div class="flex flex-wrap gap-4">
+							<button
+								id="reveal-market-card-btn"
+								class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg"
+							>
+								<i class="fas fa-chart-line mr-1"></i> Reveal Market Dynamics
+								Card
+							</button>
+							<button
+								id="next-round-btn"
+								class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg"
+							>
+								<i class="fas fa-forward mr-1"></i> Advance to Next Round
+							</button>
+							<button
+								id="group-view-btn"
+								class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg"
+							>
+								<i class="fas fa-users mr-1"></i> Show Group View
+							</button>
+							<button
+								id="presentation-view-btn"
+								class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg"
+							>
+								<i class="fas fa-tv mr-1"></i> Show Presentation View
+							</button>
+						</div>
+					</div>
+
+					<div
+						id="current-market-card"
+						class="hidden bg-yellow-50 p-4 rounded-lg mb-6"
+					>
+						<h2 class="text-lg font-semibold text-yellow-800 mb-2">
+							Current Market Dynamics Card
+						</h2>
+						<div
+							id="market-card-content"
+							class="p-4 bg-white rounded border border-yellow-200"
+						>
+							<h3 id="market-card-title" class="text-xl font-bold mb-2">
+								Technological Advancement
+							</h3>
+							<p id="market-card-description">
+								A breakthrough in Natural Language Processing has made customer
+								service chatbots significantly more effective and human-like,
+								reducing the need for human customer service representatives by
+								up to 40%.
+							</p>
+						</div>
+					</div>
+
+					<div>
+						<h2 class="text-lg font-semibold text-indigo-800 mb-2">
+							Facilitator Notes
+						</h2>
+						<div class="bg-gray-50 p-4 rounded-lg">
+							<h3 class="font-medium mb-2">
+								Round 1: Strategic Analysis and Formulation
+							</h3>
+							<ul class="list-disc pl-5 mb-4">
+								<li>
+									Introduce the concept of strategy as the "logic of success for
+									the organisation"
+								</li>
+								<li>
+									Emphasize that strategy is an argument, not just a list of
+									actions
+								</li>
+								<li>
+									Give groups time to review their scenarios and AI capability
+									cards
+								</li>
+								<li>
+									Remind groups to complete their initial Strategy Argument
+									Canvas
+								</li>
+								<li>
+									Each group should provide a brief 2-3 minute overview of their
+									initial strategy
+								</li>
+							</ul>
+
+							<h3 class="font-medium mb-2">
+								Round 2: Market Dynamics and Strategic Adaptation
+							</h3>
+							<ul class="list-disc pl-5 mb-4">
+								<li>Reveal the first market dynamics card</li>
+								<li>
+									Groups should re-evaluate and adapt their strategy based on
+									the new market conditions
+								</li>
+								<li>Groups should refine their Strategy Argument Canvas</li>
+								<li>Pair groups for constructive debate (peer review)</li>
+							</ul>
+
+							<h3 class="font-medium mb-2">
+								Round 3: Long-Term Vision and Sustainability
+							</h3>
+							<ul class="list-disc pl-5">
+								<li>Introduce a second market dynamics card</li>
+								<li>
+									Groups focus on long-term sustainability of their strategy
+								</li>
+								<li>Final strategy presentations (8-10 minutes per group)</li>
+								<li>
+									Facilitate concluding discussion focusing on key learning
+									objectives
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Group View -->
+			<div id="group-view" class="hidden">
+				<div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+					<div class="flex justify-between items-center mb-6">
+						<div>
+							<h1 class="text-2xl font-bold text-indigo-800">
+								AI Strategy Navigator
+							</h1>
+							<p class="text-gray-600">
+								Group: <span id="group-id">1</span> | Scenario:
+								<span id="scenario-name">Retail Tech</span>
+							</p>
+						</div>
+						<div>
+							<button
+								id="back-to-facilitator-btn"
+								class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg"
+							>
+								<i class="fas fa-arrow-left mr-1"></i> Back to Facilitator View
+							</button>
+						</div>
+					</div>
+
+					<div class="grid grid-cols-3 gap-6">
+						<!-- Scenario Brief Column -->
+						<div class="col-span-1">
+							<div class="bg-blue-50 rounded-lg p-4 mb-6">
+								<h2 class="text-lg font-semibold text-blue-800 mb-3">
+									Scenario Brief
+								</h2>
+								<div
+									id="scenario-content"
+									class="bg-white rounded-lg p-4 shadow-sm"
+								>
+									<h3 id="scenario-title" class="font-bold text-lg mb-2">
+										RetailTech Inc.
+									</h3>
+
+									<div class="mb-3">
+										<span class="font-medium">Industry:</span>
+										<span id="scenario-industry">Retail Technology</span>
+									</div>
+
+									<div class="mb-3">
+										<span class="font-medium">Market Position:</span>
+										<span id="scenario-position"
+											>Established mid-market player with growing
+											competition</span
+										>
+									</div>
+
+									<div class="mb-3">
+										<span class="font-medium">Existing Resources:</span>
+										<div id="scenario-resources" class="pl-4">
+											<div>- Financial: $10M annual tech budget</div>
+											<div>- Technological: Legacy ERP and CRM systems</div>
+											<div>- Human: 500 employees, small data science team</div>
+										</div>
+									</div>
+
+									<div class="mb-3">
+										<span class="font-medium"
+											>Key Challenges & Opportunities:</span
+										>
+										<div id="scenario-challenges" class="pl-4">
+											<div>
+												- Rising customer expectations for personalization
+											</div>
+											<div>- Increasing operational costs</div>
+											<div>- Growing e-commerce competition</div>
+											<div>- Rich customer data not fully utilized</div>
+										</div>
+									</div>
+
+									<div>
+										<span class="font-medium">Organizational Goals:</span>
+										<div id="scenario-goals" class="pl-4">
+											<div>- Increase market share by 15% in 3 years</div>
+											<div>- Improve customer retention by 25%</div>
+											<div>- Reduce operational costs by 20%</div>
+											<div>- Develop new digital revenue streams</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="bg-green-50 rounded-lg p-4 mb-6">
+								<h2 class="text-lg font-semibold text-green-800 mb-2">
+									Resources
+								</h2>
+								<div class="bg-white rounded-lg p-4 shadow-sm">
+									<div class="flex items-center justify-between mb-3">
+										<span class="font-medium">Budget Points:</span>
+										<span id="budget-points" class="text-xl font-bold"
+											>100</span
+										>
+									</div>
+									<div class="flex items-center justify-between">
+										<span class="font-medium">Talent Points:</span>
+										<span id="talent-points" class="text-xl font-bold">50</span>
+									</div>
+								</div>
+							</div>
+
+							<div
+								id="market-dynamics-section"
+								class="bg-yellow-50 rounded-lg p-4 hidden"
+							>
+								<h2 class="text-lg font-semibold text-yellow-800 mb-2">
+									Market Dynamics
+								</h2>
+								<div
+									id="market-dynamics-card"
+									class="bg-white rounded-lg p-4 shadow-sm"
+								>
+									<h3
+										id="market-card-title-group"
+										class="font-bold text-lg mb-2"
+									>
+										Technological Advancement
+									</h3>
+									<p id="market-card-description-group">
+										A breakthrough in Natural Language Processing has made
+										customer service chatbots significantly more effective and
+										human-like, reducing the need for human customer service
+										representatives by up to 40%.
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- AI Capabilities Column -->
+						<div class="col-span-1">
+							<div class="bg-purple-50 rounded-lg p-4 h-full">
+								<h2 class="text-lg font-semibold text-purple-800 mb-3">
+									AI Capability Cards
+								</h2>
+								<div
+									class="grid grid-cols-1 gap-4"
+									id="ai-capabilities-container"
+								>
+									<!-- AI Capability Cards will be dynamically inserted here -->
+								</div>
+							</div>
+						</div>
+
+						<!-- Strategy Canvas Column -->
+						<div class="col-span-1">
+							<div class="bg-indigo-50 rounded-lg p-4">
+								<h2 class="text-lg font-semibold text-indigo-800 mb-3">
+									Strategy Argument Canvas
+								</h2>
+								<div class="bg-white rounded-lg p-4 shadow-sm">
+									<div class="mb-4">
+										<label
+											class="block text-gray-700 font-medium mb-1"
+											for="target-customers"
+											>Target Customer Segment(s):</label
+										>
+										<textarea
+											id="target-customers"
+											rows="2"
+											class="w-full p-2 border border-gray-300 rounded"
+										></textarea>
+									</div>
+
+									<div class="mb-4">
+										<label
+											class="block text-gray-700 font-medium mb-1"
+											for="value-proposition"
+											>Value Proposition:</label
+										>
+										<textarea
+											id="value-proposition"
+											rows="2"
+											class="w-full p-2 border border-gray-300 rounded"
+										></textarea>
+									</div>
+
+									<div class="mb-4">
+										<label class="block text-gray-700 font-medium mb-1"
+											>Key AI Initiatives:</label
+										>
+										<div
+											id="selected-ai-initiatives"
+											class="min-h-[80px] p-2 border border-gray-300 rounded bg-gray-50"
+										>
+											<p class="text-gray-500 text-sm italic">
+												Selected AI initiatives will appear here
+											</p>
+										</div>
+									</div>
+
+									<div class="mb-4">
+										<label
+											class="block text-gray-700 font-medium mb-1"
+											for="resource-allocation"
+											>Resource Allocation:</label
+										>
+										<textarea
+											id="resource-allocation"
+											rows="2"
+											class="w-full p-2 border border-gray-300 rounded"
+										></textarea>
+									</div>
+
+									<div class="mb-4">
+										<label
+											class="block text-gray-700 font-medium mb-1"
+											for="competitive-advantage"
+											>Competitive Advantage:</label
+										>
+										<textarea
+											id="competitive-advantage"
+											rows="2"
+											class="w-full p-2 border border-gray-300 rounded"
+										></textarea>
+									</div>
+
+									<div class="mb-4">
+										<label
+											class="block text-gray-700 font-medium mb-1"
+											for="assumptions"
+											>Underlying Assumptions:</label
+										>
+										<textarea
+											id="assumptions"
+											rows="2"
+											class="w-full p-2 border border-gray-300 rounded"
+										></textarea>
+									</div>
+
+									<div>
+										<label
+											class="block text-gray-700 font-medium mb-1"
+											for="success-metrics"
+											>Metrics for Success:</label
+										>
+										<textarea
+											id="success-metrics"
+											rows="2"
+											class="w-full p-2 border border-gray-300 rounded"
+										></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Presentation View -->
+			<div id="presentation-view" class="hidden">
+				<div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+					<div class="flex justify-between items-center mb-6">
+						<h1 class="text-2xl font-bold text-indigo-800">
+							Strategy Presentation
+						</h1>
+						<button
+							id="back-from-presentation-btn"
+							class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg"
+						>
+							<i class="fas fa-arrow-left mr-1"></i> Back to Facilitator View
+						</button>
+					</div>
+
+					<div class="grid grid-cols-2 gap-8">
+						<!-- Group Strategy -->
+						<div class="col-span-1">
+							<div class="bg-indigo-50 rounded-lg p-6">
+								<h2 class="text-xl font-semibold text-indigo-800 mb-4">
+									Group <span id="presenting-group">1</span> Strategy
+								</h2>
+								<div class="mb-4">
+									<h3 class="font-medium text-indigo-700 mb-1">Scenario:</h3>
+									<p id="presentation-scenario" class="bg-white p-3 rounded">
+										RetailTech Inc. - Established mid-market retail technology
+										player
+									</p>
+								</div>
+
+								<div class="mb-4">
+									<h3 class="font-medium text-indigo-700 mb-1">
+										Target Customer Segment(s):
+									</h3>
+									<p id="presentation-customers" class="bg-white p-3 rounded">
+										High-value retail shoppers who value personalized
+										experiences
+									</p>
+								</div>
+
+								<div class="mb-4">
+									<h3 class="font-medium text-indigo-700 mb-1">
+										Value Proposition:
+									</h3>
+									<p id="presentation-value" class="bg-white p-3 rounded">
+										Hyper-personalized shopping experiences powered by AI
+									</p>
+								</div>
+
+								<div class="mb-4">
+									<h3 class="font-medium text-indigo-700 mb-1">
+										Key AI Initiatives:
+									</h3>
+									<div
+										id="presentation-initiatives"
+										class="bg-white p-3 rounded"
+									>
+										<div class="mb-2">
+											1. Predictive Analytics for inventory management
+										</div>
+										<div class="mb-2">
+											2. Machine Learning for personalization
+										</div>
+										<div>3. Natural Language Processing chatbots</div>
+									</div>
+								</div>
+
+								<div class="mb-4">
+									<h3 class="font-medium text-indigo-700 mb-1">
+										Competitive Advantage:
+									</h3>
+									<p id="presentation-advantage" class="bg-white p-3 rounded">
+										Unified AI platform that creates a seamless personalized
+										experience across all touchpoints
+									</p>
+								</div>
+
+								<div class="mb-4">
+									<h3 class="font-medium text-indigo-700 mb-1">
+										Underlying Assumptions:
+									</h3>
+									<p id="presentation-assumptions" class="bg-white p-3 rounded">
+										Customers will share data in exchange for personalized
+										experiences; Competition will take 18+ months to develop
+										similar capabilities
+									</p>
+								</div>
+
+								<div>
+									<h3 class="font-medium text-indigo-700 mb-1">
+										Metrics for Success:
+									</h3>
+									<p id="presentation-metrics" class="bg-white p-3 rounded">
+										25% increase in customer retention; 30% increase in average
+										order value; 20% reduction in operational costs
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- Strategic Adaptations -->
+						<div class="col-span-1">
+							<div class="bg-yellow-50 rounded-lg p-6 mb-6">
+								<h2 class="text-xl font-semibold text-yellow-800 mb-4">
+									Market Dynamics Response
+								</h2>
+								<div class="mb-4">
+									<h3 class="font-medium text-yellow-700 mb-1">
+										Market Dynamics Card 1:
+									</h3>
+									<p id="presentation-market1" class="bg-white p-3 rounded">
+										Technological Advancement: A breakthrough in Natural
+										Language Processing has made customer service chatbots
+										significantly more effective and human-like.
+									</p>
+								</div>
+
+								<div>
+									<h3 class="font-medium text-yellow-700 mb-1">
+										Strategic Adaptation:
+									</h3>
+									<p id="presentation-adaptation1" class="bg-white p-3 rounded">
+										Increased investment in NLP chatbots by 20%; Re-allocated
+										resources from in-store associates to AI development;
+										Accelerated deployment timeline by 6 months
+									</p>
+								</div>
+							</div>
+
+							<div class="bg-green-50 rounded-lg p-6">
+								<h2 class="text-xl font-semibold text-green-800 mb-4">
+									Long-Term Sustainability
+								</h2>
+								<div class="mb-4">
+									<h3 class="font-medium text-green-700 mb-1">
+										Market Dynamics Card 2:
+									</h3>
+									<p id="presentation-market2" class="bg-white p-3 rounded">
+										Shifting Customer Preferences: Growing consumer concerns
+										about AI ethics and data privacy.
+									</p>
+								</div>
+
+								<div>
+									<h3 class="font-medium text-green-700 mb-1">
+										Long-Term Strategy Evolution:
+									</h3>
+									<p id="presentation-adaptation2" class="bg-white p-3 rounded">
+										Development of transparent AI ethics framework; Opt-in data
+										collection with clear value exchange; Partnership with
+										privacy advocacy organizations; Customer education campaign
+										on AI benefits
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Instructions Modal -->
+			<div
+				id="instructions-modal"
+				class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
+			>
+				<div
+					class="bg-white rounded-lg shadow-lg p-6 max-w-4xl mx-auto max-h-screen overflow-y-auto"
+				>
+					<div class="flex justify-between items-center mb-4">
+						<h2 class="text-2xl font-bold text-indigo-800">
+							AI Strategy Navigator Instructions
+						</h2>
+						<button
+							id="close-instructions-btn"
+							class="text-gray-500 hover:text-gray-700"
+						>
+							<i class="fas fa-times text-2xl"></i>
+						</button>
+					</div>
+
+					<div class="mb-6">
+						<h3 class="text-xl font-semibold text-indigo-700 mb-2">
+							Game Objective
+						</h3>
+						<p>
+							To develop and justify a successful long-term strategy for a
+							hypothetical organisation by strategically integrating Artificial
+							Intelligence (AI) to achieve a sustainable competitive advantage
+							and secure necessary resources in a dynamic market.
+						</p>
+					</div>
+
+					<div class="mb-6">
+						<h3 class="text-xl font-semibold text-indigo-700 mb-2">
+							Gameplay (3 Rounds)
+						</h3>
+
+						<div class="mb-4">
+							<h4 class="text-lg font-medium text-indigo-600 mb-1">
+								Round 1: Strategic Analysis and Formulation
+							</h4>
+							<ol class="list-decimal pl-6">
+								<li class="mb-1">
+									Introduction & Understanding Strategy: Emphasize strategy as
+									the "logic of success for the organisation"
+								</li>
+								<li class="mb-1">
+									Scenario Immersion: Each group reviews their assigned Scenario
+									Brief
+								</li>
+								<li class="mb-1">
+									Exploring AI Capabilities: Groups examine the "AI Capability
+									Cards"
+								</li>
+								<li class="mb-1">
+									Developing the Initial Strategy Argument: Complete the
+									"Strategy Argument Canvas"
+								</li>
+								<li>
+									Brief Strategy Outlines: 2-3 minute overview of initial
+									strategic direction
+								</li>
+							</ol>
+						</div>
+
+						<div class="mb-4">
+							<h4 class="text-lg font-medium text-indigo-600 mb-1">
+								Round 2: Market Dynamics and Strategic Adaptation
+							</h4>
+							<ol class="list-decimal pl-6">
+								<li class="mb-1">
+									Introduction of Market Dynamics: Reveal a "Market Dynamics
+									Card"
+								</li>
+								<li class="mb-1">
+									Re-evaluating and Adapting Strategy: Groups discuss
+									implications of the market event
+								</li>
+								<li class="mb-1">
+									Refining the Strategy Argument: Revise the "Strategy Argument
+									Canvas"
+								</li>
+								<li>
+									Constructive Debate (Peer Review): Groups pair up and critique
+									each other's strategies
+								</li>
+							</ol>
+						</div>
+
+						<div>
+							<h4 class="text-lg font-medium text-indigo-600 mb-1">
+								Round 3: Long-Term Vision and Sustainability
+							</h4>
+							<ol class="list-decimal pl-6">
+								<li class="mb-1">
+									Second Market Dynamics Card: Introduction of another market
+									shift
+								</li>
+								<li class="mb-1">
+									Forecasting and Long-Term Sustainability: Consider longer-term
+									implications
+								</li>
+								<li class="mb-1">
+									Final Strategy Argument Presentation: 8-10 minute
+									presentations
+								</li>
+								<li>
+									Facilitated Discussion and Debrief: Focus on key learning
+									objectives
+								</li>
+							</ol>
+						</div>
+					</div>
+
+					<div class="mb-6">
+						<h3 class="text-xl font-semibold text-indigo-700 mb-2">
+							Key Learning Objectives
+						</h3>
+						<ul class="list-disc pl-6">
+							<li class="mb-1">
+								<span class="font-medium">What is Strategy?</span> Strategy as a
+								coherent logic of success, an argument built on assumptions.
+							</li>
+							<li class="mb-1">
+								<span class="font-medium"
+									>Strategy vs. Other Business Games:</span
+								>
+								Emphasizing long-term thinking, adaptation, and justification of
+								choices.
+							</li>
+							<li class="mb-1">
+								<span class="font-medium"
+									>AI from a Business Strategy Perspective:</span
+								>
+								AI as a tool to achieve broader business goals, not as an end in
+								itself.
+							</li>
+							<li>
+								The importance of identifying assumptions, adapting to market
+								changes, and engaging in constructive debate.
+							</li>
+						</ul>
+					</div>
+
+					<div class="text-center">
+						<button
+							id="close-instructions-btn2"
+							class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300"
+						>
+							Got it!
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- AI Capability Details Modal -->
+		<div
+			id="capability-details-modal"
+			class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
+		>
+			<div class="bg-white rounded-lg shadow-lg p-6 max-w-lg mx-auto">
+				<div class="flex justify-between items-center mb-4">
+					<h2
+						id="modal-capability-name"
+						class="text-2xl font-bold text-indigo-800"
+					>
+						Capability Name
+					</h2>
+					<button
+						id="close-capability-modal-btn"
+						class="text-gray-500 hover:text-gray-700"
+					>
+						<i class="fas fa-times text-2xl"></i>
+					</button>
+				</div>
+
+				<p id="modal-capability-description" class="mb-4">
+					Description goes here
+				</p>
+
+				<div class="mb-4">
+					<h3 class="font-medium text-indigo-700 mb-1">Applications:</h3>
+					<ul id="modal-capability-applications" class="list-disc pl-6">
+						<!-- Applications will be inserted here -->
+					</ul>
+				</div>
+
+				<div class="mb-4">
+					<h3 class="font-medium text-indigo-700 mb-1">Benefits:</h3>
+					<p id="modal-capability-benefits">Benefits go here</p>
+				</div>
+
+				<div class="mb-4">
+					<h3 class="font-medium text-indigo-700 mb-1">Risks:</h3>
+					<p id="modal-capability-risks">Risks go here</p>
+				</div>
+
+				<div class="flex justify-between items-center mb-4">
+					<div>
+						<span class="font-medium">Budget Cost:</span>
+						<span id="modal-capability-budget" class="ml-2 font-bold"
+							>15 points</span
+						>
+					</div>
+					<div>
+						<span class="font-medium">Talent Cost:</span>
+						<span id="modal-capability-talent" class="ml-2 font-bold"
+							>10 points</span
+						>
+					</div>
+				</div>
+
+				<div class="text-center">
+					<button
+						id="modal-select-capability-btn"
+						class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300"
+					>
+						Select This Capability
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="script.js"></script>
+	</body>
+</html>

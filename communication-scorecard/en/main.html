@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Communication Scorecard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+        .scorecard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #0d6efd;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 15px;
+        }
+        .factor-card {
+            border-left: 5px solid #0d6efd;
+            margin-bottom: 25px;
+            transition: transform 0.2s;
+        }
+        .factor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #e7f1ff;
+            font-weight: bold;
+        }
+        .progress {
+            height: 25px;
+            margin-top: 10px;
+        }
+        .rating-label {
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        .comments {
+            min-height: 100px;
+            margin-top: 10px;
+        }
+        .factor-description {
+            font-style: italic;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+        .save-btn {
+            margin-top: 20px;
+        }
+        .overall-score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #0d6efd;
+            text-align: center;
+            border: 3px solid #0d6efd;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            line-height: 94px;
+            margin: 0 auto 20px;
+        }
+        .results-section {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .date-picker {
+            max-width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container scorecard-container">
+        <h1 class="text-center">Business Process Improvement Communication Scorecard</h1>
+        
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="evaluator" class="form-label">Evaluator Name:</label>
+                    <input type="text" class="form-control" id="evaluator" placeholder="Enter your name">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="project" class="form-label">Process Improvement Project:</label>
+                    <input type="text" class="form-control" id="project" placeholder="Enter project name">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="date" class="form-label">Evaluation Date:</label>
+                    <input type="date" class="form-control date-picker" id="date">
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Factor 1 -->
+        <div class="card factor-card">
+            <div class="card-header">
+                I. Clarity of Strategy & Logic
+            </div>
+            <div class="card-body">
+                <p class="factor-description">How clearly the rationale behind the business process improvement plan is communicated, including why specific processes are targeted, what the desired future state looks like, and how proposed changes will lead to desired outcomes.</p>
+                
+                <div class="row mb-2">
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf1-c1">
+                            <label class="form-check-label" for="sf1-c1">
+                                Clear explanation of why processes need improvement
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf1-c2">
+                            <label class="form-check-label" for="sf1-c2">
+                                Desired future state clearly articulated
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf1-c3">
+                            <label class="form-check-label" for="sf1-c3">
+                                Logical connection between actions and outcomes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf1-c4">
+                            <label class="form-check-label" for="sf1-c4">
+                                Distinction between why, what, and how
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <label class="rating-label">Rating (1-10):</label>
+                <input type="range" class="form-range" min="1" max="10" id="sf1-rating" value="5">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" id="sf1-progress" style="width: 50%;" aria-valuenow="5" aria-valuemin="1" aria-valuemax="10">5/10</div>
+                </div>
+                
+                <label class="rating-label">Comments:</label>
+                <textarea class="form-control comments" id="sf1-comments" placeholder="Enter your observations and suggestions"></textarea>
+            </div>
+        </div>
+
+        <!-- Success Factor 2 -->
+        <div class="card factor-card">
+            <div class="card-header">
+                II. Strategy as an Argument & Fostering Discussion
+            </div>
+            <div class="card-body">
+                <p class="factor-description">How well the plan is presented as a logical argument, including clarity of assumptions, inviting constructive debate, and creating space for employee perspectives.</p>
+                
+                <div class="row mb-2">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf2-c1">
+                            <label class="form-check-label" for="sf2-c1">
+                                Assumptions clearly stated
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf2-c2">
+                            <label class="form-check-label" for="sf2-c2">
+                                Constructive debate encouraged
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf2-c3">
+                            <label class="form-check-label" for="sf2-c3">
+                                Space for employee perspectives provided
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <label class="rating-label">Rating (1-10):</label>
+                <input type="range" class="form-range" min="1" max="10" id="sf2-rating" value="5">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" id="sf2-progress" style="width: 50%;" aria-valuenow="5" aria-valuemin="1" aria-valuemax="10">5/10</div>
+                </div>
+                
+                <label class="rating-label">Comments:</label>
+                <textarea class="form-control comments" id="sf2-comments" placeholder="Enter your observations and suggestions"></textarea>
+            </div>
+        </div>
+
+        <!-- Success Factor 3 -->
+        <div class="card factor-card">
+            <div class="card-header">
+                III. Relentless and Consistent Communication
+            </div>
+            <div class="card-body">
+                <p class="factor-description">How regularly and through which channels the plan is communicated, including progress updates, reinforcement of reasons, and timeliness of information.</p>
+                
+                <div class="row mb-2">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf3-c1">
+                            <label class="form-check-label" for="sf3-c1">
+                                Regular progress updates provided
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf3-c2">
+                            <label class="form-check-label" for="sf3-c2">
+                                Reinforcement of reasons and benefits
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf3-c3">
+                            <label class="form-check-label" for="sf3-c3">
+                                Timely information distribution
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <label class="rating-label">Rating (1-10):</label>
+                <input type="range" class="form-range" min="1" max="10" id="sf3-rating" value="5">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" id="sf3-progress" style="width: 50%;" aria-valuenow="5" aria-valuemin="1" aria-valuemax="10">5/10</div>
+                </div>
+                
+                <label class="rating-label">Comments:</label>
+                <textarea class="form-control comments" id="sf3-comments" placeholder="Enter your observations and suggestions"></textarea>
+            </div>
+        </div>
+
+        <!-- Success Factor 4 -->
+        <div class="card factor-card">
+            <div class="card-header">
+                IV. Active Listening and Incorporating Feedback
+            </div>
+            <div class="card-body">
+                <p class="factor-description">How well feedback is solicited, listened to, and incorporated from those directly involved in the processes being improved.</p>
+                
+                <div class="row mb-2">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf4-c1">
+                            <label class="form-check-label" for="sf4-c1">
+                                Feedback mechanisms created
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf4-c2">
+                            <label class="form-check-label" for="sf4-c2">
+                                Feedback taken seriously
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf4-c3">
+                            <label class="form-check-label" for="sf4-c3">
+                                Evidence of feedback influencing plan
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <label class="rating-label">Rating (1-10):</label>
+                <input type="range" class="form-range" min="1" max="10" id="sf4-rating" value="5">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" id="sf4-progress" style="width: 50%;" aria-valuenow="5" aria-valuemin="1" aria-valuemax="10">5/10</div>
+                </div>
+                
+                <label class="rating-label">Comments:</label>
+                <textarea class="form-control comments" id="sf4-comments" placeholder="Enter your observations and suggestions"></textarea>
+            </div>
+        </div>
+
+        <!-- Success Factor 5 -->
+        <div class="card factor-card">
+            <div class="card-header">
+                V. Audience Understanding and Tailoring
+            </div>
+            <div class="card-body">
+                <p class="factor-description">How well communication is tailored to different employee groups, considering impacts, using relevant language, and addressing potential concerns.</p>
+                
+                <div class="row mb-2">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf5-c1">
+                            <label class="form-check-label" for="sf5-c1">
+                                Impact on different roles considered
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf5-c2">
+                            <label class="form-check-label" for="sf5-c2">
+                                Relevant language and examples used
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf5-c3">
+                            <label class="form-check-label" for="sf5-c3">
+                                Potential concerns addressed proactively
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <label class="rating-label">Rating (1-10):</label>
+                <input type="range" class="form-range" min="1" max="10" id="sf5-rating" value="5">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" id="sf5-progress" style="width: 50%;" aria-valuenow="5" aria-valuemin="1" aria-valuemax="10">5/10</div>
+                </div>
+                
+                <label class="rating-label">Comments:</label>
+                <textarea class="form-control comments" id="sf5-comments" placeholder="Enter your observations and suggestions"></textarea>
+            </div>
+        </div>
+
+        <!-- Success Factor 6 -->
+        <div class="card factor-card">
+            <div class="card-header">
+                VI. Engaging Delivery
+            </div>
+            <div class="card-body">
+                <p class="factor-description">How effectively the plan is presented in an engaging manner, including structure, visuals, stories, and opportunities for interaction.</p>
+                
+                <div class="row mb-2">
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf6-c1">
+                            <label class="form-check-label" for="sf6-c1">
+                                Strong opening and closing
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf6-c2">
+                            <label class="form-check-label" for="sf6-c2">
+                                Effective visuals used
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf6-c3">
+                            <label class="form-check-label" for="sf6-c3">
+                                Stories/examples to illustrate points
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sf6-c4">
+                            <label class="form-check-label" for="sf6-c4">
+                                Opportunities for interaction
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <label class="rating-label">Rating (1-10):</label>
+                <input type="range" class="form-range" min="1" max="10" id="sf6-rating" value="5">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" id="sf6-progress" style="width: 50%;" aria-valuenow="5" aria-valuemin="1" aria-valuemax="10">5/10</div>
+                </div>
+                
+                <label class="rating-label">Comments:</label>
+                <textarea class="form-control comments" id="sf6-comments" placeholder="Enter your observations and suggestions"></textarea>
+            </div>
+        </div>
+
+        <button class="btn btn-primary btn-lg d-block mx-auto save-btn" id="calculate-btn">Calculate Overall Score</button>
+
+        <div class="results-section mt-4" id="results-section" style="display: none;">
+            <h3 class="text-center mb-4">Scorecard Results</h3>
+            
+            <div class="overall-score" id="overall-score">0</div>
+            <p class="text-center mb-4" id="score-interpretation"></p>
+            
+            <h4>Strengths</h4>
+            <ul id="strengths-list" class="mb-4">
+                <!-- Will be populated by JavaScript -->
+            </ul>
+            
+            <h4>Areas for Improvement</h4>
+            <ul id="improvements-list" class="mb-4">
+                <!-- Will be populated by JavaScript -->
+            </ul>
+            
+            <h4>Recommended Next Steps</h4>
+            <ul id="recommendations-list">
+                <!-- Will be populated by JavaScript -->
+            </ul>
+            
+            <div class="d-flex justify-content-center mt-4">
+                <button class="btn btn-success me-2" id="print-btn">Print Scorecard</button>
+                <button class="btn btn-secondary" id="save-pdf-btn">Save as PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Set today's date as default
+        document.getElementById('date').valueAsDate = new Date();
+        
+        // Update progress bars when sliders change
+        for (let i = 1; i <= 6; i++) {
+            const slider = document.getElementById(`sf${i}-rating`);
+            const progress = document.getElementById(`sf${i}-progress`);
+            
+            slider.addEventListener('input', function() {
+                const value = this.value;
+                const percentage = (value / 10) * 100;
+                
+                progress.style.width = percentage + '%';
+                progress.setAttribute('aria-valuenow', value);
+                progress.textContent = value + '/10';
+                
+                // Change color based on rating
+                if (value <= 3) {
+                    progress.className = 'progress-bar bg-danger';
+                } else if (value <= 7) {
+                    progress.className = 'progress-bar bg-warning';
+                } else {
+                    progress.className = 'progress-bar bg-success';
+                }
+            });
+        }
+        
+        // Calculate overall score
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            const scores = [];
+            for (let i = 1; i <= 6; i++) {
+                scores.push(parseInt(document.getElementById(`sf${i}-rating`).value));
+            }
+            
+            const overallScore = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+            document.getElementById('overall-score').textContent = overallScore;
+            
+            // Show results section
+            document.getElementById('results-section').style.display = 'block';
+            
+            // Score interpretation
+            const scoreInterpretation = document.getElementById('score-interpretation');
+            if (overallScore <= 3) {
+                scoreInterpretation.textContent = 'Communication strategy needs significant improvement';
+            } else if (overallScore <= 5) {
+                scoreInterpretation.textContent = 'Communication strategy is below average and requires attention';
+            } else if (overallScore <= 7) {
+                scoreInterpretation.textContent = 'Communication strategy is satisfactory but has room for improvement';
+            } else if (overallScore <= 9) {
+                scoreInterpretation.textContent = 'Communication strategy is strong with minor areas for enhancement';
+            } else {
+                scoreInterpretation.textContent = 'Excellent communication strategy, maintain current approach';
+            }
+            
+            // Identify strengths and areas for improvement
+            const strengths = [];
+            const improvements = [];
+            const factorNames = [
+                'Clarity of Strategy & Logic',
+                'Strategy as an Argument & Fostering Discussion',
+                'Relentless and Consistent Communication',
+                'Active Listening and Incorporating Feedback',
+                'Audience Understanding and Tailoring',
+                'Engaging Delivery'
+            ];
+            
+            scores.forEach((score, index) => {
+                if (score >= 8) {
+                    strengths.push(`<li><strong>${factorNames[index]}</strong> (Score: ${score}/10)</li>`);
+                }
+                if (score <= 5) {
+                    improvements.push(`<li><strong>${factorNames[index]}</strong> (Score: ${score}/10)</li>`);
+                }
+            });
+            
+            document.getElementById('strengths-list').innerHTML = strengths.length > 0 ? strengths.join('') : '<li>No significant strengths identified. All areas need improvement.</li>';
+            document.getElementById('improvements-list').innerHTML = improvements.length > 0 ? improvements.join('') : '<li>No major areas for improvement. Keep up the good work!</li>';
+            
+            // Generate recommendations
+            const recommendations = [];
+            if (scores[0] <= 5) recommendations.push('<li>Clarify the purpose and expected outcomes of the process improvement plan to all stakeholders.</li>');
+            if (scores[1] <= 5) recommendations.push('<li>Create more opportunities for employees to provide input and discuss the improvement plan.</li>');
+            if (scores[2] <= 5) recommendations.push('<li>Implement a more structured communication schedule with regular updates.</li>');
+            if (scores[3] <= 5) recommendations.push('<li>Develop better feedback collection mechanisms and demonstrate how feedback is incorporated.</li>');
+            if (scores[4] <= 5) recommendations.push('<li>Tailor communications to different stakeholder groups based on their specific needs and concerns.</li>');
+            if (scores[5] <= 5) recommendations.push('<li>Use more engaging visual aids and storytelling techniques in presentations.</li>');
+            
+            if (recommendations.length === 0) {
+                recommendations.push('<li>Continue the current approach, focusing on maintaining consistency across all communication areas.</li>');
+                recommendations.push('<li>Document successful communication practices to serve as a template for future projects.</li>');
+            }
+            
+            document.getElementById('recommendations-list').innerHTML = recommendations.join('');
+            
+            // Scroll to results
+            document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Print scorecard
+        document.getElementById('print-btn').addEventListener('click', function() {
+            window.print();
+        });
+        
+        // Save as PDF (this would typically require additional libraries or server-side processing)
+        document.getElementById('save-pdf-btn').addEventListener('click', function() {
+            alert('PDF export functionality would be implemented here. In a real application, this would save the current scorecard as a PDF file.');
+        });
+    </script>
+</body>
+</html>
